@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — PrediCare AI</title>
+<meta name="description" content="PrediCare AI Privacy Policy — how we collect, use and protect your health data.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F9F7F2;
+  --ink: #0D0C09;
+  --teal: #006B61;
+  --teal2: #00C4B0;
+  --teal-light: #E0F7F5;
+  --orange: #C8511A;
+  --orange-light: #FDF0EA;
+  --cream: #F3EFE7;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --border: #E2DDD5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(249,247,242,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Fraunces',serif;font-weight:900;font-size:20px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{background:var(--ink);color:#fff;padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:var(--teal);}
+
+/* HERO */
+.hero{background:var(--ink);padding:130px 48px 72px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 40% 60% at 85% 40%,rgba(0,196,176,0.1) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:680px;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(0,196,176,0.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:20px;}
+.hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:52px;line-height:1.0;letter-spacing:-1.5px;color:#fff;margin-bottom:18px;}
+.hero-sub{font-size:15px;color:#94A3B8;line-height:1.7;max-width:520px;margin-bottom:28px;}
+.hero-updated{font-size:12px;color:#475569;display:flex;align-items:center;gap:8px;}
+.hero-updated span{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:3px 10px;}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:240px 1fr;gap:48px;max-width:980px;margin:0 auto;padding:56px 48px 96px;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:88px;height:fit-content;}
+.sidebar-title{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:14px;}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;}
+.sidebar-link{
+  display:block;padding:8px 12px;border-radius:7px;
+  font-size:13px;font-weight:500;color:var(--gray);
+  text-decoration:none;transition:all 0.15s;
+}
+.sidebar-link:hover{background:var(--cream);color:var(--ink);}
+.sidebar-link.active{background:var(--teal-light);color:var(--teal);font-weight:600;}
+.sidebar-divider{height:1px;background:var(--border);margin:14px 0;}
+.contact-box{background:var(--ink);border-radius:12px;padding:18px;margin-top:20px;}
+.contact-box h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;}
+.contact-box p{font-size:12px;color:#94A3B8;line-height:1.5;margin-bottom:12px;}
+.contact-box a{display:block;background:var(--teal2);color:var(--ink);padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;text-decoration:none;text-align:center;transition:background 0.2s;}
+.contact-box a:hover{background:#00E5CE;}
+
+/* CONTENT */
+.content{max-width:640px;}
+.summary-box{
+  background:var(--teal-light);border:1px solid rgba(0,107,97,0.2);
+  border-left:4px solid var(--teal);border-radius:0 12px 12px 0;
+  padding:20px 24px;margin-bottom:40px;
+}
+.summary-box h3{font-size:14px;font-weight:700;color:var(--teal);margin-bottom:10px;}
+.summary-box ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.summary-box li{font-size:13px;color:#064E48;display:flex;gap:8px;align-items:flex-start;}
+.summary-box li::before{content:'✓';font-weight:700;color:var(--teal);flex-shrink:0;}
+
+/* SECTIONS */
+.policy-section{margin-bottom:48px;scroll-margin-top:100px;}
+.policy-section h2{
+  font-family:'Fraunces',serif;font-size:26px;font-weight:700;
+  letter-spacing:-0.3px;margin-bottom:16px;
+  padding-bottom:12px;border-bottom:2px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.policy-section h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--ink);}
+.policy-section p{font-size:14px;color:#374151;line-height:1.8;margin-bottom:14px;}
+.policy-section ul,.policy-section ol{padding-left:20px;margin-bottom:14px;}
+.policy-section li{font-size:14px;color:#374151;line-height:1.7;margin-bottom:6px;}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;}
+.data-table th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;border-bottom:2px solid var(--border);background:var(--cream);}
+.data-table td{padding:12px 14px;border-bottom:1px solid #F0EDE8;color:#374151;vertical-align:top;}
+.data-table td strong{color:var(--ink);}
+.data-table tr:last-child td{border-bottom:none;}
+
+/* HIGHLIGHT BOX */
+.highlight{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:16px 0;font-size:13px;color:#374151;}
+.highlight strong{color:var(--ink);}
+.warn-highlight{background:var(--orange-light);border:1px solid rgba(200,81,26,0.2);border-radius:10px;padding:18px 20px;margin:16px 0;font-size:13px;color:#7C2D12;}
+
+/* RIGHTS GRID */
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+.right-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.right-card h4{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+.right-card p{font-size:12px;color:var(--gray);line-height:1.6;}
+
+footer{background:var(--ink);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-brand{font-family:'Fraunces',serif;font-weight:900;font-size:18px;color:#fff;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:13px;color:#6B7280;text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--teal2);}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 20px 56px;}
+  .hero h1{font-size:36px;}
+  .layout{grid-template-columns:1fr;padding:32px 20px 64px;}
+  .sidebar{position:static;display:none;}
+  .rights-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;padding:32px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html" class="active">Privacy</a>
+  </div>
+  <a href="assess.html" class="nav-cta">Check My Risk →</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🔒 Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="hero-sub">We built PrediCare AI on the belief that your health data belongs to you. This policy explains exactly what we collect, why, and how we protect it.</p>
+    <div class="hero-updated">
+      <span>Last updated: March 7, 2026</span>
+      <span>Effective: March 7, 2026</span>
+      <span>Version 1.0</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-title">Contents</div>
+    <div class="sidebar-nav">
+      <a href="#summary" class="sidebar-link active">Quick Summary</a>
+      <a href="#who" class="sidebar-link">1. Who We Are</a>
+      <a href="#collect" class="sidebar-link">2. What We Collect</a>
+      <a href="#use" class="sidebar-link">3. How We Use It</a>
+      <a href="#share" class="sidebar-link">4. Who We Share With</a>
+      <a href="#storage" class="sidebar-link">5. Storage & Security</a>
+      <a href="#rights" class="sidebar-link">6. Your Rights</a>
+      <a href="#cookies" class="sidebar-link">7. Cookies</a>
+      <a href="#children" class="sidebar-link">8. Children</a>
+      <a href="#dpdp" class="sidebar-link">9. DPDP Act 2023</a>
+      <a href="#changes" class="sidebar-link">10. Policy Changes</a>
+      <a href="#contact" class="sidebar-link">11. Contact Us</a>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="contact-box">
+      <h4>Privacy questions?</h4>
+      <p>Contact our data protection team directly.</p>
+      <a href="mailto:privacy@predicare.ai">privacy@predicare.ai</a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SUMMARY -->
+    <div class="summary-box" id="summary">
+      <h3>🔒 Plain-English Summary — What You Need to Know</h3>
+      <ul>
+        <li>We collect only the health information you choose to share with us</li>
+        <li>We never sell your personal data to advertisers, insurers, or anyone else</li>
+        <li>Your health data is encrypted end-to-end and stored securely in India</li>
+        <li>You can delete your account and all your data at any time by emailing us</li>
+        <li>We don't share your data with third parties except to run the service</li>
+        <li>We comply with India's Digital Personal Data Protection Act 2023</li>
+        <li>PrediCare AI is a wellness tool — not a medical device</li>
+      </ul>
+    </div>
+
+    <!-- 1. WHO WE ARE -->
+    <div class="policy-section" id="who">
+      <h2>1. Who We Are</h2>
+      <p>PrediCare AI ("PrediCare", "we", "us", "our") is a preventive healthcare technology company building AI tools to help people understand and reduce their disease risk. We operate the website at <strong>predicare.ai</strong>, the mobile applications "PrediCare AI" available on Google Play and the Apple App Store, and the health risk assessment tool at <strong>predicare.ai/assess</strong>.</p>
+      <p>Our registered business contact is: <strong>team@predicare.ai</strong></p>
+      <p>For data protection matters specifically: <strong>privacy@predicare.ai</strong></p>
+      <div class="highlight">
+        <strong>Important disclaimer:</strong> PrediCare AI is a health risk awareness tool. It is not a licensed medical device, does not provide medical diagnoses, and is not a substitute for professional medical advice. Always consult a qualified doctor for health decisions.
+      </div>
+    </div>
+
+    <!-- 2. WHAT WE COLLECT -->
+    <div class="policy-section" id="collect">
+      <h2>2. What We Collect</h2>
+
+      <h3>2.1 Information You Provide</h3>
+      <table class="data-table">
+        <thead><tr><th>Data Type</th><th>Examples</th><th>Why We Need It</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Health & Lifestyle Data</strong></td><td>Age, weight category, smoking status, exercise habits, diet, sleep, stress level, family medical history, blood pressure status</td><td>To calculate your disease risk score and personalise your prevention plan</td></tr>
+          <tr><td><strong>Contact Information</strong></td><td>Email address</td><td>Waitlist communications, account creation, product updates</td></tr>
+          <tr><td><strong>Account Data</strong></td><td>Password (hashed), account preferences, language setting</td><td>To provide a personalised experience</td></tr>
+          <tr><td><strong>Communications</strong></td><td>Emails or messages you send us</td><td>To respond to support requests</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2.2 Information We Collect Automatically</h3>
+      <table class="data-table">
+        <thead><tr><th>Data Type</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Usage Data</strong></td><td>Pages visited, features used, time spent in app, assessment completion rates</td></tr>
+          <tr><td><strong>Device Information</strong></td><td>Device type, operating system, app version, language settings</td></tr>
+          <tr><td><strong>Log Data</strong></td><td>IP address, browser type, access timestamps — stored for security purposes only</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2.3 What We Do NOT Collect</h3>
+      <ul>
+        <li>We do not collect blood test results, medical records, or clinical data</li>
+        <li>We do not collect biometric data (fingerprints, facial scans)</li>
+        <li>We do not collect precise GPS location (only country/region if you provide it)</li>
+        <li>We do not collect financial information</li>
+        <li>We do not collect data from children under 18 (see Section 8)</li>
+      </ul>
+    </div>
+
+    <!-- 3. HOW WE USE IT -->
+    <div class="policy-section" id="use">
+      <h2>3. How We Use Your Information</h2>
+      <p>We use your information only for the following purposes:</p>
+      <ul>
+        <li><strong>Providing the service:</strong> Running the risk assessment, generating your risk score and prevention plan</li>
+        <li><strong>Personalisation:</strong> Remembering your preferences, language, and previous assessments</li>
+        <li><strong>Communications:</strong> Sending product updates, waitlist notifications, and responses to your enquiries</li>
+        <li><strong>Improving PrediCare AI:</strong> Understanding how people use the product to make it better — using anonymised, aggregated data only</li>
+        <li><strong>Safety & security:</strong> Detecting fraud, abuse, and technical issues</li>
+        <li><strong>Legal compliance:</strong> Meeting our obligations under applicable Indian law</li>
+      </ul>
+      <div class="highlight">
+        <strong>We never use your health data for advertising, insurance risk assessment, employer screening, or any commercial purpose beyond providing and improving PrediCare AI.</strong>
+      </div>
+    </div>
+
+    <!-- 4. SHARING -->
+    <div class="policy-section" id="share">
+      <h2>4. Who We Share Your Data With</h2>
+      <p>We do not sell your personal data. We share information only in these limited circumstances:</p>
+
+      <h3>4.1 Service Providers</h3>
+      <p>We use trusted third-party services to operate PrediCare AI. These providers process data only on our behalf and under strict data processing agreements:</p>
+      <table class="data-table">
+        <thead><tr><th>Provider</th><th>Purpose</th><th>Data Shared</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Firebase (Google)</strong></td><td>Authentication, database, push notifications</td><td>Account credentials, usage data</td></tr>
+          <tr><td><strong>Google Cloud (Mumbai region)</strong></td><td>App hosting and data storage</td><td>Encrypted health data — stored in India</td></tr>
+          <tr><td><strong>Mailchimp / Email provider</strong></td><td>Waitlist and product emails</td><td>Email address only</td></tr>
+          <tr><td><strong>Mixpanel / Analytics</strong></td><td>Product analytics (anonymised)</td><td>Anonymised usage events — no health data</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.2 Legal Requirements</h3>
+      <p>We may disclose your information if required to do so by law, court order, or a lawful request from a government authority under Indian law.</p>
+
+      <h3>4.3 Business Transfers</h3>
+      <p>If PrediCare AI is acquired or merges with another company, your data may be transferred as part of that transaction. We will notify you before any such transfer and provide an option to delete your data.</p>
+
+      <div class="warn-highlight">
+        <strong>We will never share your health data with:</strong> Insurance companies · Employers · Advertisers · Data brokers · Any third party for commercial purposes
+      </div>
+    </div>
+
+    <!-- 5. STORAGE -->
+    <div class="policy-section" id="storage">
+      <h2>5. Data Storage & Security</h2>
+
+      <h3>5.1 Where We Store Your Data</h3>
+      <p>All personal data is stored on Google Cloud servers located in the <strong>Mumbai, India region</strong> — ensuring your data stays within Indian jurisdiction and complies with India's data localisation requirements.</p>
+
+      <h3>5.2 How We Protect Your Data</h3>
+      <ul>
+        <li><strong>Encryption in transit:</strong> All data transmitted between your device and our servers is encrypted using TLS 1.3</li>
+        <li><strong>Encryption at rest:</strong> Health data stored in our databases is encrypted using AES-256</li>
+        <li><strong>Access controls:</strong> Only authorised PrediCare team members can access production data, with full audit logs</li>
+        <li><strong>Password security:</strong> Passwords are hashed using bcrypt — we never store plain-text passwords</li>
+        <li><strong>Regular security audits:</strong> We conduct security reviews of our systems regularly</li>
+      </ul>
+
+      <h3>5.3 How Long We Keep Your Data</h3>
+      <table class="data-table">
+        <thead><tr><th>Data Type</th><th>Retention Period</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Health assessment data</strong></td><td>Until you delete your account, or 3 years of inactivity</td></tr>
+          <tr><td><strong>Account information</strong></td><td>Until you delete your account</td></tr>
+          <tr><td><strong>Email (waitlist)</strong></td><td>Until you unsubscribe</td></tr>
+          <tr><td><strong>Server logs</strong></td><td>90 days for security purposes</td></tr>
+          <tr><td><strong>Anonymised analytics</strong></td><td>Indefinitely (no personal data included)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 6. YOUR RIGHTS -->
+    <div class="policy-section" id="rights">
+      <h2>6. Your Rights</h2>
+      <p>Under India's Digital Personal Data Protection Act 2023 and general privacy principles, you have the following rights:</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <h4>📋 Right to Access</h4>
+          <p>Request a copy of all personal data we hold about you.</p>
+        </div>
+        <div class="right-card">
+          <h4>✏️ Right to Correction</h4>
+          <p>Ask us to correct inaccurate or incomplete personal data.</p>
+        </div>
+        <div class="right-card">
+          <h4>🗑️ Right to Erasure</h4>
+          <p>Request deletion of your account and all associated personal data.</p>
+        </div>
+        <div class="right-card">
+          <h4>📦 Right to Portability</h4>
+          <p>Receive your data in a structured, machine-readable format.</p>
+        </div>
+        <div class="right-card">
+          <h4>🚫 Right to Object</h4>
+          <p>Object to processing of your data for specific purposes.</p>
+        </div>
+        <div class="right-card">
+          <h4>↩️ Right to Withdraw Consent</h4>
+          <p>Withdraw consent at any time — this won't affect prior processing.</p>
+        </div>
+      </div>
+      <p style="margin-top:16px;">To exercise any of these rights, email us at <strong>privacy@predicare.ai</strong> with the subject line "Data Rights Request". We will respond within <strong>30 days</strong>.</p>
+    </div>
+
+    <!-- 7. COOKIES -->
+    <div class="policy-section" id="cookies">
+      <h2>7. Cookies & Tracking</h2>
+      <p>Our website predicare.ai uses the following cookies:</p>
+      <table class="data-table">
+        <thead><tr><th>Cookie Type</th><th>Purpose</th><th>Can You Opt Out?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Essential cookies</strong></td><td>Session management, login state, security</td><td>No — required for the site to work</td></tr>
+          <tr><td><strong>Analytics cookies</strong></td><td>Understanding how pages are used (anonymised)</td><td>Yes — email us to opt out</td></tr>
+          <tr><td><strong>Preference cookies</strong></td><td>Remembering your language and settings</td><td>Yes — clear your browser cookies</td></tr>
+        </tbody>
+      </table>
+      <p>We do <strong>not</strong> use advertising cookies or allow third-party advertising trackers on our website.</p>
+    </div>
+
+    <!-- 8. CHILDREN -->
+    <div class="policy-section" id="children">
+      <h2>8. Children's Privacy</h2>
+      <p>PrediCare AI is intended for users aged <strong>18 and above</strong>. We do not knowingly collect personal data from children under 18.</p>
+      <p>If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <strong>privacy@predicare.ai</strong> and we will delete it promptly.</p>
+    </div>
+
+    <!-- 9. DPDP -->
+    <div class="policy-section" id="dpdp">
+      <h2>9. India's DPDP Act 2023 Compliance</h2>
+      <p>PrediCare AI complies with the <strong>Digital Personal Data Protection Act, 2023 (DPDP Act)</strong> of India. Specifically:</p>
+      <ul>
+        <li><strong>Lawful basis:</strong> We process your personal data on the basis of your consent, which you give when you use our service</li>
+        <li><strong>Data minimisation:</strong> We collect only the data necessary to provide the health risk assessment and prevention recommendations</li>
+        <li><strong>Purpose limitation:</strong> Your data is used only for the purposes described in this policy</li>
+        <li><strong>Data localisation:</strong> All personal data is stored in India (Google Cloud Mumbai)</li>
+        <li><strong>Data Principal rights:</strong> You can exercise all rights granted to Data Principals under the DPDP Act by contacting privacy@predicare.ai</li>
+        <li><strong>Grievance officer:</strong> For DPDP-related complaints, contact our designated officer at privacy@predicare.ai</li>
+      </ul>
+      <div class="highlight">
+        <strong>Health data classification:</strong> Your health and lifestyle data may be classified as "sensitive personal data" under applicable Indian law. We treat it accordingly with the highest level of protection.
+      </div>
+    </div>
+
+    <!-- 10. CHANGES -->
+    <div class="policy-section" id="changes">
+      <h2>10. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we make significant changes, we will:</p>
+      <ul>
+        <li>Post the updated policy on this page with a new "Last Updated" date</li>
+        <li>Send an email notification to registered users at least 14 days before changes take effect</li>
+        <li>Display a notice in the app</li>
+      </ul>
+      <p>Your continued use of PrediCare AI after the effective date constitutes acceptance of the updated policy.</p>
+    </div>
+
+    <!-- 11. CONTACT -->
+    <div class="policy-section" id="contact">
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us:</p>
+      <table class="data-table">
+        <tbody>
+          <tr><td><strong>General enquiries</strong></td><td><a href="mailto:team@predicare.ai" style="color:var(--teal);">team@predicare.ai</a></td></tr>
+          <tr><td><strong>Privacy & data rights</strong></td><td><a href="mailto:privacy@predicare.ai" style="color:var(--teal);">privacy@predicare.ai</a></td></tr>
+          <tr><td><strong>Subject line for data requests</strong></td><td>Data Rights Request — [Your Name]</td></tr>
+          <tr><td><strong>Website</strong></td><td><a href="https://predicare.ai" style="color:var(--teal);">predicare.ai</a></td></tr>
+          <tr><td><strong>Response time</strong></td><td>Within 30 days of receiving your request</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight" style="margin-top:20px;">
+        This Privacy Policy was last updated on <strong>March 7, 2026</strong> and is effective from that date. It applies to all users of predicare.ai and the PrediCare AI mobile applications.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">💚 PrediCare AI</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:team@predicare.ai">Contact</a>
+  </div>
+  <div style="font-size:12px;color:#374151;">© 2026 PrediCare AI · predicare.ai</div>
+</footer>
+
+<script>
+// Highlight sidebar link on scroll
+const sections = document.querySelectorAll('.policy-section, #summary');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  sidebarLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>

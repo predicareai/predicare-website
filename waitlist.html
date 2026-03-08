@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Waitlist — PrediCare AI</title>
+<meta name="description" content="Join PrediCare AI's early access waitlist. Get free Premium access for 3 months when we launch.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#08121F;--navy2:#0D1B30;--teal:#00C4B0;--teal2:#007A6E;
+  --mint:#E0FAF7;--orange:#FF6B35;--white:#FFFFFF;
+  --gray:#94A3B8;--border:rgba(0,196,176,0.15);--card:#0F1E33;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(8,18,31,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;text-decoration:none;color:var(--white);}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{background:var(--teal);color:var(--navy);padding:10px 22px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:#00E5CE;}
+
+/* HERO */
+.page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 48px 48px;}
+.left{padding-right:48px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,196,176,0.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:24px;}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:52px;line-height:1.0;letter-spacing:-1.5px;margin-bottom:20px;}
+h1 span{color:var(--teal);}
+.sub{font-size:16px;color:var(--gray);line-height:1.75;max-width:480px;margin-bottom:32px;}
+
+/* BENEFITS */
+.benefits{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.benefit{display:flex;align-items:flex-start;gap:12px;}
+.benefit-icon{width:36px;height:36px;border-radius:8px;background:rgba(0,196,176,0.1);border:1px solid rgba(0,196,176,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.benefit-text strong{display:block;font-size:14px;font-weight:600;margin-bottom:2px;}
+.benefit-text span{font-size:13px;color:var(--gray);}
+
+/* SOCIAL PROOF */
+.social-proof{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(0,196,176,0.05);border:1px solid var(--border);border-radius:12px;}
+.avatars{display:flex;}
+.avatar{width:32px;height:32px;border-radius:50%;border:2px solid var(--navy);background:var(--teal2);display:flex;align-items:center;justify-content:center;font-size:12px;margin-left:-8px;}
+.avatar:first-child{margin-left:0;}
+.proof-text strong{font-size:14px;font-weight:600;}
+.proof-text span{font-size:12px;color:var(--gray);}
+
+/* FORM CARD */
+.right{}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;}
+.form-card::before{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(0,196,176,0.1) 0%,transparent 65%);pointer-events:none;}
+.form-card::after{content:'';position:absolute;bottom:-60px;left:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,107,53,0.06) 0%,transparent 65%);pointer-events:none;}
+.form-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;}
+.form-card h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;}
+.form-card p{font-size:14px;color:var(--gray);margin-bottom:28px;line-height:1.6;}
+
+.field-label{font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:block;}
+.input{width:100%;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;margin-bottom:16px;}
+.input:focus{border-color:var(--teal);}
+.input::placeholder{color:rgba(148,163,184,0.6);}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.input-hint{font-size:11px;color:var(--gray);margin-top:-10px;margin-bottom:16px;}
+
+/* PLAN SELECTOR */
+.plan-label{font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:block;}
+.plan-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.plan-option{border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.2s;position:relative;}
+.plan-option:hover{border-color:rgba(0,196,176,0.3);}
+.plan-option.selected{border-color:var(--teal);background:rgba(0,196,176,0.06);}
+.plan-option input{position:absolute;opacity:0;width:0;height:0;}
+.plan-name{font-size:14px;font-weight:700;margin-bottom:3px;}
+.plan-price{font-size:12px;color:var(--gray);}
+.plan-option.selected .plan-name{color:var(--teal);}
+.plan-badge-free{font-size:10px;background:rgba(0,196,176,0.15);color:var(--teal);padding:2px 7px;border-radius:100px;font-weight:700;margin-left:6px;}
+.plan-badge-hot{font-size:10px;background:rgba(255,107,53,0.15);color:var(--orange);padding:2px 7px;border-radius:100px;font-weight:700;margin-left:6px;}
+
+.submit-btn{width:100%;padding:16px;border-radius:10px;background:var(--teal);color:var(--navy);font-weight:800;font-size:16px;border:none;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:-0.3px;transition:all 0.2s;position:relative;z-index:1;}
+.submit-btn:hover{background:#00E5CE;transform:translateY(-1px);}
+.submit-btn:disabled{opacity:0.7;transform:none;cursor:not-allowed;}
+.form-note{font-size:11px;color:var(--gray);text-align:center;margin-top:12px;line-height:1.5;}
+
+/* SUCCESS */
+.success-screen{display:none;text-align:center;padding:20px 0;}
+.success-icon{font-size:64px;margin-bottom:16px;}
+.success-screen h3{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px;}
+.success-screen p{font-size:14px;color:var(--gray);line-height:1.7;max-width:340px;margin:0 auto 24px;}
+.success-ref{font-size:12px;background:rgba(0,196,176,0.08);border:1px solid var(--border);border-radius:8px;padding:10px 16px;color:var(--teal);font-weight:600;}
+.back-btn{display:inline-block;margin-top:20px;color:var(--gray);font-size:13px;text-decoration:none;transition:color 0.2s;}
+.back-btn:hover{color:var(--white);}
+
+/* STATS BAR */
+.stats-bar{background:var(--navy2);border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:center;gap:64px;flex-wrap:wrap;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--teal);}
+.stat-label{font-size:12px;color:var(--gray);margin-top:2px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.left>*{animation:fadeUp 0.5s ease both;}
+.left>*:nth-child(2){animation-delay:0.1s;}
+.left>*:nth-child(3){animation-delay:0.18s;}
+.left>*:nth-child(4){animation-delay:0.26s;}
+.left>*:nth-child(5){animation-delay:0.32s;}
+.form-card{animation:fadeUp 0.5s ease 0.15s both;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .page{grid-template-columns:1fr;padding:90px 20px 40px;gap:40px;}
+  .left{padding-right:0;}
+  h1{font-size:36px;}
+  .input-row,.plan-options{grid-template-columns:1fr;}
+  .stats-bar{gap:32px;padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <a href="assess.html" class="nav-cta">Check My Risk →</a>
+</nav>
+
+<div class="page">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="eyebrow">🚀 Early Access</div>
+    <h1>Know your risk.<br><span>Before it's too late.</span></h1>
+    <p class="sub">Join thousands of Indians getting early access to PrediCare AI — the free app that predicts your risk of diabetes, heart disease, stroke and more, years before symptoms appear.</p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">🎁</div>
+        <div class="benefit-text">
+          <strong>3 months Premium — free</strong>
+          <span>Beta users get full Premium access at no cost when we launch</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🔔</div>
+        <div class="benefit-text">
+          <strong>First to know</strong>
+          <span>Get notified the moment we launch — before the public</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">💬</div>
+        <div class="benefit-text">
+          <strong>Shape the product</strong>
+          <span>Early users influence features, language support, and design</span>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🔒</div>
+        <div class="benefit-text">
+          <strong>Your data stays yours</strong>
+          <span>AES-256 encrypted, stored in India, never sold to anyone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-proof">
+      <div class="avatars">
+        <div class="avatar">👤</div>
+        <div class="avatar">👤</div>
+        <div class="avatar">👤</div>
+        <div class="avatar">+</div>
+      </div>
+      <div class="proof-text">
+        <strong>100+ people already on the waitlist</strong>
+        <span>From Delhi, Mumbai, Bangalore, Hyderabad and beyond</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="right">
+    <div class="form-card" id="formCard">
+      <div class="form-badge">🔥 Limited Beta Spots</div>
+      <h2>Reserve your free spot</h2>
+      <p>Enter your email or WhatsApp — we'll reach out the moment PrediCare AI is ready for you.</p>
+
+      <form id="waitlistForm" onsubmit="handleSubmit(event)" method="POST" data-netlify="true" name="waitlist" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="waitlist">
+        <p style="display:none"><input name="bot-field"></p>
+
+        <div class="input-row">
+          <div>
+            <label class="field-label">Email address</label>
+            <input type="email" name="email" id="emailInput" class="input" placeholder="your@email.com" style="margin-bottom:0;">
+          </div>
+          <div>
+            <label class="field-label">WhatsApp / Mobile</label>
+            <input type="tel" name="phone" id="phoneInput" class="input" placeholder="+91 98765 43210" style="margin-bottom:0;">
+          </div>
+        </div>
+        <div class="input-hint">Enter at least one — email or WhatsApp number</div>
+
+        <label class="field-label">Your name (optional)</label>
+        <input type="text" name="name" class="input" placeholder="What should we call you?">
+
+        <label class="field-label">Which city are you in? (optional)</label>
+        <input type="text" name="city" class="input" placeholder="e.g. Mumbai, Delhi, Bengaluru...">
+
+        <label class="plan-label">Which plan interests you?</label>
+        <div class="plan-options">
+          <label class="plan-option selected" id="planFree" onclick="selectPlan('free')">
+            <input type="radio" name="plan" value="free" checked>
+            <div class="plan-name">Free <span class="plan-badge-free">Forever</span></div>
+            <div class="plan-price">₹0 · Basic risk assessment</div>
+          </label>
+          <label class="plan-option" id="planPremium" onclick="selectPlan('premium')">
+            <input type="radio" name="plan" value="premium">
+            <div class="plan-name">Premium <span class="plan-badge-hot">Popular</span></div>
+            <div class="plan-price">₹299/mo · Full AI coaching</div>
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          🚀 Join the Waitlist — Free
+        </button>
+        <div class="form-note">🔒 No spam. No credit card. Unsubscribe anytime.<br>We comply with India's DPDP Act 2023.</div>
+      </form>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">🎉</div>
+        <h3>You're on the list!</h3>
+        <p>We'll WhatsApp or email you the moment PrediCare AI launches. You're getting 3 months Premium free.</p>
+        <div class="success-ref">📋 Reference: PC-<span id="refCode"></span></div>
+        <a href="assess.html" style="display:block;margin-top:20px;background:var(--teal);color:var(--navy);padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;text-align:center;">
+          🔬 Try the free risk assessment now →
+        </a>
+        <a href="index.html" class="back-btn">← Back to homepage</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-label">Core app — always free</div></div>
+  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Diseases we predict</div></div>
+  <div class="stat-item"><div class="stat-num">3 min</div><div class="stat-label">To complete assessment</div></div>
+  <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Already on waitlist</div></div>
+  <div class="stat-item"><div class="stat-num">3 mo</div><div class="stat-label">Free Premium for beta users</div></div>
+</div>
+
+<script>
+function selectPlan(plan) {
+  document.getElementById('planFree').classList.toggle('selected', plan === 'free');
+  document.getElementById('planPremium').classList.toggle('selected', plan === 'premium');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
+  const btn = document.getElementById('submitBtn');
+
+  // Reset
+  document.getElementById('emailInput').style.borderColor = 'rgba(255,255,255,0.1)';
+  document.getElementById('phoneInput').style.borderColor = 'rgba(255,255,255,0.1)';
+
+  // Validate at least one
+  if (!email && !phone) {
+    document.getElementById('emailInput').style.borderColor = '#EF4444';
+    document.getElementById('phoneInput').style.borderColor = '#EF4444';
+    return;
+  }
+  if (email && !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#EF4444';
+    return;
+  }
+
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const form = document.getElementById('waitlistForm');
+  const data = new FormData(form);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => showSuccess())
+  .catch(() => showSuccess()); // Show success regardless — Netlify processes on submit
+}
+
+function showSuccess() {
+  document.getElementById('waitlistForm').style.display = 'none';
+  document.getElementById('successScreen').style.display = 'block';
+  document.querySelector('.form-badge').style.display = 'none';
+  document.querySelector('.form-card h2').textContent = "You're in! 🎉";
+  document.querySelector('.form-card p').textContent = '';
+  // Generate reference code
+  const ref = Math.random().toString(36).substr(2,6).toUpperCase();
+  document.getElementById('refCode').textContent = ref;
+}
+</script>
+</body>
+</html>

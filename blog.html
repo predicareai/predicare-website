@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Press — PrediCare AI</title>
+<meta name="description" content="Insights on preventive healthcare, AI in medicine, and building for India's 1.4 billion people.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F9F7F2;
+  --ink: #0D0C09;
+  --teal: #006B61;
+  --teal2: #00C4B0;
+  --teal-light: #E0F7F5;
+  --orange: #C8511A;
+  --orange-light: #FDF0EA;
+  --cream: #F3EFE7;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --border: #E2DDD5;
+  --card: #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(249,247,242,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Fraunces',serif;font-weight:900;font-size:20px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{background:var(--ink);color:#fff;padding:10px 22px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:var(--teal);}
+
+/* HERO */
+.hero{background:var(--ink);padding:130px 48px 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 90% 30%,rgba(0,196,176,0.1) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:760px;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(0,196,176,0.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:22px;}
+.hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:58px;line-height:0.97;letter-spacing:-2px;color:#fff;margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:var(--teal2);}
+.hero-sub{font-size:16px;color:#94A3B8;max-width:520px;line-height:1.7;margin-bottom:36px;}
+
+/* FILTER TABS */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,0.15);color:#94A3B8;background:transparent;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--teal2);border-color:var(--teal2);color:var(--ink);}
+
+/* FEATURED POST */
+.featured-section{padding:64px 48px 0;}
+.featured-label{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;}
+.featured-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  transition:box-shadow 0.2s;cursor:pointer;text-decoration:none;color:inherit;
+}
+.featured-card:hover{box-shadow:0 24px 80px rgba(0,0,0,0.1);}
+.featured-img{
+  background:var(--ink);min-height:320px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.featured-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(0,196,176,0.18) 0%,transparent 65%);}
+.featured-img-icon{font-size:80px;position:relative;z-index:1;}
+.featured-img-num{position:absolute;bottom:24px;right:24px;font-family:'Fraunces',serif;font-size:120px;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;}
+.featured-body{padding:40px;}
+.post-cat{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;}
+.featured-body h2{font-family:'Fraunces',serif;font-size:30px;font-weight:900;letter-spacing:-0.5px;line-height:1.15;margin-bottom:14px;}
+.featured-body p{font-size:14px;color:var(--gray);line-height:1.75;margin-bottom:24px;}
+.post-meta{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--gray);}
+.post-meta-author{display:flex;align-items:center;gap:7px;}
+.author-dot{width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:13px;}
+.read-more{display:inline-flex;align-items:center;gap:6px;margin-top:20px;color:var(--teal);font-weight:700;font-size:14px;text-decoration:none;transition:gap 0.2s;}
+.read-more:hover{gap:10px;}
+
+/* POSTS GRID */
+.posts-section{padding:48px 48px 96px;}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.post-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column;
+}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.08);}
+.post-thumb{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.post-thumb-icon{font-size:52px;position:relative;z-index:1;}
+.post-content{padding:22px;flex:1;display:flex;flex-direction:column;}
+.post-content h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;letter-spacing:-0.3px;line-height:1.25;margin-bottom:10px;margin-top:10px;}
+.post-content p{font-size:13px;color:var(--gray);line-height:1.7;flex:1;}
+.post-footer{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--gray);}
+.post-footer a{color:var(--teal);font-weight:700;text-decoration:none;font-size:12px;}
+
+/* PRESS SECTION */
+.press-section{background:var(--cream);padding:80px 48px;}
+.press-section h2{font-family:'Fraunces',serif;font-size:40px;font-weight:900;letter-spacing:-1px;margin-bottom:8px;}
+.press-section .sub{font-size:15px;color:var(--gray);max-width:480px;margin-bottom:40px;}
+.press-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.press-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px;}
+.press-outlet{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.press-card h4{font-family:'Fraunces',serif;font-size:17px;font-weight:700;line-height:1.3;margin-bottom:8px;}
+.press-card p{font-size:12px;color:var(--gray);line-height:1.6;}
+.press-cta{
+  background:var(--ink);border-radius:14px;padding:32px 36px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.press-cta h3{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:6px;}
+.press-cta p{font-size:14px;color:#94A3B8;}
+.press-btn{background:var(--teal2);color:var(--ink);padding:13px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.press-btn:hover{background:#00E5CE;}
+
+/* NEWSLETTER */
+.newsletter-section{background:var(--teal);padding:72px 48px;text-align:center;}
+.newsletter-section h2{font-family:'Fraunces',serif;font-size:40px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:10px;}
+.newsletter-section p{font-size:15px;color:rgba(255,255,255,0.75);max-width:440px;margin:0 auto 32px;}
+.nl-form{display:flex;gap:10px;max-width:440px;margin:0 auto;}
+.nl-input{flex:1;padding:14px 18px;border-radius:9px;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:background 0.2s;}
+.nl-input::placeholder{color:rgba(255,255,255,0.5);}
+.nl-input:focus{background:rgba(255,255,255,0.22);}
+.nl-btn{padding:14px 24px;border-radius:9px;background:#fff;color:var(--teal);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;}
+.nl-btn:hover{background:var(--ink);color:#fff;}
+.nl-success{display:none;color:#fff;font-weight:600;margin-top:14px;font-size:15px;}
+
+footer{background:var(--ink);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-brand{font-family:'Fraunces',serif;font-weight:900;font-size:18px;color:#fff;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:13px;color:#6B7280;text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--teal2);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp 0.5s ease both;}
+.hero-inner>*:nth-child(2){animation-delay:0.1s;}
+.hero-inner>*:nth-child(3){animation-delay:0.18s;}
+.hero-inner>*:nth-child(4){animation-delay:0.26s;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 20px 56px;}
+  .hero h1{font-size:38px;}
+  .featured-section,.posts-section,.press-section,.newsletter-section{padding:48px 20px;}
+  .featured-card,.posts-grid,.press-grid{grid-template-columns:1fr;}
+  .press-cta{flex-direction:column;}
+  .nl-form{flex-direction:column;}
+  footer{flex-direction:column;text-align:center;padding:32px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <a href="assess.html" class="nav-cta">Check My Risk →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📝 Blog & Press</div>
+    <h1>Ideas that could<br><em>save your life.</em></h1>
+    <p class="hero-sub">Insights on preventive healthcare, AI in medicine, India's health crisis — and what we're doing about it. Written by the PrediCare AI team.</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterPosts('all',this)">All Posts</button>
+      <button class="filter-btn" onclick="filterPosts('health',this)">🩺 Health Science</button>
+      <button class="filter-btn" onclick="filterPosts('ai',this)">🤖 AI & Tech</button>
+      <button class="filter-btn" onclick="filterPosts('india',this)">🇮🇳 India Health</button>
+      <button class="filter-btn" onclick="filterPosts('building',this)">🏗️ Building in Public</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<div class="featured-section">
+  <div class="featured-label">📌 Featured Post</div>
+  <a href="#post-1" class="featured-card">
+    <div class="featured-img" style="background:linear-gradient(135deg,#0D0C09,#0F2A26);">
+      <div class="featured-img-icon">🔮</div>
+      <div class="featured-img-num">01</div>
+    </div>
+    <div class="featured-body">
+      <span class="post-cat" style="background:var(--teal-light);color:var(--teal);">🇮🇳 India Health</span>
+      <h2>77 Million Indians Have Diabetes. Most Don't Know It.</h2>
+      <p>India is facing a silent epidemic. The majority of people living with Type 2 diabetes in India remain undiagnosed — not because tests don't exist, but because no one has told them to get tested. Here's why, and what AI can do about it.</p>
+      <div class="post-meta">
+        <div class="post-meta-author"><div class="author-dot">👤</div><span>PrediCare AI Team</span></div>
+        <span>·</span>
+        <span>March 2026</span>
+        <span>·</span>
+        <span>8 min read</span>
+      </div>
+      <span class="read-more">Read Article →</span>
+    </div>
+  </a>
+</div>
+
+<!-- POSTS GRID -->
+<div class="posts-section">
+  <div class="posts-grid" id="postsGrid">
+
+    <a href="#post-2" class="post-card" data-cat="health">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0D0C09,#1A0A00);">
+        <div class="post-thumb-icon">❤️</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#FEE2E2;color:#B91C1C;">🩺 Health Science</span>
+        <h3>The Framingham Risk Score: How Doctors Have Predicted Heart Attacks Since 1948</h3>
+        <p>Long before AI, cardiologists used a simple formula to predict 10-year heart attack risk. Here's how it works — and how modern ML takes it 10x further.</p>
+        <div class="post-footer"><span>March 2026 · 6 min read</span><a href="#post-2">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-3" class="post-card" data-cat="building">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0F2A26,#06110F);">
+        <div class="post-thumb-icon">🏗️</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:var(--teal-light);color:var(--teal);">🏗️ Building in Public</span>
+        <h3>How We Built a Working Health AI Prototype in 30 Days With No Code</h3>
+        <p>From idea to live product at predicare.ai/assess — the exact tools, decisions, and mistakes we made building our first version with zero engineering budget.</p>
+        <div class="post-footer"><span>Feb 2026 · 10 min read</span><a href="#post-3">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-4" class="post-card" data-cat="ai">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0D0820,#120B2E);">
+        <div class="post-thumb-icon">🤖</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#EDE9FE;color:#6D28D9;">🤖 AI & Tech</span>
+        <h3>Can AI Really Predict Disease? What the Research Actually Says</h3>
+        <p>We reviewed 40+ peer-reviewed studies on ML-based disease prediction. The results are more promising — and more honest — than the hype suggests.</p>
+        <div class="post-footer"><span>Feb 2026 · 12 min read</span><a href="#post-4">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-5" class="post-card" data-cat="india">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#1A0800,#2D1200);">
+        <div class="post-thumb-icon">🇮🇳</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:var(--orange-light);color:var(--orange);">🇮🇳 India Health</span>
+        <h3>India's 1:1511 Doctor Ratio Is a Healthcare Time Bomb</h3>
+        <p>The WHO recommends 1 doctor per 1,000 patients. India has 1 per 1,511 — and the gap is worse in rural areas. The only realistic solution scales without doctors.</p>
+        <div class="post-footer"><span>Jan 2026 · 7 min read</span><a href="#post-5">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-6" class="post-card" data-cat="health">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0A1A0A,#0F280F);">
+        <div class="post-thumb-icon">🧬</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#DCFCE7;color:#15803D;">🩺 Health Science</span>
+        <h3>The 5 Diseases Killing India Silently — And the Warning Signs That Come Years Before</h3>
+        <p>Diabetes, heart disease, stroke, hypertension, cancer. Each one has precursors that appear years in advance. Most Indians never know to look for them.</p>
+        <div class="post-footer"><span>Jan 2026 · 9 min read</span><a href="#post-6">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-7" class="post-card" data-cat="building">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#1A0F00,#2A1800);">
+        <div class="post-thumb-icon">💰</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#FEF9C3;color:#854D0E;">🏗️ Building in Public</span>
+        <h3>Raising a $2M Seed Round as a Solo Founder in India: What I've Learned So Far</h3>
+        <p>I've pitched 20+ investors in the last 3 months. Here's what actually works, what doesn't, and what I wish someone had told me before I started.</p>
+        <div class="post-footer"><span>Jan 2026 · 11 min read</span><a href="#post-7">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-8" class="post-card" data-cat="ai">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#060B18,#0C1628);">
+        <div class="post-thumb-icon">📊</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#EDE9FE;color:#6D28D9;">🤖 AI & Tech</span>
+        <h3>ABDM: India's $10B Healthcare Data Goldmine That Most Startups Are Ignoring</h3>
+        <p>The Ayushman Bharat Digital Mission is creating a national health ID for every Indian. Here's why it's a once-in-a-generation opportunity for health AI — and how we're building around it.</p>
+        <div class="post-footer"><span>Dec 2025 · 8 min read</span><a href="#post-8">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-9" class="post-card" data-cat="india">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0A0A1A,#12122E);">
+        <div class="post-thumb-icon">📱</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:var(--orange-light);color:var(--orange);">🇮🇳 India Health</span>
+        <h3>650 Million Smartphone Users. Zero Preventive Health Apps Built for Them.</h3>
+        <p>India has one of the largest smartphone populations on Earth. Yet every health app is built for urban, English-speaking, premium users. We're changing that.</p>
+        <div class="post-footer"><span>Dec 2025 · 5 min read</span><a href="#post-9">Read →</a></div>
+      </div>
+    </a>
+
+    <a href="#post-10" class="post-card" data-cat="health">
+      <div class="post-thumb" style="background:linear-gradient(135deg,#0D0905,#1E1509);">
+        <div class="post-thumb-icon">🥗</div>
+      </div>
+      <div class="post-content">
+        <span class="post-cat" style="background:#DCFCE7;color:#15803D;">🩺 Health Science</span>
+        <h3>The Indian Diet and Diabetes: Why Our Food Culture Is Both the Problem and the Solution</h3>
+        <p>India's traditional diet was one of the healthiest in the world. Modern ultra-processed food has changed that — but the solution isn't Western nutrition advice. It's rooted in what we already know.</p>
+        <div class="post-footer"><span>Nov 2025 · 7 min read</span><a href="#post-10">Read →</a></div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- PRESS -->
+<section class="press-section">
+  <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Press Coverage</div>
+  <h2>In the News</h2>
+  <p class="sub">Coverage and mentions of PrediCare AI across India's startup and health media.</p>
+  <div class="press-grid">
+    <div class="press-card">
+      <div class="press-outlet">📰 YourStory <span style="margin-left:auto;font-size:10px;color:#CBD5E1;">Upcoming</span></div>
+      <h4>"The AI That Wants to Predict Your Heart Attack Before It Happens"</h4>
+      <p>Feature on PrediCare AI's mission to bring preventive healthcare to India's underserved billions — interview with the founder.</p>
+    </div>
+    <div class="press-card">
+      <div class="press-outlet">📰 Inc42 <span style="margin-left:auto;font-size:10px;color:#CBD5E1;">Upcoming</span></div>
+      <h4>"10 Health AI Startups Changing India's Preventive Care Landscape in 2026"</h4>
+      <p>PrediCare AI listed among the most promising early-stage health AI companies building for India-first.</p>
+    </div>
+    <div class="press-card">
+      <div class="press-outlet">📰 The Hindu BL <span style="margin-left:auto;font-size:10px;color:#CBD5E1;">Upcoming</span></div>
+      <h4>"Free AI Health Tools Are Democratising Preventive Medicine in Rural India"</h4>
+      <p>Long-form piece on how AI is helping bridge India's doctor shortage — featuring the predicare.ai/assess prototype.</p>
+    </div>
+  </div>
+  <div class="press-cta">
+    <div>
+      <h3>Press enquiries</h3>
+      <p>For interviews, features, media kits, or product demos — reach us directly.</p>
+    </div>
+    <a href="mailto:team@predicare.ai?subject=Press Enquiry — PrediCare AI" class="press-btn">📩 Contact Press Team</a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <h2>Get the insights<br>in your inbox.</h2>
+  <p>New articles on health AI, India healthcare, and building PrediCare — every two weeks. No spam.</p>
+  <div class="nl-form">
+    <input type="email" id="nlEmail" class="nl-input" placeholder="your@email.com">
+    <button class="nl-btn" onclick="nlSignup()">Subscribe →</button>
+  </div>
+  <div class="nl-success" id="nlSuccess">🎉 You're subscribed! First issue coming soon.</div>
+</section>
+
+<footer>
+  <div class="footer-brand">💚 PrediCare AI</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:team@predicare.ai">Contact</a>
+  </div>
+  <div style="font-size:12px;color:#374151;">© 2026 PrediCare AI · predicare.ai</div>
+</footer>
+
+<script>
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.post-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? 'flex' : 'none';
+  });
+}
+function nlSignup() {
+  const email = document.getElementById('nlEmail').value;
+  if (!email || !email.includes('@')) { document.getElementById('nlEmail').style.outline = '2px solid #EF4444'; return; }
+  document.querySelector('.nl-btn').textContent = '✓ Done!';
+  document.querySelector('.nl-btn').style.background = '#15803D';
+  document.querySelector('.nl-btn').style.color = '#fff';
+  document.getElementById('nlSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>

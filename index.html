@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrediCare AI — Predict. Prevent. Protect.</title>
+<meta name="description" content="AI-powered predictive healthcare. Know your disease risk 5–10 years before symptoms. Free for everyone.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #08121F;
+  --navy2: #0D1B30;
+  --teal: #00C4B0;
+  --teal2: #007A6E;
+  --mint: #E0FAF7;
+  --orange: #FF6B35;
+  --white: #FFFFFF;
+  --offwhite: #F5F9FA;
+  --gray: #94A3B8;
+  --light-gray: #CBD5E1;
+  --border: rgba(0,196,176,0.15);
+  --card: #0F1E33;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(8,18,31,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; }
+.nav-logo .heart { font-size: 22px; }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--teal); color: var(--navy);
+  padding: 10px 22px; border-radius: 8px;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none; transition: all 0.2s;
+}
+.nav-cta:hover { background: #00E5CE; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0,196,176,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-content { max-width: 680px; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,196,176,0.1);
+  border: 1px solid rgba(0,196,176,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px; font-weight: 600; color: var(--teal);
+  text-transform: uppercase; letter-spacing: 0.8px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 64px; font-weight: 800;
+  line-height: 1.0; letter-spacing: -2px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero h1 .teal { color: var(--teal); }
+.hero h1 .underline { position: relative; display: inline-block; }
+.hero h1 .underline::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 3px; background: var(--orange); border-radius: 2px;
+}
+
+.hero-sub {
+  font-size: 18px; color: var(--gray);
+  line-height: 1.7; max-width: 520px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+.btn-primary {
+  background: var(--teal); color: var(--navy);
+  padding: 16px 32px; border-radius: 10px;
+  font-weight: 700; font-size: 16px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #00E5CE; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,196,176,0.3); }
+.btn-secondary {
+  background: transparent; color: var(--white);
+  padding: 16px 32px; border-radius: 10px;
+  font-weight: 600; font-size: 16px;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 56px;
+  padding-top: 40px; border-top: 1px solid var(--border);
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.hero-stat .n {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px; font-weight: 800;
+  color: var(--teal); line-height: 1;
+}
+.hero-stat .l { font-size: 12px; color: var(--gray); margin-top: 4px; font-weight: 500; }
+
+/* FLOATING CARD */
+.hero-visual {
+  position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+  width: 320px; z-index: 1;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(-50%) translateY(0)} 50%{transform:translateY(-50%) translateY(-16px)} }
+.risk-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+.risk-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.risk-card-title { font-size: 12px; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.risk-score-ring {
+  width: 90px; height: 90px; margin: 0 auto 20px;
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.risk-score-ring svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 6; }
+.ring-fill { fill: none; stroke: var(--teal); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 77; }
+.ring-score { position: absolute; text-align: center; }
+.ring-score .num { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--teal); }
+.ring-score .lbl { font-size: 9px; color: var(--gray); }
+.risk-bars { display: flex; flex-direction: column; gap: 10px; }
+.risk-bar-item { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.risk-bar-label { width: 70px; color: var(--gray); }
+.risk-bar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
+.risk-bar-fill { height: 100%; border-radius: 100px; }
+.risk-bar-pct { width: 28px; text-align: right; color: var(--white); font-weight: 600; }
+
+/* SECTIONS */
+section { padding: 96px 48px; }
+
+/* PROBLEM */
+.problem-section { background: var(--navy2); }
+.section-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  color: var(--teal); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px; font-weight: 800;
+  letter-spacing: -1px; line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-sub { font-size: 16px; color: var(--gray); max-width: 520px; line-height: 1.7; margin-bottom: 56px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.stat-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+.stat-icon { font-size: 28px; margin-bottom: 16px; }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--teal); margin-bottom: 6px; }
+.stat-label { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+/* HOW IT WORKS */
+.steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+.steps-grid::before {
+  content: ''; position: absolute;
+  top: 28px; left: 10%; right: 10%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--teal), transparent);
+  opacity: 0.3;
+}
+.how-step { text-align: center; padding: 0 16px; position: relative; }
+.step-circle {
+  width: 56px; height: 56px;
+  background: var(--teal2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+  margin: 0 auto 20px; position: relative; z-index: 1;
+  border: 3px solid rgba(0,196,176,0.3);
+}
+.step-name { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.step-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+/* PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pillar-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.pillar-card:hover { transform: translateY(-4px); border-color: var(--teal); }
+.pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.pillar-predict::before { background: var(--teal); }
+.pillar-diagnose::before { background: var(--orange); }
+.pillar-prevent::before { background: #8B5CF6; }
+.pillar-icon { font-size: 36px; margin-bottom: 20px; }
+.pillar-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+.pillar-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+/* PRICING */
+.pricing-section { background: var(--navy2); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+.price-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; text-align: center;
+}
+.price-card.featured {
+  border-color: var(--teal);
+  background: linear-gradient(135deg, rgba(0,196,176,0.08), var(--card));
+  position: relative;
+}
+.featured-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--teal); color: var(--navy);
+  font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+}
+.price-plan { font-size: 13px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.price-amount { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; margin-bottom: 4px; }
+.price-amount span { font-size: 16px; font-weight: 400; color: var(--gray); }
+.price-desc { font-size: 12px; color: var(--gray); margin-bottom: 24px; }
+.price-features { list-style: none; text-align: left; margin-bottom: 28px; }
+.price-features li { font-size: 13px; color: #CBD5E1; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 8px; align-items: flex-start; }
+.price-features li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+.price-btn {
+  width: 100%; padding: 12px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  border: none; font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.price-btn-primary { background: var(--teal); color: var(--navy); }
+.price-btn-primary:hover { background: #00E5CE; }
+.price-btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+.price-btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+/* WAITLIST CTA */
+.waitlist-section { text-align: center; }
+.waitlist-section .section-title { font-size: 48px; }
+.waitlist-section .section-sub { margin: 0 auto 40px; }
+.waitlist-form { display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin: 0 auto; }
+.waitlist-row { display: flex; gap: 12px; }
+.waitlist-input {
+  flex: 1; padding: 16px 20px; border-radius: 10px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--white); font-size: 15px; outline: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+}
+.waitlist-input:focus { border-color: var(--teal); }
+.waitlist-input::placeholder { color: var(--gray); }
+.waitlist-btn {
+  padding: 16px 28px; border-radius: 10px;
+  background: var(--teal); color: var(--navy);
+  font-weight: 700; font-size: 15px;
+  border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s; white-space: nowrap;
+}
+.waitlist-btn:hover { background: #00E5CE; transform: translateY(-1px); }
+.waitlist-note { font-size: 12px; color: var(--gray); margin-top: 14px; }
+.success-msg { display: none; color: var(--teal); font-weight: 600; font-size: 16px; margin-top: 16px; }
+
+/* FOOTER */
+footer {
+  background: #05090F;
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--teal); }
+.footer-copy { font-size: 12px; color: #4A5568; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero h1 { font-size: 40px; letter-spacing: -1px; }
+  .hero-visual { display: none; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  section { padding: 64px 20px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+  .steps-grid::before { display: none; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 360px; }
+  .waitlist-form { flex-direction: column; }
+  .waitlist-row { flex-direction: column; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+}
+
+/* FAQ */
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s;}
+.faq-item:hover{border-color:rgba(0,196,176,0.3);}
+.faq-q{padding:18px 20px;font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--white);}
+.faq-arrow{font-size:16px;color:var(--gray);transition:transform 0.2s;flex-shrink:0;}
+.faq-a{display:none;padding:0 20px 18px;font-size:13px;color:var(--gray);line-height:1.7;border-top:1px solid var(--border);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open{border-color:rgba(0,196,176,0.3);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="heart">💚</span>
+    PrediCare <span style="color:var(--teal)">AI</span>
+  </div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#product">Product</a>
+    <a href="#pricing">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="assess.html">Try Free</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <a href="#waitlist" class="nav-cta">Join Waitlist →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🇮🇳 Built for India · Launching 2026</div>
+    <h1>
+      Know your<br>
+      <span class="teal">disease risk</span><br>
+      <span class="underline">before</span> it strikes.
+    </h1>
+    <p class="hero-sub">
+      PrediCare AI predicts your risk of heart disease, diabetes, cancer, and stroke — 5 to 10 years in advance. Free. In your language. On any phone.
+    </p>
+    <div class="hero-actions">
+      <a href="assess.html" class="btn-primary">🔍 Check My Risk — Free</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n">3.5B</div><div class="l">People underserved</div></div>
+      <div class="hero-stat"><div class="n">71%</div><div class="l">Deaths preventable</div></div>
+      <div class="hero-stat"><div class="n">5–10yr</div><div class="l">Earlier detection</div></div>
+      <div class="hero-stat"><div class="n">₹0</div><div class="l">Always free tier</div></div>
+    </div>
+  </div>
+
+  <!-- FLOATING RISK CARD -->
+  <div class="hero-visual">
+    <div class="risk-card">
+      <div class="risk-card-header">
+        <div class="risk-card-title">Your Risk Profile</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:600;">MODERATE</div>
+      </div>
+      <div class="risk-score-ring">
+        <svg viewBox="0 0 90 90" width="90" height="90">
+          <circle class="ring-bg" cx="45" cy="45" r="35"/>
+          <circle class="ring-fill" cx="45" cy="45" r="35"/>
+        </svg>
+        <div class="ring-score">
+          <div class="num">65</div>
+          <div class="lbl">score</div>
+        </div>
+      </div>
+      <div class="risk-bars">
+        <div class="risk-bar-item">
+          <span class="risk-bar-label">Diabetes</span>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:68%;background:#F97316;"></div></div>
+          <span class="risk-bar-pct">68%</span>
+        </div>
+        <div class="risk-bar-item">
+          <span class="risk-bar-label">Heart</span>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:42%;background:#EF4444;"></div></div>
+          <span class="risk-bar-pct">42%</span>
+        </div>
+        <div class="risk-bar-item">
+          <span class="risk-bar-label">Stroke</span>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:28%;background:#00C4B0;"></div></div>
+          <span class="risk-bar-pct">28%</span>
+        </div>
+        <div class="risk-bar-item">
+          <span class="risk-bar-label">Cancer</span>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:18%;background:#22C55E;"></div></div>
+          <span class="risk-bar-pct">18%</span>
+        </div>
+        <div class="risk-bar-item">
+          <span class="risk-bar-label">Hypert.</span>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:55%;background:#8B5CF6;"></div></div>
+          <span class="risk-bar-pct">55%</span>
+        </div>
+      </div>
+      <div style="margin-top:18px;padding:12px;background:rgba(255,107,53,0.1);border-radius:8px;font-size:11px;color:#FB923C;line-height:1.5;">
+        ⚠️ <strong>Action needed:</strong> Your diabetes risk is elevated. Recommended: cut refined sugar, walk 30min daily.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="section-tag">The Problem</div>
+  <h2 class="section-title">Half of humanity has<br>no healthcare.</h2>
+  <p class="section-sub">They don't die from untreatable diseases. They die from diseases that could have been prevented if someone had warned them in time.</p>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">🌍</div>
+      <div class="stat-num">3.5B</div>
+      <div class="stat-label">People with no access to quality healthcare</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">❤️</div>
+      <div class="stat-num">71%</div>
+      <div class="stat-label">Of all deaths worldwide are from preventable diseases</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⏱</div>
+      <div class="stat-num">5 yrs</div>
+      <div class="stat-label">Average delay to diagnose a chronic disease in India</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👩‍⚕️</div>
+      <div class="stat-num">1:1511</div>
+      <div class="stat-label">Doctor to patient ratio in India — WHO minimum is 1:1000</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">How It Works</div>
+  <h2 class="section-title">Your health oracle<br>in 5 steps.</h2>
+  <p class="section-sub" style="margin-bottom:64px;">Takes 3 minutes. No blood test. No doctor visit. Just answers that could save your life.</p>
+  <div class="steps-grid">
+    <div class="how-step">
+      <div class="step-circle">1</div>
+      <div class="step-name">Answer 12 questions</div>
+      <div class="step-desc">Age, lifestyle, family history, diet, sleep — simple everyday questions</div>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">2</div>
+      <div class="step-name">AI analyzes 200+ factors</div>
+      <div class="step-desc">Our ML engine cross-references global health databases in seconds</div>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">3</div>
+      <div class="step-name">Get your risk score</div>
+      <div class="step-desc">See your 5-disease risk profile — presented clearly, not in medical jargon</div>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">4</div>
+      <div class="step-name">Receive action plan</div>
+      <div class="step-desc">Personalised daily habits to reduce your risk — specific to your body and lifestyle</div>
+    </div>
+    <div class="how-step">
+      <div class="step-circle">5</div>
+      <div class="step-name">Connect to doctors</div>
+      <div class="step-desc">High-risk? We connect you to verified doctors near you — immediately</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:56px;">
+    <a href="assess.html" class="btn-primary" style="font-size:17px;padding:18px 40px;">Try it now — it's free →</a>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product" style="background:var(--navy2)">
+  <div class="section-tag">The Product</div>
+  <h2 class="section-title">Three tools.<br>One mission.</h2>
+  <p class="section-sub" style="margin-bottom:48px;">Prevention, diagnosis, and coaching — all in one app, built for the 3.5 billion people the world's healthcare system forgot.</p>
+
+  <!-- PILLAR CARDS -->
+  <div class="pillars-grid" style="margin-bottom:64px;">
+    <div class="pillar-card pillar-predict">
+      <div class="pillar-icon">🔮</div>
+      <div class="pillar-name">PREDICT</div>
+      <div class="pillar-desc">Our AI forecasts your risk of 5 major diseases up to 10 years before symptoms. No blood test, no clinic, no wait. Works on any Android phone, even without internet.</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--teal);font-weight:700;">✓</span> Diabetes risk scoring</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--teal);font-weight:700;">✓</span> Heart disease prediction</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--teal);font-weight:700;">✓</span> Cancer risk assessment</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--teal);font-weight:700;">✓</span> Stroke + hypertension</div>
+      </div>
+    </div>
+    <div class="pillar-card pillar-diagnose">
+      <div class="pillar-icon">🩺</div>
+      <div class="pillar-name">DIAGNOSE</div>
+      <div class="pillar-desc">A 24/7 AI doctor available via text, voice, or camera. Understands Hindi, Tamil, Bengali, and 100+ languages. Free for everyone. Refers to real doctors when needed.</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--orange);font-weight:700;">✓</span> Hindi + 100 languages</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--orange);font-weight:700;">✓</span> Text, voice & image input</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--orange);font-weight:700;">✓</span> Available 24/7 free</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:var(--orange);font-weight:700;">✓</span> Doctor referral when needed</div>
+      </div>
+    </div>
+    <div class="pillar-card pillar-prevent">
+      <div class="pillar-icon">💊</div>
+      <div class="pillar-name">PREVENT</div>
+      <div class="pillar-desc">Hyper-personalised prevention plans that adapt to your body, your food, your culture, your stress levels. Updated daily. Built around Indian diets and lifestyles.</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:#8B5CF6;font-weight:700;">✓</span> Personalised daily plan</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:#8B5CF6;font-weight:700;">✓</span> Indian diet-aware AI</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:#8B5CF6;font-weight:700;">✓</span> Wearable sync (Premium)</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#94A3B8;"><span style="color:#8B5CF6;font-weight:700;">✓</span> Weekly progress tracking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE HIGHLIGHTS STRIP -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="section-tag" style="margin-bottom:8px;">Why PrediCare AI is different</div>
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;">Built for India. Not adapted for it.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <div style="text-align:center;padding:20px 12px;">
+        <div style="font-size:32px;margin-bottom:12px;">📴</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Works Offline</div>
+        <div style="font-size:12px;color:var(--gray);line-height:1.5;">Full assessment with no internet. Built for 2G India.</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;">
+        <div style="font-size:32px;margin-bottom:12px;">🗣️</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">100+ Languages</div>
+        <div style="font-size:12px;color:var(--gray);line-height:1.5;">Hindi, Tamil, Telugu, Bengali, Marathi and more.</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;">
+        <div style="font-size:32px;margin-bottom:12px;">🏥</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">ABDM Integration</div>
+        <div style="font-size:12px;color:var(--gray);line-height:1.5;">Connected to India's national health ID system.</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;">
+        <div style="font-size:32px;margin-bottom:12px;">🔒</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">DPDP Compliant</div>
+        <div style="font-size:12px;color:var(--gray);line-height:1.5;">Data stored in India. Never sold. AES-256 encrypted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISEASE CARDS -->
+  <div style="text-align:center;margin-bottom:28px;">
+    <div class="section-tag" style="margin-bottom:8px;">5 diseases we predict</div>
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;">Know your risk — years before symptoms.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:40px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid #EF4444;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:10px;">❤️</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Heart Disease</div>
+      <div style="font-size:11px;color:var(--gray);">India: 1.5M deaths/yr</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid #F97316;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:10px;">🩸</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Diabetes</div>
+      <div style="font-size:11px;color:var(--gray);">77M Indians affected</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid #8B5CF6;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:10px;">🧠</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Stroke</div>
+      <div style="font-size:11px;color:var(--gray);">185M risk in India</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid var(--teal);border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:10px;">🫀</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Hypertension</div>
+      <div style="font-size:11px;color:var(--gray);">220M Indians: BP issues</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-top:3px solid #22C55E;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:10px;">🔬</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Cancer Risk</div>
+      <div style="font-size:11px;color:var(--gray);">1.4M new cases/yr India</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="assess.html" class="btn-primary" style="font-size:16px;padding:16px 36px;">🔬 Check All 5 Disease Risks — Free →</a>
+    <div style="margin-top:14px;font-size:12px;color:var(--gray);">Takes 3 minutes · No signup required · Works on any phone</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div style="text-align:center;margin-bottom:56px;">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Affordable for everyone.<br>Free for those who need it most.</h2>
+    <p class="section-sub" style="margin:0 auto 28px;">Healthcare should never be a privilege. The core PrediCare AI is free forever.</p>
+    <!-- BILLING TOGGLE -->
+    <div style="display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:6px 8px;">
+      <button id="toggleMonthly" onclick="setPricing('monthly')" style="padding:7px 18px;border-radius:100px;border:none;background:var(--teal);color:var(--navy);font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;">Monthly</button>
+      <button id="toggleYearly" onclick="setPricing('yearly')" style="padding:7px 18px;border-radius:100px;border:none;background:transparent;color:var(--gray);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;">Yearly <span style="background:rgba(0,196,176,0.15);color:var(--teal);padding:2px 7px;border-radius:100px;font-size:10px;margin-left:4px;">Save 30%</span></button>
+    </div>
+  </div>
+
+  <div class="pricing-grid" style="max-width:900px;">
+    <!-- FREE -->
+    <div class="price-card">
+      <div class="price-plan">Free</div>
+      <div class="price-amount">₹0 <span>/ forever</span></div>
+      <div class="price-desc">For everyone — no credit card needed</div>
+      <ul class="price-features">
+        <li>Full 5-disease risk assessment</li>
+        <li>Overall risk score + dashboard</li>
+        <li>Basic prevention plan (5 tips)</li>
+        <li>Hindi + English support</li>
+        <li>Doctor referral if high risk</li>
+        <li>Works on any Android phone</li>
+        <li style="opacity:0.35;text-decoration:line-through;">Weekly tracking & history</li>
+        <li style="opacity:0.35;text-decoration:line-through;">Family profiles</li>
+        <li style="opacity:0.35;text-decoration:line-through;">Wearable sync</li>
+      </ul>
+      <button class="price-btn price-btn-outline" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Free Access →</button>
+      <div style="margin-top:12px;font-size:11px;color:var(--gray);text-align:center;">No card · No signup · Always free</div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="price-card featured">
+      <div class="featured-badge">🔥 Most Popular</div>
+      <div class="price-plan">Premium</div>
+      <div class="price-amount" id="premiumPrice">₹299 <span>/ month</span></div>
+      <div class="price-desc" id="premiumDesc">Billed monthly — cancel anytime</div>
+      <ul class="price-features">
+        <li>Everything in Free</li>
+        <li>Weekly re-assessment + history</li>
+        <li>Full AI prevention plan (daily)</li>
+        <li>Family profiles — up to 5 members</li>
+        <li>Wearable sync (Fitbit, Apple Watch)</li>
+        <li>Priority doctor connection</li>
+        <li>Detailed nutrition AI (Indian diet)</li>
+        <li>Exercise & sleep coaching</li>
+        <li>WhatsApp health reminders</li>
+      </ul>
+      <button class="price-btn price-btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Beta — 3 Months Free →</button>
+      <div style="margin-top:12px;font-size:11px;color:var(--teal);text-align:center;">Beta users get first 3 months free</div>
+    </div>
+
+    <!-- CLINIC -->
+    <div class="price-card">
+      <div class="price-plan">Clinic / Hospital</div>
+      <div class="price-amount" id="clinicPrice">₹799 <span>/ seat/mo</span></div>
+      <div class="price-desc" id="clinicDesc">Per doctor seat — billed monthly</div>
+      <ul class="price-features">
+        <li>Everything in Premium</li>
+        <li>Bulk patient risk screening</li>
+        <li>Doctor dashboard + analytics</li>
+        <li>Patient report exports (PDF)</li>
+        <li>EHR / hospital system integration</li>
+        <li>ABDM data access</li>
+        <li>Branded patient-facing app</li>
+        <li>Dedicated account manager</li>
+        <li>SLA: 99.9% uptime guarantee</li>
+      </ul>
+      <button class="price-btn price-btn-outline" onclick="window.location.href='mailto:team@predicare.ai?subject=Clinic Plan Enquiry'">Contact Us →</button>
+      <div style="margin-top:12px;font-size:11px;color:var(--gray);text-align:center;">Free 30-day pilot for clinics</div>
+    </div>
+  </div>
+
+  <!-- COMPARE TABLE -->
+  <div style="max-width:900px;margin:48px auto 0;">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.3px;">Full Feature Comparison</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr style="background:rgba(0,196,176,0.06);">
+            <th style="padding:14px 20px;text-align:left;color:var(--gray);font-weight:600;font-size:12px;border-bottom:1px solid var(--border);">Feature</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--gray);font-weight:600;font-size:12px;border-bottom:1px solid var(--border);">Free</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--teal);font-weight:700;font-size:12px;border-bottom:1px solid var(--border);">Premium</th>
+            <th style="padding:14px 20px;text-align:center;color:var(--gray);font-weight:600;font-size:12px;border-bottom:1px solid var(--border);">Clinic</th>
+          </tr>
+        </thead>
+        <tbody id="compareTable">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04)"><td style="padding:12px 20px;color:#CBD5E1;">5-disease risk assessment</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01)"><td style="padding:12px 20px;color:#CBD5E1;">Hindi + 100 languages</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04)"><td style="padding:12px 20px;color:#CBD5E1;">Basic prevention plan</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01)"><td style="padding:12px 20px;color:#CBD5E1;">Doctor referral</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04)"><td style="padding:12px 20px;color:#CBD5E1;">Weekly tracking + history</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01)"><td style="padding:12px 20px;color:#CBD5E1;">Family profiles (5 members)</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04)"><td style="padding:12px 20px;color:#CBD5E1;">Wearable sync</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01)"><td style="padding:12px 20px;color:#CBD5E1;">Doctor dashboard + analytics</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.04)"><td style="padding:12px 20px;color:#CBD5E1;">ABDM integration</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+          <tr><td style="padding:12px 20px;color:#CBD5E1;">Branded clinic app</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--gray);">—</td><td style="text-align:center;color:var(--teal);font-weight:700;">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="max-width:700px;margin:48px auto 0;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.3px;">Pricing FAQ</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;" id="faqContainer">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Will the free plan always be free? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes — permanently. The core 5-disease risk assessment and basic prevention plan will always be free. Our mission is access for everyone, not just premium users. Business revenue comes from Premium subscriptions and Clinic plans.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What does "Beta — 3 months free" mean? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Early users who join the waitlist now will get the first 3 months of Premium completely free when we launch. No credit card needed during beta. After 3 months, you can choose to continue at ₹299/month or stay on the free plan.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is my health data safe? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes. Your health data is encrypted end-to-end using AES-256, stored in India (Google Cloud Mumbai), and never sold to any third party — not insurers, not advertisers, not anyone. We comply with India's DPDP Act 2023. See our Privacy Policy for full details.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I cancel the Premium plan anytime? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes — cancel anytime with no penalty. Your account reverts to the Free plan and you keep all your historical data. No questions asked.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is this a medical diagnosis? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No. PrediCare AI provides health risk indicators and awareness — not a medical diagnosis. It's a preventive wellness tool. For any health decisions, always consult a qualified doctor. When your risk score is high, we connect you to verified doctors near you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section id="waitlist" class="waitlist-section">
+  <div class="section-tag">Early Access</div>
+  <h2 class="section-title" style="font-size:48px;">Be the first to<br>know your risk.</h2>
+  <p class="section-sub">Join the waitlist — get free early access when we launch in India. No spam, ever.</p>
+  <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="waitlist-form" id="waitlistForm" onsubmit="handleWaitlist(event)">
+    <input type="hidden" name="form-name" value="waitlist">
+    <p style="display:none"><input name="bot-field"></p>
+    <div class="waitlist-row">
+      <input type="email" name="email" id="emailInput" class="waitlist-input" placeholder="Email address (optional)">
+      <input type="tel" name="phone" id="phoneInput" class="waitlist-input" placeholder="WhatsApp / mobile (optional)">
+    </div>
+    <div style="font-size:12px;color:var(--gray);text-align:left;margin-top:-4px;">Enter at least one — email <em>or</em> WhatsApp number</div>
+    <button type="submit" class="waitlist-btn" id="waitlistBtn">Join Waitlist →</button>
+  </form>
+  <div class="waitlist-note">🔒 We respect your privacy. No spam, unsubscribe anytime.</div>
+  <div class="success-msg" id="successMsg">🎉 You're on the list! We'll reach out when PrediCare AI launches.</div>
+  <div style="margin-top:64px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;">
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--teal)">100+</div><div style="font-size:13px;color:var(--gray)">Early signups</div></div>
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--teal)">3</div><div style="font-size:13px;color:var(--gray)">Hospital partners</div></div>
+    <div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--teal)">India</div><div style="font-size:13px;color:var(--gray)">Launching first</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">💚 PrediCare AI</div>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="assess.html">Try Free</a>
+    <a href="/cdn-cgi/l/email-protection#582c3d393518282a3d3c313b392a3d763931">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 PrediCare AI · predicare.ai · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="384c5d595578484a5d5c515b594a5d165951">[email&#160;protected]</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+function toggleFaq(el) { el.classList.toggle('open'); }
+function setPricing(type) {
+  const monthly = document.getElementById('toggleMonthly');
+  const yearly = document.getElementById('toggleYearly');
+  const premiumPrice = document.getElementById('premiumPrice');
+  const premiumDesc = document.getElementById('premiumDesc');
+  const clinicPrice = document.getElementById('clinicPrice');
+  const clinicDesc = document.getElementById('clinicDesc');
+  if (type === 'yearly') {
+    monthly.style.background = 'transparent'; monthly.style.color = 'var(--gray)';
+    yearly.style.background = 'var(--teal)'; yearly.style.color = 'var(--navy)';
+    premiumPrice.innerHTML = '\u20b9209 <span>/ month</span>';
+    premiumDesc.textContent = 'Billed \u20b92,499/year — save \u20b91,089';
+    clinicPrice.innerHTML = '\u20b9559 <span>/ seat/mo</span>';
+    clinicDesc.textContent = 'Billed annually — save 30%';
+  } else {
+    monthly.style.background = 'var(--teal)'; monthly.style.color = 'var(--navy)';
+    yearly.style.background = 'transparent'; yearly.style.color = 'var(--gray)';
+    premiumPrice.innerHTML = '\u20b9299 <span>/ month</span>';
+    premiumDesc.textContent = 'Billed monthly — cancel anytime';
+    clinicPrice.innerHTML = '\u20b9799 <span>/ seat/mo</span>';
+    clinicDesc.textContent = 'Per doctor seat — billed monthly';
+  }
+}
+
+// Handle scroll after Cloudflare strips hash (e.g. /waitlist → / → scroll to #waitlist)
+(function() {
+  var hash = window.location.hash;
+  var ref = document.referrer;
+  // If someone lands on homepage from a /waitlist redirect, scroll down
+  if (!hash) {
+    var path = window.location.pathname;
+    var map = { '/': null }; // no-op for plain homepage
+    // Check sessionStorage for intended anchor
+    var target = sessionStorage.getItem('scrollTo');
+    if (target) {
+      sessionStorage.removeItem('scrollTo');
+      var el = document.getElementById(target);
+      if (el) setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); }, 300);
+    }
+  }
+})();
+</script><script>
+function handleWaitlist(e) {
+  e.preventDefault();
+  const btn = document.getElementById('waitlistBtn');
+  const email = document.getElementById('emailInput').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
+  // Reset borders
+  document.getElementById('emailInput').style.borderColor = 'var(--border)';
+  document.getElementById('phoneInput').style.borderColor = 'var(--border)';
+  // Require at least one
+  if (!email && !phone) {
+    document.getElementById('emailInput').style.borderColor = '#EF4444';
+    document.getElementById('phoneInput').style.borderColor = '#EF4444';
+    return;
+  }
+  if (email && !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#EF4444';
+    return;
+  }
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ 'form-name': 'waitlist', email, phone }).toString()
+  })
+  .then(() => {
+    btn.textContent = 'Joined!';
+    btn.style.background = '#16A34A';
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('emailInput').value = '';
+    document.getElementById('phoneInput').value = '';
+  })
+  .catch(() => {
+    btn.textContent = 'Joined!';
+    btn.style.background = '#16A34A';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+}
+  document.getElementById('emailInput').style.borderColor = 'var(--teal)';
+  document.querySelector('.waitlist-btn').textContent = '✓ Joined!';
+  document.querySelector('.

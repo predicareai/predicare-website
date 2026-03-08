@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrediCare AI — Free Health Risk Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #08121F; --navy2: #0D1B30; --card: #0F1E33;
+  --teal: #00C4B0; --teal2: #007A6E;
+  --orange: #FF6B35; --red: #EF4444; --yellow: #F59E0B;
+  --green: #22C55E; --purple: #8B5CF6;
+  --white: #FFFFFF; --gray: #94A3B8;
+  --border: rgba(0,196,176,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid var(--border);background:rgba(8,18,31,0.95);position:sticky;top:0;z-index:10;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
+.logo span{color:var(--teal);}
+.back-link{font-size:13px;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+.back-link:hover{color:var(--teal);}
+
+/* PROGRESS BAR */
+.progress-wrap{padding:0 32px;background:var(--navy2);border-bottom:1px solid var(--border);}
+.progress-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+.progress-text{font-size:13px;color:var(--gray);}
+.progress-text strong{color:var(--white);}
+.progress-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:100px;margin:8px 0;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal2),var(--teal));border-radius:100px;transition:width 0.4s ease;}
+
+/* MAIN */
+.main{max-width:640px;margin:0 auto;padding:48px 20px 80px;}
+
+/* SCREENS */
+.screen{display:none;}
+.screen.active{display:block;animation:fadeIn 0.3s ease both;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* INTRO */
+.intro-icon{font-size:56px;margin-bottom:20px;}
+.intro-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px;margin-bottom:14px;line-height:1.1;}
+.intro-title span{color:var(--teal);}
+.intro-sub{font-size:16px;color:var(--gray);line-height:1.7;margin-bottom:32px;}
+.intro-features{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;}
+.intro-feat{display:flex;gap:12px;align-items:center;font-size:14px;color:#CBD5E1;}
+.feat-icon{width:32px;height:32px;border-radius:8px;background:rgba(0,196,176,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.start-btn{width:100%;padding:18px;border-radius:12px;background:var(--teal);color:var(--navy);font-family:'Syne',sans-serif;font-size:18px;font-weight:800;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:-0.3px;}
+.start-btn:hover{background:#00E5CE;transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,196,176,0.25);}
+
+/* QUESTION */
+.q-num{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+.q-text{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;letter-spacing:-0.5px;line-height:1.2;margin-bottom:8px;}
+.q-hint{font-size:13px;color:var(--gray);margin-bottom:28px;}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:10px;}
+.option-btn{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--card);border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;color:var(--white);text-align:left;font-family:'DM Sans',sans-serif;}
+.option-btn:hover{border-color:var(--teal);background:rgba(0,196,176,0.06);}
+.option-btn.selected{border-color:var(--teal);background:rgba(0,196,176,0.12);color:var(--teal);}
+.option-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.option-label{font-weight:500;}
+.option-check{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all 0.2s;}
+.option-btn.selected .option-check{background:var(--teal);border-color:var(--teal);color:var(--navy);}
+
+/* SLIDER */
+.slider-wrap{margin-bottom:8px;}
+.slider-val{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:var(--teal);margin-bottom:4px;}
+.slider-unit{font-size:14px;color:var(--gray);}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:100px;background:rgba(255,255,255,0.08);outline:none;margin:16px 0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--teal);cursor:pointer;border:3px solid var(--navy);box-shadow:0 0 0 3px rgba(0,196,176,0.3);}
+.slider-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--gray);}
+
+/* NAV BTNS */
+.nav-btns{display:flex;gap:12px;margin-top:32px;}
+.prev-btn{flex:0 0 auto;padding:14px 24px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--white);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.prev-btn:hover{border-color:var(--teal);color:var(--teal);}
+.next-btn{flex:1;padding:14px;border-radius:10px;background:var(--teal);color:var(--navy);font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;border:none;transition:all 0.2s;}
+.next-btn:hover{background:#00E5CE;}
+.next-btn:disabled{background:rgba(255,255,255,0.08);color:var(--gray);cursor:not-allowed;}
+
+/* LOADING */
+.loading-wrap{text-align:center;padding:40px 0;}
+.loading-icon{font-size:48px;margin-bottom:20px;animation:spin 2s linear infinite;}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.loading-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:10px;}
+.loading-steps{display:flex;flex-direction:column;gap:8px;margin-top:24px;text-align:left;}
+.loading-step{font-size:13px;color:var(--gray);display:flex;gap:10px;align-items:center;opacity:0;transition:opacity 0.3s;}
+.loading-step.visible{opacity:1;}
+.loading-step .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+
+/* RESULTS */
+.results-header{text-align:center;margin-bottom:36px;}
+.results-tag{display:inline-block;background:rgba(0,196,176,0.1);border:1px solid rgba(0,196,176,0.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:16px;}
+.results-title{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px;}
+.results-sub{font-size:14px;color:var(--gray);}
+
+/* OVERALL SCORE */
+.overall-score{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;margin-bottom:24px;}
+.score-ring{width:130px;height:130px;margin:0 auto 20px;position:relative;display:flex;align-items:center;justify-content:center;}
+.score-ring svg{transform:rotate(-90deg);}
+.sr-bg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:10;}
+.sr-fill{fill:none;stroke-width:10;stroke-linecap:round;stroke-dasharray:346;transition:stroke-dashoffset 1.5s ease;}
+.score-inner{position:absolute;text-align:center;}
+.score-num{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;line-height:1;}
+.score-lbl{font-size:11px;color:var(--gray);margin-top:4px;}
+.score-verdict{font-size:15px;font-weight:600;margin-bottom:6px;}
+.score-detail{font-size:13px;color:var(--gray);}
+
+/* DISEASE CARDS */
+.disease-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.disease-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;}
+.disease-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.disease-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray);margin-bottom:10px;}
+.disease-pct{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;margin-bottom:8px;}
+.disease-bar-track{height:5px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden;margin-bottom:8px;}
+.disease-bar-fill{height:100%;border-radius:100px;transition:width 1.2s ease;}
+.disease-level{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;display:inline-block;}
+
+/* RECOMMENDATIONS */
+.recs-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:16px;letter-spacing:-0.3px;}
+.rec-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;}
+.rec-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.rec-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+.rec-desc{font-size:12px;color:var(--gray);line-height:1.5;}
+
+/* ALERT CARDS */
+.alert-high{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:18px;margin-bottom:16px;}
+.alert-high h4{color:var(--red);font-size:14px;font-weight:700;margin-bottom:6px;}
+.alert-high p{font-size:13px;color:#FCA5A5;line-height:1.5;}
+
+/* WAITLIST CTA */
+.results-cta{background:linear-gradient(135deg,rgba(0,196,176,0.1),rgba(0,122,110,0.08));border:1px solid rgba(0,196,176,0.25);border-radius:16px;padding:32px;text-align:center;margin-top:28px;}
+.cta-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px;}
+.cta-sub{font-size:14px;color:var(--gray);margin-bottom:24px;}
+.cta-form{display:flex;gap:10px;max-width:400px;margin:0 auto;}
+.cta-input{flex:1;padding:14px 16px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--white);font-size:14px;outline:none;font-family:'DM Sans',sans-serif;}
+.cta-input:focus{border-color:var(--teal);}
+.cta-input::placeholder{color:var(--gray);}
+.cta-btn{padding:14px 22px;border-radius:8px;background:var(--teal);color:var(--navy);font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:#00E5CE;}
+.cta-success{display:none;color:var(--teal);font-weight:600;font-size:15px;margin-top:12px;}
+
+.restart-btn{display:block;width:100%;margin-top:16px;padding:14px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--gray);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.restart-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+@media(max-width:600px){
+  .main{padding:32px 16px 80px;}
+  .disease-grid{grid-template-columns:1fr;}
+  .cta-form{flex-direction:column;}
+  .q-text{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">💚 PrediCare <span>AI</span></div>
+  <a href="index.html" class="back-link">← Back to predicare.ai</a>
+</div>
+
+<div class="progress-wrap" id="progressWrap" style="display:none;">
+  <div class="progress-inner">
+    <div class="progress-text">Question <strong id="qNumDisplay">1</strong> of 12</div>
+    <div class="progress-text" id="progressPct" style="color:var(--teal);font-weight:600;">0%</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-icon">🔬</div>
+    <h1 class="intro-title">Know your <span>disease risk</span> in 3 minutes.</h1>
+    <p class="intro-sub">Answer 12 simple questions. Our AI analyses 200+ health factors and shows your risk for 5 major diseases — diabetes, heart disease, stroke, cancer, and hypertension.</p>
+    <div class="intro-features">
+      <div class="intro-feat"><div class="feat-icon">🆓</div>Completely free — no credit card, no signup</div>
+      <div class="intro-feat"><div class="feat-icon">🔒</div>Your data is private and never sold</div>
+      <div class="intro-feat"><div class="feat-icon">⚡</div>Results in under 3 minutes</div>
+      <div class="intro-feat"><div class="feat-icon">🩺</div>Powered by medical-grade AI algorithms</div>
+    </div>
+    <p style="font-size:11px;color:var(--gray);margin-bottom:16px;">⚠️ This is a risk indicator, not a medical diagnosis. Always consult a doctor for health decisions.</p>
+    <button class="start-btn" onclick="startAssessment()">Start My Free Risk Assessment →</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="screen" id="screen-questions">
+    <div class="q-num" id="qNum">Question 1 of 12</div>
+    <div class="q-text" id="qText"></div>
+    <div class="q-hint" id="qHint"></div>
+    <div id="qInput"></div>
+    <div class="nav-btns">
+      <button class="prev-btn" id="prevBtn" onclick="prevQ()" style="display:none;">← Back</button>
+      <button class="next-btn" id="nextBtn" onclick="nextQ()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="loading-icon">🧠</div>
+      <div class="loading-title">Analysing your health profile…</div>
+      <p style="font-size:14px;color:var(--gray);">Our AI is cross-referencing 200+ health factors</p>
+      <div class="loading-steps" id="loadingSteps">
+        <div class="loading-step" id="ls1"><div class="dot"></div>Processing lifestyle and age factors…</div>
+        <div class="loading-step" id="ls2"><div class="dot"></div>Cross-referencing family history data…</div>
+        <div class="loading-step" id="ls3"><div class="dot"></div>Running 5-disease prediction model…</div>
+        <div class="loading-step" id="ls4"><div class="dot"></div>Generating personalised prevention plan…</div>
+        <div class="loading-step" id="ls5"><div class="dot"></div>Preparing your risk report…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="screen" id="screen-results">
+    <div class="results-header">
+      <div class="results-tag">Your Risk Report</div>
+      <div class="results-title" id="resultsTitle">Your Health Risk Report</div>
+      <div class="results-sub">Based on your answers — this is a risk indicator, not a diagnosis</div>
+    </div>
+
+    <!-- OVERALL SCORE -->
+    <div class="overall-score">
+      <div class="score-ring">
+        <svg viewBox="0 0 120 120" width="130" height="130">
+          <circle class="sr-bg" cx="60" cy="60" r="55"/>
+          <circle class="sr-fill" id="scoreRing" cx="60" cy="60" r="55" stroke="#00C4B0" stroke-dashoffset="346"/>
+        </svg>
+        <div class="score-inner">
+          <div class="score-num" id="scoreNum" style="color:var(--teal)">—</div>
+          <div class="score-lbl">Overall Risk</div>
+        </div>
+      </div>
+      <div class="score-verdict" id="scoreVerdict"></div>
+      <div class="score-detail" id="scoreDetail"></div>
+    </div>
+
+    <!-- DISEASE CARDS -->
+    <div class="disease-grid" id="diseaseGrid"></div>
+
+    <!-- HIGH RISK ALERT -->
+    <div class="alert-high" id="alertHigh" style="display:none;">
+      <h4>⚠️ Action Recommended</h4>
+      <p id="alertText"></p>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="recs-title">Your Personal Prevention Plan</div>
+    <div id="recsContainer"></div>
+
+    <!-- WAITLIST CTA -->
+    <div class="results-cta">
+      <div class="cta-title">Get your full prevention plan 📲</div>
+      <div class="cta-sub">Join the waitlist to get weekly risk tracking, wearable sync, and a personalised AI health coach when we launch.</div>
+      <div class="cta-form">
+        <input type="email" id="ctaEmail" class="cta-input" placeholder="your@email.com">
+        <button class="cta-btn" onclick="joinWaitlist()">Join Free</button>
+      </div>
+      <div class="cta-success" id="ctaSuccess">🎉 You're on the list! We'll notify you at launch.</div>
+    </div>
+    <button class="restart-btn" onclick="restart()">↺ Retake Assessment</button>
+  </div>
+
+</div><!-- end .main -->
+
+<script>
+const questions = [
+  { id:'age', text:'How old are you?', hint:'Age is one of the strongest predictors of disease risk.', type:'slider', min:18, max:80, default:35, unit:'years old' },
+  { id:'gender', text:'What is your biological sex?', hint:'Some diseases affect men and women differently.', type:'options', options:[{label:'Male',icon:'👨'},{label:'Female',icon:'👩'},{label:'Prefer not to say',icon:'🧑'}] },
+  { id:'bmi', text:'What is your approximate weight category?', hint:'Weight significantly affects metabolic and cardiac risk.', type:'options', options:[{label:'Underweight (BMI < 18.5)',icon:'🪶'},{label:'Normal weight (BMI 18.5–24.9)',icon:'✅'},{label:'Overweight (BMI 25–29.9)',icon:'⚖️'},{label:'Obese (BMI 30+)',icon:'🔴'}] },
+  { id:'smoking', text:'Do you smoke or use tobacco?', hint:'Tobacco is the single largest preventable cause of death.', type:'options', options:[{label:'Never smoked',icon:'🚭'},{label:'Used to, quit now',icon:'✅'},{label:'Occasional / social smoking',icon:'⚠️'},{label:'Daily smoker',icon:'🚬'}] },
+  { id:'alcohol', text:'How often do you consume alcohol?', hint:'Regular alcohol use increases cancer and liver disease risk.', type:'options', options:[{label:'Never',icon:'🚫'},{label:'Rarely (special occasions)',icon:'🥂'},{label:'Weekly',icon:'🍺'},{label:'Daily or near-daily',icon:'🔴'}] },
+  { id:'exercise', text:'How physically active are you?', hint:'Sedentary lifestyle is linked to 5+ major diseases.', type:'options', options:[{label:'Active — exercise 4+ times/week',icon:'🏃'},{label:'Moderate — 1–3 times/week',icon:'🚶'},{label:'Light — occasional walk',icon:'🐢'},{label:'Sedentary — desk job, no exercise',icon:'🛋️'}] },
+  { id:'diet', text:'How would you describe your diet?', hint:'Diet is a primary driver of diabetes, heart disease and cancer.', type:'options', options:[{label:'Mostly fruits, veg, whole grains',icon:'🥗'},{label:'Balanced with some junk food',icon:'🍱'},{label:'High in fried, processed foods',icon:'🍟'},{label:'Very high sugar / sweet intake',icon:'🍭'}] },
+  { id:'sleep', text:'How much sleep do you get per night?', hint:'Poor sleep is linked to diabetes, hypertension and immune issues.', type:'options', options:[{label:'7–9 hours (healthy)',icon:'😴'},{label:'6–7 hours (slightly short)',icon:'🌙'},{label:'Less than 6 hours',icon:'⚠️'},{label:'Very irregular / insomnia',icon:'🔴'}] },
+  { id:'stress', text:'What is your typical stress level?', hint:'Chronic stress raises cortisol, affecting heart and immune health.', type:'options', options:[{label:'Low — generally calm',icon:'😌'},{label:'Moderate — sometimes stressed',icon:'😐'},{label:'High — frequently stressed',icon:'😰'},{label:'Very high — burnout level',icon:'🔥'}] },
+  { id:'family', text:'Does your family have a history of any of these?', hint:'Genetic risk is a major factor — family history can double or triple your risk.', type:'options', options:[{label:'None that I know of',icon:'✅'},{label:'Diabetes',icon:'🩸'},{label:'Heart disease or stroke',icon:'❤️'},{label:'Cancer',icon:'🔬'},{label:'Multiple of the above',icon:'⚠️'}] },
+  { id:'bp', text:'Do you know your blood pressure status?', hint:'High BP (hypertension) silently damages arteries over years.', type:'options', options:[{label:'Normal (below 120/80)',icon:'✅'},{label:'Slightly elevated',icon:'⚠️'},{label:'High — I have hypertension',icon:'🔴'},{label:'I don\'t know',icon:'❓'}] },
+  { id:'checkup', text:'When did you last have a health checkup?', hint:'Regular checkups catch problems early when they\'re still treatable.', type:'options', options:[{label:'Within the last year',icon:'✅'},{label:'1–2 years ago',icon:'📅'},{label:'3–5 years ago',icon:'⚠️'},{label:'Never or more than 5 years',icon:'🔴'}] }
+];
+
+let answers = {};
+let currentQ = 0;
+
+function startAssessment() {
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-questions').classList.add('active');
+  document.getElementById('progressWrap').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('qNum').textContent = `Question ${currentQ + 1} of ${questions.length}`;
+  document.getElementById('qNumDisplay').textContent = currentQ + 1;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qHint').textContent = q.hint;
+
+  const pct = Math.round((currentQ / questions.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  document.getElementById('prevBtn').style.display = currentQ > 0 ? 'block' : 'none';
+  document.getElementById('nextBtn').disabled = !answers[q.id];
+
+  const container = document.getElementById('qInput');
+  container.innerHTML = '';
+
+  if (q.type === 'slider') {
+    const val = answers[q.id] || q.default;
+    container.innerHTML = `
+      <div class="slider-wrap">
+        <div class="slider-val" id="sliderVal">${val}</div>
+        <div class="slider-unit">${q.unit}</div>
+        <input type="range" min="${q.min}" max="${q.max}" value="${val}" id="sliderInput"
+          oninput="document.getElementById('sliderVal').textContent=this.value;answers['${q.id}']=parseInt(this.value);document.getElementById('nextBtn').disabled=false;">
+        <div class="slider-labels"><span>${q.min}</span><span>${q.max}</span></div>
+      </div>`;
+    answers[q.id] = val;
+    document.getElementById('nextBtn').disabled = false;
+  } else {
+    const div = document.createElement('div');
+    div.className = 'options';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn' + (answers[q.id] === i ? ' selected' : '');
+      btn.innerHTML = `<div class="option-icon">${opt.icon}</div><span class="option-label">${opt.label}</span><div class="option-check">${answers[q.id] === i ? '✓' : ''}</div>`;
+      btn.onclick = () => {
+        container.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('selected'); b.querySelector('.option-check').textContent = ''; });
+        btn.classList.add('selected');
+        btn.querySelector('.option-check').textContent = '✓';
+        answers[q.id] = i;
+        document.getElementById('nextBtn').disabled = false;
+      };
+      div.appendChild(btn);
+    });
+    container.appendChild(div);
+  }
+}
+
+function nextQ() {
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQuestion();
+    document.getElementById('screen-questions').style.animation = 'none';
+    setTimeout(() => document.getElementById('screen-questions').style.animation = '', 10);
+  } else {
+    showLoading();
+  }
+}
+
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+}
+
+function showLoading() {
+  document.getElementById('screen-questions').classList.remove('active');
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('screen-loading').classList.add('active');
+  const steps = ['ls1','ls2','ls3','ls4','ls5'];
+  steps.forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), i * 700));
+  setTimeout(showResults, 4200);
+}
+
+function calcRisks() {
+  let diabetes = 15, heart = 12, stroke = 10, cancer = 8, hypertension = 12;
+  const age = answers.age || 35;
+
+  // Age factor
+  const ageFactor = age > 50 ? 1.6 : age > 40 ? 1.3 : age > 30 ? 1.1 : 1.0;
+  diabetes *= ageFactor; heart *= ageFactor; stroke *= ageFactor; hypertension *= ageFactor;
+
+  // BMI
+  if (answers.bmi === 2) { diabetes += 15; heart += 8; hypertension += 10; }
+  if (answers.bmi === 3) { diabetes += 28; heart += 18; hypertension += 22; stroke += 10; }
+
+  // Smoking
+  if (answers.smoking === 2) { cancer += 12; heart += 8; stroke += 6; }
+  if (answers.smoking === 3) { cancer += 25; heart += 18; stroke += 15; hypertension += 10; }
+
+  // Alcohol
+  if (answers.alcohol === 2) { cancer += 8; heart += 5; }
+  if (answers.alcohol === 3) { cancer += 18; heart += 12; hypertension += 8; }
+
+  // Exercise
+  if (answers.exercise === 2) { diabetes += 8; heart += 6; }
+  if (answers.exercise === 3) { diabetes += 15; heart += 12; hypertension += 10; }
+
+  // Diet
+  if (answers.diet === 2) { diabetes += 8; heart += 6; }
+  if (answers.diet === 3) { diabetes += 18; heart += 14; }
+  if (answers.diet === 3 || answers.diet === 2) { cancer += 5; }
+
+  // Sleep
+  if (answers.sleep === 2) { diabetes += 5; hypertension += 5; }
+  if (answers.sleep === 3) { diabetes += 12; hypertension += 12; heart += 8; }
+
+  // Stress
+  if (answers.stress === 2) { heart += 8; hypertension += 8; }
+  if (answers.stress === 3) { heart += 16; hypertension += 16; stroke += 8; }
+
+  // Family history
+  if (answers.family === 1) { diabetes += 18; }
+  if (answers.family === 2) { heart += 20; stroke += 15; }
+  if (answers.family === 3) { cancer += 20; }
+  if (answers.family === 4) { diabetes += 15; heart += 15; cancer += 12; stroke += 10; }
+
+  // Blood pressure
+  if (answers.bp === 1) { heart += 10; stroke += 10; hypertension += 20; }
+  if (answers.bp === 2) { heart += 20; stroke += 18; hypertension += 35; }
+
+  // No checkup
+  if (answers.checkup === 2) { diabetes += 5; heart += 5; }
+  if (answers.checkup === 3) { diabetes += 10; heart += 10; cancer += 8; }
+
+  // Female modifier
+  if (answers.gender === 1) { heart *= 0.85; cancer += 5; }
+
+  return {
+    diabetes: Math.min(Math.round(diabetes), 95),
+    heart: Math.min(Math.round(heart), 95),
+    stroke: Math.min(Math.round(stroke), 95),
+    cancer: Math.min(Math.round(cancer), 95),
+    hypertension: Math.min(Math.round(hypertension), 95)
+  };
+}
+
+function getRiskLevel(pct) {
+  if (pct < 25) return { label: 'Low Risk', color: '#22C55E', bg: 'rgba(34,197,94,0.12)', border: 'rgba(34,197,94,0.3)' };
+  if (pct < 50) return { label: 'Moderate', color: '#F59E0B', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.3)' };
+  if (pct < 70) return { label: 'Elevated', color: '#F97316', bg: 'rgba(249,115,22,0.12)', border: 'rgba(249,115,22,0.3)' };
+  return { label: 'High Risk', color: '#EF4444', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.3)' };
+}
+
+function showResults() {
+  document.getElementById('screen-loading').classList.remove('active');
+  document.getElementById('screen-results').classList.add('active');
+
+  const risks = calcRisks();
+  const overall = Math.round((risks.diabetes + risks.heart + risks.stroke + risks.cancer + risks.hypertension) / 5);
+  const overallLevel = getRiskLevel(overall);
+
+  // Overall score ring
+  const circumference = 346;
+  const offset = circumference - (overall / 100) * circumference;
+  setTimeout(() => {
+    document.getElementById('scoreRing').style.strokeDashoffset = offset;
+    document.getElementById('scoreRing').style.stroke = overallLevel.color;
+  }, 200);
+  document.getElementById('scoreNum').textContent = overall + '%';
+  document.getElementById('scoreNum').style.color = overallLevel.color;
+  document.getElementById('scoreVerdict').textContent = overallLevel.label + ' Overall';
+  document.getElementById('scoreVerdict').style.color = overallLevel.color;
+  document.getElementById('scoreDetail').textContent = overall < 35
+    ? 'Your lifestyle choices are protecting you well. Keep it up and monitor regularly.'
+    : overall < 60
+    ? 'Some risk factors present. The prevention plan below can meaningfully reduce your risk.'
+    : 'Multiple elevated risk factors detected. We strongly recommend consulting a doctor soon.';
+
+  // Disease cards
+  const diseases = [
+    { key: 'diabetes', name: 'Diabetes', icon: '🩸' },
+    { key: 'heart', name: 'Heart Disease', icon: '❤️' },
+    { key: 'hypertension', name: 'Hypertension', icon: '🫀' },
+    { key: 'stroke', name: 'Stroke', icon: '🧠' },
+    { key: 'cancer', name: 'Cancer Risk', icon: '🔬' }
+  ];
+
+  const grid = document.getElementById('diseaseGrid');
+  grid.innerHTML = '';
+  let highRisks = [];
+
+  diseases.forEach(d => {
+    const pct = risks[d.key];
+    const lvl = getRiskLevel(pct);
+    if (pct >= 50) highRisks.push(d.name);
+    const card = document.createElement('div');
+    card.className = 'disease-card';
+    card.style.borderColor = lvl.border;
+    card.style.setProperty('--bar-color', lvl.color);
+    card.innerHTML = `
+      <div class="disease-name">${d.icon} ${d.name}</div>
+      <div class="disease-pct" style="color:${lvl.color}">${pct}%</div>
+      <div class="disease-bar-track"><div class="disease-bar-fill" style="background:${lvl.color};width:0%" data-width="${pct}%"></div></div>
+      <span class="disease-level" style="background:${lvl.bg};color:${lvl.color}">${lvl.label}</span>`;
+    grid.appendChild(card);
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.disease-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
+  }, 400);
+
+  // High risk alert
+  if (highRisks.length > 0) {
+    document.getElementById('alertHigh').style.display = 'block';
+    document.getElementById('alertText').textContent = `Your ${highRisks.join(' and ')} risk is elevated. This means action now can prevent serious illness later. We recommend booking a health checkup and following the prevention plan below.`;
+  }
+
+  // Recommendations
+  const recs = buildRecs(risks, answers);
+  const recsContainer = document.getElementById('recsContainer');
+  recsContainer.innerHTML = '';
+  recs.forEach(rec => {
+    const div = document.createElement('div');
+    div.className = 'rec-card';
+    div.innerHTML = `<div class="rec-icon" style="background:${rec.bg}">${rec.icon}</div><div><div class="rec-title">${rec.title}</div><div class="rec-desc">${rec.desc}</div></div>`;
+    recsContainer.appendChild(div);
+  });
+}
+
+function buildRecs(risks, answers) {
+  const recs = [];
+  if (risks.diabetes > 30) recs.push({ icon:'🥗', bg:'rgba(34,197,94,0.12)', title:'Cut sugar and refined carbs', desc:'Replace white rice with millets or brown rice. Avoid sugary chai and cold drinks. Aim for 3 small meals instead of 2 large ones.' });
+  if (answers.exercise >= 2) recs.push({ icon:'🚶', bg:'rgba(0,196,176,0.12)', title:'Walk 30 minutes every day', desc:'Even a 30-minute brisk walk reduces diabetes risk by 30% and heart disease risk by 20%. Start with 15 minutes if needed.' });
+  if (risks.heart > 30) recs.push({ icon:'❤️', bg:'rgba(239,68,68,0.1)', title:'Monitor blood pressure monthly', desc:'Buy a home BP monitor (₹800–1500). Check weekly. If consistently above 130/80, see a doctor — hypertension has no symptoms.' });
+  if (answers.smoking >= 2) recs.push({ icon:'🚭', bg:'rgba(249,115,22,0.1)', title:'Quit tobacco — most impactful step', desc:'Quitting smoking reduces cancer risk by 50% within 5 years and heart attack risk by 50% within 1 year. Ask your doctor about nicotine patches.' });
+  if (answers.sleep >= 2) recs.push({ icon:'😴', bg:'rgba(139,92,246,0.1)', title:'Prioritise 7–8 hours of sleep', desc:'Set a consistent bedtime. Avoid screens 1 hour before bed. Poor sleep raises insulin resistance and blood pressure significantly.' });
+  if (answers.stress >= 2) recs.push({ icon:'🧘', bg:'rgba(245,158,11,0.1)', title:'Daily 10-minute stress reduction', desc:'Try the Headspace or Calm app. Even 10 minutes of meditation daily measurably lowers cortisol, blood pressure and heart risk.' });
+  if (answers.checkup >= 2) recs.push({ icon:'🏥', bg:'rgba(0,196,176,0.1)', title:'Book a full health checkup this month', desc:'A basic health checkup costs ₹500–1500 at most hospitals. At minimum: HbA1c (diabetes), lipid panel (heart), blood pressure check.' });
+  recs.push({ icon:'💧', bg:'rgba(59,130,246,0.1)', title:'Drink 2–3 litres of water daily', desc:'Adequate hydration reduces kidney stress, supports metabolism, and helps the body flush toxins. Replace one chai/cold drink with water per day.' });
+  return recs.slice(0, 5);
+}
+
+function joinWaitlist() {
+  const email = document.getElementById('ctaEmail').value;
+  if (!email || !email.includes('@')) { document.getElementById('ctaEmail').style.borderColor = '#EF4444'; return; }
+  document.getElementById('ctaEmail').style.borderColor = 'var(--teal)';
+  document.querySelector('.cta-btn').textContent = '✓ Done!';
+  document.querySelector('.cta-btn').style.background = '#16A34A';
+  document.getElementById('ctaSuccess').style.display = 'block';
+}
+
+function restart() {
+  answers = {}; currentQ = 0;
+  document.getElementById('screen-results').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+  document.getElementById('progressWrap').style.display = 'none';
+}
+</script>
+</body>
+</html>
