@@ -767,7 +767,7 @@ footer {
   <div class="section-tag">Early Access</div>
   <h2 class="section-title" style="font-size:48px;">Be the first to<br>know your risk.</h2>
   <p class="section-sub">Join the waitlist — get free early access when we launch in India. No spam, ever.</p>
-  <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="waitlist-form" id="waitlistForm" onsubmit="handleWaitlist(event)">
+  <form name="waitlist" method="POST" action="/waitlist-success.html" data-netlify="true" netlify-honeypot="bot-field" class="waitlist-form" id="waitlistForm" onsubmit="handleWaitlist(event)">
     <input type="hidden" name="form-name" value="waitlist">
     <p style="display:none"><input name="bot-field"></p>
     <div class="waitlist-row">
@@ -844,42 +844,24 @@ function setPricing(type) {
 })();
 </script><script>
 function handleWaitlist(e) {
-  e.preventDefault();
-  const btn = document.getElementById('waitlistBtn');
   const email = document.getElementById('emailInput').value.trim();
   const phone = document.getElementById('phoneInput').value.trim();
-  // Reset borders
   document.getElementById('emailInput').style.borderColor = 'var(--border)';
   document.getElementById('phoneInput').style.borderColor = 'var(--border)';
-  // Require at least one
   if (!email && !phone) {
+    e.preventDefault();
     document.getElementById('emailInput').style.borderColor = '#EF4444';
     document.getElementById('phoneInput').style.borderColor = '#EF4444';
     return;
   }
   if (email && !email.includes('@')) {
+    e.preventDefault();
     document.getElementById('emailInput').style.borderColor = '#EF4444';
     return;
   }
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ 'form-name': 'waitlist', email, phone }).toString()
-  })
-  .then(() => {
-    btn.textContent = 'Joined!';
-    btn.style.background = '#16A34A';
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('emailInput').value = '';
-    document.getElementById('phoneInput').value = '';
-  })
-  .catch(() => {
-    btn.textContent = 'Joined!';
-    btn.style.background = '#16A34A';
-    document.getElementById('successMsg').style.display = 'block';
-  });
+  // Valid — let the form submit naturally to Netlify
+  document.getElementById('waitlistBtn').textContent = 'Submitting...';
+  document.getElementById('waitlistBtn').disabled = true;
 }
   document.getElementById('emailInput').style.borderColor = 'var(--teal)';
   document.querySelector('.waitlist-btn').textContent = '✓ Joined!';
