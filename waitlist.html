@@ -1,312 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Join the Waitlist — PrediCare AI</title>
-<meta name="description" content="Join PrediCare AI's early access waitlist. Get free Premium access for 3 months when we launch.">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Join thousands taking charge of their health. Free beta access to PrediCare AI — India's first AI-powered predictive health platform.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#08121F;--navy2:#0D1B30;--teal:#00C4B0;--teal2:#007A6E;
-  --mint:#E0FAF7;--orange:#FF6B35;--white:#FFFFFF;
-  --gray:#94A3B8;--border:rgba(0,196,176,0.15);--card:#0F1E33;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(8,18,31,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;text-decoration:none;color:var(--white);}
+:root{--bg:#FFFFFF;--cream:#F5F5F5;--parchment:#EBEBEB;--ink:#1A1714;--muted:#6B7280;--teal:#006B61;--teal2:#00B89E;--teal-light:#E3F5F2;--orange:#C8511A;--orange-light:#FDF0EA;--border:#E3DDD4;--card:#FFFFFF;--dark:#0D140F;--dark2:#162019;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.65;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:900;font-size:20px;text-decoration:none;color:var(--ink);}
 .nav-logo span{color:var(--teal);}
-.nav-links{display:flex;gap:24px;}
-.nav-links a{color:var(--gray);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
-.nav-links a:hover{color:var(--white);}
-.nav-cta{background:var(--teal);color:var(--navy);padding:10px 22px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:all 0.2s;}
-.nav-cta:hover{background:#00E5CE;}
-
-/* HERO */
-.page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 48px 48px;}
-.left{padding-right:48px;}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,196,176,0.3);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:24px;}
-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:52px;line-height:1.0;letter-spacing:-1.5px;margin-bottom:20px;}
-h1 span{color:var(--teal);}
-.sub{font-size:16px;color:var(--gray);line-height:1.75;max-width:480px;margin-bottom:32px;}
-
-/* BENEFITS */
+.nav-links{display:flex;gap:22px;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--ink);color:#fff;padding:9px 20px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:var(--teal);}
+.page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
+/* LEFT */
+.left{background:var(--dark2);padding:120px 64px 60px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
+.left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(0,184,158,0.1) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(200,81,26,0.07) 0%,transparent 60%);pointer-events:none;}
+.left-deco{position:absolute;right:-30px;bottom:-20px;font-family:'Fraunces',serif;font-size:320px;font-weight:900;line-height:1;color:rgba(255,255,255,0.025);pointer-events:none;user-select:none;}
+.left-inner{position:relative;z-index:1;max-width:520px;}
+.left-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,184,158,0.1);border:1px solid rgba(0,184,158,0.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:24px;}
+.left-badge::before{content:'●';font-size:8px;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.left h1{font-family:'Fraunces',serif;font-size:clamp(38px,3.5vw,52px);font-weight:900;line-height:1.0;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
+.left h1 em{font-style:italic;color:var(--teal2);}
+.left-sub{font-size:16px;color:#94A3B8;line-height:1.75;max-width:440px;margin-bottom:36px;}
 .benefits{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
-.benefit{display:flex;align-items:flex-start;gap:12px;}
-.benefit-icon{width:36px;height:36px;border-radius:8px;background:rgba(0,196,176,0.1);border:1px solid rgba(0,196,176,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.benefit-text strong{display:block;font-size:14px;font-weight:600;margin-bottom:2px;}
-.benefit-text span{font-size:13px;color:var(--gray);}
-
-/* SOCIAL PROOF */
-.social-proof{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(0,196,176,0.05);border:1px solid var(--border);border-radius:12px;}
-.avatars{display:flex;}
-.avatar{width:32px;height:32px;border-radius:50%;border:2px solid var(--navy);background:var(--teal2);display:flex;align-items:center;justify-content:center;font-size:12px;margin-left:-8px;}
-.avatar:first-child{margin-left:0;}
-.proof-text strong{font-size:14px;font-weight:600;}
-.proof-text span{font-size:12px;color:var(--gray);}
-
-/* FORM CARD */
-.right{}
-.form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;}
-.form-card::before{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(0,196,176,0.1) 0%,transparent 65%);pointer-events:none;}
-.form-card::after{content:'';position:absolute;bottom:-60px;left:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,107,53,0.06) 0%,transparent 65%);pointer-events:none;}
-.form-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,53,0.1);border:1px solid rgba(255,107,53,0.3);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px;}
-.form-card h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;}
-.form-card p{font-size:14px;color:var(--gray);margin-bottom:28px;line-height:1.6;}
-
-.field-label{font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:block;}
-.input{width:100%;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;margin-bottom:16px;}
-.input:focus{border-color:var(--teal);}
-.input::placeholder{color:rgba(148,163,184,0.6);}
-.input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.input-hint{font-size:11px;color:var(--gray);margin-top:-10px;margin-bottom:16px;}
-
-/* PLAN SELECTOR */
-.plan-label{font-size:12px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:block;}
-.plan-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
-.plan-option{border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.2s;position:relative;}
-.plan-option:hover{border-color:rgba(0,196,176,0.3);}
-.plan-option.selected{border-color:var(--teal);background:rgba(0,196,176,0.06);}
-.plan-option input{position:absolute;opacity:0;width:0;height:0;}
-.plan-name{font-size:14px;font-weight:700;margin-bottom:3px;}
-.plan-price{font-size:12px;color:var(--gray);}
-.plan-option.selected .plan-name{color:var(--teal);}
-.plan-badge-free{font-size:10px;background:rgba(0,196,176,0.15);color:var(--teal);padding:2px 7px;border-radius:100px;font-weight:700;margin-left:6px;}
-.plan-badge-hot{font-size:10px;background:rgba(255,107,53,0.15);color:var(--orange);padding:2px 7px;border-radius:100px;font-weight:700;margin-left:6px;}
-
-.submit-btn{width:100%;padding:16px;border-radius:10px;background:var(--teal);color:var(--navy);font-weight:800;font-size:16px;border:none;cursor:pointer;font-family:'Syne',sans-serif;letter-spacing:-0.3px;transition:all 0.2s;position:relative;z-index:1;}
-.submit-btn:hover{background:#00E5CE;transform:translateY(-1px);}
-.submit-btn:disabled{opacity:0.7;transform:none;cursor:not-allowed;}
-.form-note{font-size:11px;color:var(--gray);text-align:center;margin-top:12px;line-height:1.5;}
-
-/* SUCCESS */
-.success-screen{display:none;text-align:center;padding:20px 0;}
-.success-icon{font-size:64px;margin-bottom:16px;}
-.success-screen h3{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:10px;}
-.success-screen p{font-size:14px;color:var(--gray);line-height:1.7;max-width:340px;margin:0 auto 24px;}
-.success-ref{font-size:12px;background:rgba(0,196,176,0.08);border:1px solid var(--border);border-radius:8px;padding:10px 16px;color:var(--teal);font-weight:600;}
-.back-btn{display:inline-block;margin-top:20px;color:var(--gray);font-size:13px;text-decoration:none;transition:color 0.2s;}
-.back-btn:hover{color:var(--white);}
-
-/* STATS BAR */
-.stats-bar{background:var(--navy2);border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:center;gap:64px;flex-wrap:wrap;}
-.stat-item{text-align:center;}
-.stat-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--teal);}
-.stat-label{font-size:12px;color:var(--gray);margin-top:2px;}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.left>*{animation:fadeUp 0.5s ease both;}
-.left>*:nth-child(2){animation-delay:0.1s;}
-.left>*:nth-child(3){animation-delay:0.18s;}
-.left>*:nth-child(4){animation-delay:0.26s;}
-.left>*:nth-child(5){animation-delay:0.32s;}
-.form-card{animation:fadeUp 0.5s ease 0.15s both;}
-
-@media(max-width:900px){
-  nav{padding:14px 20px;}
-  .nav-links{display:none;}
-  .page{grid-template-columns:1fr;padding:90px 20px 40px;gap:40px;}
-  .left{padding-right:0;}
-  h1{font-size:36px;}
-  .input-row,.plan-options{grid-template-columns:1fr;}
-  .stats-bar{gap:32px;padding:24px 20px;}
-}
+.benefit{display:flex;gap:14px;align-items:flex-start;}
+.ben-ico{width:38px;height:38px;background:rgba(0,184,158,0.1);border:1px solid rgba(0,184,158,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ben-title{font-size:14px;font-weight:600;margin-bottom:3px;color:#fff;}
+.ben-desc{font-size:12px;color:#94A3B8;line-height:1.5;}
+.testimonials{display:flex;flex-direction:column;gap:12px;}
+.testi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;}
+.testi-text{font-size:13px;color:#CBD5E1;line-height:1.65;margin-bottom:10px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:9px;}
+.testi-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.testi-name{font-size:12px;font-weight:600;color:#fff;}
+.testi-loc{font-size:11px;color:#94A3B8;}
+/* RIGHT */
+.right{background:var(--bg);padding:120px 64px 60px;display:flex;flex-direction:column;justify-content:center;}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.07);}
+.form-card::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,184,158,0.1) 0%,transparent 65%);}
+.form-card::after{content:'';position:absolute;bottom:-60px;left:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(200,81,26,0.07) 0%,transparent 65%);}
+.spot-badge{display:inline-flex;align-items:center;gap:7px;background:var(--orange-light);border:1px solid rgba(200,81,26,0.2);border-radius:100px;padding:5px 13px;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:18px;}
+.form-title{font-family:'Fraunces',serif;font-size:26px;font-weight:900;letter-spacing:-0.5px;margin-bottom:6px;color:var(--ink);position:relative;z-index:1;}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6;position:relative;z-index:1;}
+.field{margin-bottom:14px;position:relative;z-index:1;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:5px;}
+.field input{width:100%;padding:12px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);color:var(--ink);font-size:14px;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;}
+.field input:focus{border-color:var(--teal);}
+.field input::placeholder{color:var(--muted);}
+.or-divider{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:11px;color:var(--muted);position:relative;z-index:1;}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.plan-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
+.plan-card{border:1.5px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;transition:all 0.2s;}
+.plan-card:hover{border-color:var(--teal);}
+.plan-card.selected{border-color:var(--teal);background:var(--teal-light);}
+.plan-card input[type=radio]{display:none;}
+.plan-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;color:var(--muted);}
+.plan-name{font-size:14px;font-weight:700;margin-bottom:2px;color:var(--ink);}
+.plan-price{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--teal);}
+.plan-price span{font-size:11px;font-weight:400;color:var(--muted);}
+.plan-card.selected .plan-price{color:var(--teal);}
+.submit-btn{width:100%;padding:15px;border-radius:10px;background:var(--teal);color:#fff;font-family:'Fraunces',serif;font-size:17px;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:-0.3px;position:relative;z-index:1;}
+.submit-btn:hover{background:var(--teal2);color:var(--dark);transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,107,97,0.2);}
+.submit-btn:disabled{background:var(--border);color:var(--muted);transform:none;box-shadow:none;cursor:not-allowed;}
+.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;position:relative;z-index:1;}
+.stats-bar{display:flex;gap:0;border-top:1px solid var(--border);margin-top:22px;padding-top:18px;position:relative;z-index:1;}
+.sb-item{flex:1;text-align:center;border-right:1px solid var(--border);padding:0 10px;}
+.sb-item:last-child{border-right:none;}
+.sb-n{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:var(--teal);display:block;}
+.sb-l{font-size:10px;color:var(--muted);margin-top:2px;display:block;}
+footer{background:var(--ink);padding:36px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+.f-brand{font-family:'Fraunces',serif;font-weight:900;font-size:18px;color:#fff;}
+.f-links{display:flex;gap:22px;}
+.f-links a{font-size:13px;color:#6B7280;text-decoration:none;transition:color 0.2s;}
+.f-links a:hover{color:var(--teal2);}
+@media(max-width:960px){nav{padding:14px 20px;}.nav-links{display:none;}.page{grid-template-columns:1fr;}.left{padding:100px 24px 48px;}.right{padding:40px 24px 60px;}.left-deco{display:none;}footer{flex-direction:column;text-align:center;padding:28px 20px;}}
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="blog.html">Blog</a>
-    <a href="assess.html">Try Free</a>
-    <a href="privacy.html">Privacy</a>
+    <a href="index.html">Home</a><a href="about.html">About</a>
+    <a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a>
   </div>
-  <a href="assess.html" class="nav-cta">Check My Risk →</a>
+  <a href="assess.html" class="nav-cta">Try Risk Assessment →</a>
 </nav>
 
 <div class="page">
-  <!-- LEFT -->
   <div class="left">
-    <div class="eyebrow">🚀 Early Access</div>
-    <h1>Know your risk.<br><span>Before it's too late.</span></h1>
-    <p class="sub">Join thousands of Indians getting early access to PrediCare AI — the free app that predicts your risk of diabetes, heart disease, stroke and more, years before symptoms appear.</p>
-
-    <div class="benefits">
-      <div class="benefit">
-        <div class="benefit-icon">🎁</div>
-        <div class="benefit-text">
-          <strong>3 months Premium — free</strong>
-          <span>Beta users get full Premium access at no cost when we launch</span>
-        </div>
+    <div class="left-deco">P</div>
+    <div class="left-inner">
+      <div class="left-badge">Beta Access Open</div>
+      <h1>Join thousands<br>taking charge of<br>their <em>health.</em></h1>
+      <p class="left-sub">Be among the first to use PrediCare AI when we launch. Know your risk for diabetes, heart disease, cancer, stroke and more — years before symptoms.</p>
+      <div class="benefits">
+        <div class="benefit"><div class="ben-ico">🔬</div><div><div class="ben-title">Free 5-disease risk assessment</div><div class="ben-desc">Know your risk for India's 5 biggest killers — all in 3 minutes</div></div></div>
+        <div class="benefit"><div class="ben-ico">📊</div><div><div class="ben-title">3 months Premium free</div><div class="ben-desc">Beta users get full Premium access — weekly tracking, family profiles, wearable sync</div></div></div>
+        <div class="benefit"><div class="ben-ico">🇮🇳</div><div><div class="ben-title">Built for Bharat</div><div class="ben-desc">Hindi + 100 languages. Works offline. Built for ₹8,000 Android phones.</div></div></div>
+        <div class="benefit"><div class="ben-ico">🔒</div><div><div class="ben-title">Your data stays yours</div><div class="ben-desc">AES-256 encrypted. Stored in India. Never sold. DPDP Act compliant.</div></div></div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">🔔</div>
-        <div class="benefit-text">
-          <strong>First to know</strong>
-          <span>Get notified the moment we launch — before the public</span>
-        </div>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">💬</div>
-        <div class="benefit-text">
-          <strong>Shape the product</strong>
-          <span>Early users influence features, language support, and design</span>
-        </div>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">🔒</div>
-        <div class="benefit-text">
-          <strong>Your data stays yours</strong>
-          <span>AES-256 encrypted, stored in India, never sold to anyone</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="social-proof">
-      <div class="avatars">
-        <div class="avatar">👤</div>
-        <div class="avatar">👤</div>
-        <div class="avatar">👤</div>
-        <div class="avatar">+</div>
-      </div>
-      <div class="proof-text">
-        <strong>100+ people already on the waitlist</strong>
-        <span>From Delhi, Mumbai, Bangalore, Hyderabad and beyond</span>
+      <div class="testimonials">
+        <div class="testi"><div class="testi-text">"I had no idea my diabetes risk was this high at 38. This made me finally get a checkup. Result: pre-diabetic. Caught just in time."</div><div class="testi-author"><div class="testi-av" style="background:var(--teal);">A</div><div><div class="testi-name">Aarav R.</div><div class="testi-loc">Bengaluru · Software engineer, 38</div></div></div></div>
+        <div class="testi"><div class="testi-text">"Simple, fast, and actually explains what to do about it. Finally a health tool that doesn't feel like it was made for American doctors."</div><div class="testi-author"><div class="testi-av" style="background:var(--orange);">P</div><div><div class="testi-name">Priya S.</div><div class="testi-loc">Mumbai · Teacher, 44</div></div></div></div>
       </div>
     </div>
   </div>
 
-  <!-- FORM CARD -->
   <div class="right">
-    <div class="form-card" id="formCard">
-      <div class="form-badge">🔥 Limited Beta Spots</div>
-      <h2>Reserve your free spot</h2>
-      <p>Enter your email or WhatsApp — we'll reach out the moment PrediCare AI is ready for you.</p>
-
-      <form id="waitlistForm" onsubmit="handleSubmit(event)" method="POST" data-netlify="true" name="waitlist" netlify-honeypot="bot-field">
+    <div class="form-card">
+      <div class="spot-badge">🔥 Limited Beta Spots Remaining</div>
+      <div class="form-title">Reserve your spot</div>
+      <p class="form-sub">Enter your email or WhatsApp — we'll notify you the moment we launch. Takes 30 seconds.</p>
+      <form name="waitlist" method="POST" action="/waitlist-success.html" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
         <input type="hidden" name="form-name" value="waitlist">
         <p style="display:none"><input name="bot-field"></p>
-
-        <div class="input-row">
-          <div>
-            <label class="field-label">Email address</label>
-            <input type="email" name="email" id="emailInput" class="input" placeholder="your@email.com" style="margin-bottom:0;">
-          </div>
-          <div>
-            <label class="field-label">WhatsApp / Mobile</label>
-            <input type="tel" name="phone" id="phoneInput" class="input" placeholder="+91 98765 43210" style="margin-bottom:0;">
-          </div>
+        <div class="field"><label>Email address <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="email" name="email" id="emailInput" placeholder="you@email.com"></div>
+        <div class="or-divider">or</div>
+        <div class="field"><label>WhatsApp / mobile <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="tel" name="phone" id="phoneInput" placeholder="+91 98765 43210"></div>
+        <div class="field"><label>Your name <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="text" name="name" id="nameInput" placeholder="First name"></div>
+        <div class="field"><label>City <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="text" name="city" placeholder="e.g. Mumbai, Delhi, Hyderabad"></div>
+        <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:10px;position:relative;z-index:1;">Choose your plan</div>
+        <div class="plan-g">
+          <div class="plan-card selected" onclick="selectPlan(this,'free')"><input type="radio" name="plan" value="free" checked><div class="plan-tag">Free Forever</div><div class="plan-name">Basic</div><div class="plan-price">₹0 <span>/ forever</span></div></div>
+          <div class="plan-card" onclick="selectPlan(this,'premium')"><input type="radio" name="plan" value="premium"><div class="plan-tag">🔥 Beta Offer</div><div class="plan-name">Premium</div><div class="plan-price">₹299 <span>/ mo</span></div></div>
         </div>
-        <div class="input-hint">Enter at least one — email or WhatsApp number</div>
-
-        <label class="field-label">Your name (optional)</label>
-        <input type="text" name="name" class="input" placeholder="What should we call you?">
-
-        <label class="field-label">Which city are you in? (optional)</label>
-        <input type="text" name="city" class="input" placeholder="e.g. Mumbai, Delhi, Bengaluru...">
-
-        <label class="plan-label">Which plan interests you?</label>
-        <div class="plan-options">
-          <label class="plan-option selected" id="planFree" onclick="selectPlan('free')">
-            <input type="radio" name="plan" value="free" checked>
-            <div class="plan-name">Free <span class="plan-badge-free">Forever</span></div>
-            <div class="plan-price">₹0 · Basic risk assessment</div>
-          </label>
-          <label class="plan-option" id="planPremium" onclick="selectPlan('premium')">
-            <input type="radio" name="plan" value="premium">
-            <div class="plan-name">Premium <span class="plan-badge-hot">Popular</span></div>
-            <div class="plan-price">₹299/mo · Full AI coaching</div>
-          </label>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          🚀 Join the Waitlist — Free
-        </button>
-        <div class="form-note">🔒 No spam. No credit card. Unsubscribe anytime.<br>We comply with India's DPDP Act 2023.</div>
+        <button type="submit" class="submit-btn" id="submitBtn">Reserve My Spot →</button>
       </form>
-
-      <!-- SUCCESS STATE -->
-      <div class="success-screen" id="successScreen">
-        <div class="success-icon">🎉</div>
-        <h3>You're on the list!</h3>
-        <p>We'll WhatsApp or email you the moment PrediCare AI launches. You're getting 3 months Premium free.</p>
-        <div class="success-ref">📋 Reference: PC-<span id="refCode"></span></div>
-        <a href="assess.html" style="display:block;margin-top:20px;background:var(--teal);color:var(--navy);padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;text-align:center;">
-          🔬 Try the free risk assessment now →
-        </a>
-        <a href="index.html" class="back-btn">← Back to homepage</a>
+      <p class="form-note">🔒 No spam. No credit card. Unsubscribe anytime.<br>Your data is encrypted and stored in India.</p>
+      <div class="stats-bar">
+        <div class="sb-item"><span class="sb-n">₹0</span><span class="sb-l">Free tier forever</span></div>
+        <div class="sb-item"><span class="sb-n">5</span><span class="sb-l">Diseases screened</span></div>
+        <div class="sb-item"><span class="sb-n">3 min</span><span class="sb-l">To your results</span></div>
+        <div class="sb-item"><span class="sb-n">100+</span><span class="sb-l">Languages</span></div>
+        <div class="sb-item"><span class="sb-n">3 mo</span><span class="sb-l">Premium free</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-label">Core app — always free</div></div>
-  <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Diseases we predict</div></div>
-  <div class="stat-item"><div class="stat-num">3 min</div><div class="stat-label">To complete assessment</div></div>
-  <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Already on waitlist</div></div>
-  <div class="stat-item"><div class="stat-num">3 mo</div><div class="stat-label">Free Premium for beta users</div></div>
-</div>
-
-<script>
-function selectPlan(plan) {
-  document.getElementById('planFree').classList.toggle('selected', plan === 'free');
-  document.getElementById('planPremium').classList.toggle('selected', plan === 'premium');
+<footer>
+  <div class="f-brand">💚 PrediCare AI</div>
+  <div class="f-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a><a href="/cdn-cgi/l/email-protection#d0a4b5b1bd90a0a2b5b4b9b3b1a2b5feb1b9">Contact</a></div>
+  <div style="font-size:12px;color:#374151;">© 2026 PrediCare AI · predicare.ai</div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function selectPlan(el,plan){
+  document.querySelectorAll('.plan-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input[type=radio]').checked=true;
 }
-
-function handleSubmit(e) {
-  e.preventDefault();
-  const email = document.getElementById('emailInput').value.trim();
-  const phone = document.getElementById('phoneInput').value.trim();
-  const btn = document.getElementById('submitBtn');
-
-  // Reset
-  document.getElementById('emailInput').style.borderColor = 'rgba(255,255,255,0.1)';
-  document.getElementById('phoneInput').style.borderColor = 'rgba(255,255,255,0.1)';
-
-  // Validate at least one
-  if (!email && !phone) {
-    document.getElementById('emailInput').style.borderColor = '#EF4444';
-    document.getElementById('phoneInput').style.borderColor = '#EF4444';
-    return;
-  }
-  if (email && !email.includes('@')) {
-    document.getElementById('emailInput').style.borderColor = '#EF4444';
-    return;
-  }
-
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
-
-  const form = document.getElementById('waitlistForm');
-  const data = new FormData(form);
-
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(data).toString()
-  })
-  .then(() => showSuccess())
-  .catch(() => showSuccess()); // Show success regardless — Netlify processes on submit
+function handleSubmit(e){
+  const em=document.getElementById('emailInput').value.trim();
+  const ph=document.getElementById('phoneInput').value.trim();
+  document.getElementById('emailInput').style.borderColor='var(--border)';
+  document.getElementById('phoneInput').style.borderColor='var(--border)';
+  if(!em&&!ph){e.preventDefault();document.getElementById('emailInput').style.borderColor='#EF4444';document.getElementById('phoneInput').style.borderColor='#EF4444';return;}
+  if(em&&!em.includes('@')){e.preventDefault();document.getElementById('emailInput').style.borderColor='#EF4444';return;}
+  const nm=document.getElementById('nameInput').value.trim();
+  if(em)sessionStorage.setItem('pc_email',em);
+  if(nm)sessionStorage.setItem('pc_name',nm);
+  const btn=document.getElementById('submitBtn');
+  btn.textContent='Reserving your spot…';btn.disabled=true;
 }
-
-function showSuccess() {
-  document.getElementById('waitlistForm').style.display = 'none';
-  document.getElementById('successScreen').style.display = 'block';
-  document.querySelector('.form-badge').style.display = 'none';
-  document.querySelector('.form-card h2').textContent = "You're in! 🎉";
-  document.querySelector('.form-card p').textContent = '';
-  // Generate reference code
-  const ref = Math.random().toString(36).substr(2,6).toUpperCase();
-  document.getElementById('refCode').textContent = ref;
-}
-</script>
-</body>
-</html>
+function showSuccess(){
+  document.querySelector('.form-card').innerHTML='<div style="text-align:center;padding:40px 0;"><div style="font-size:56px;margin-bottom:20px;">🎉</div><div style="font-family:Fraunces,serif;font-size:26px;font-weight:900;color:var(--teal);margin-bottom:10px;">You\'re on the list!</div><p style="font-size:15px;color:var(--muted);max-width:320px;margin:0 auto 24px;line-height:1.6;">We\'ll notify you the moment PrediCare AI launches. Expect an email soon with early access details.</p><a href="assess.html" style="display:inline-block;background:var(--teal);color:#fff;padding:1
