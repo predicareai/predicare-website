@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>PrediCare AI — Predict. Prevent. Protect.</title>
+
+<meta name="description" content="AI-powered predictive healthcare. Know your disease risk 5–10 years before symptoms. Free for everyone.">
+
+<link rel="icon" href="/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+
+<meta name="keywords" content="AI healthcare, disease prediction AI, diabetes risk predictor, heart disease AI India">
+
+<meta property="og:title" content="PrediCare AI — Predict. Prevent. Protect.">
+<meta property="og:description" content="Know your disease risk 5–10 years before symptoms using AI.">
+<meta property="og:image" content="https://predicare.ai/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://predicare.ai">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PrediCare AI — Predict. Prevent. Protect.</title>
 <meta name="description" content="AI-powered predictive healthcare. Know your disease risk 5–10 years before symptoms. Free for everyone.">
@@ -343,7 +363,7 @@ footer{background:var(--ink);padding:36px 48px;display:flex;justify-content:spac
 
 <footer>
   <div class="f-brand">💚 PrediCare AI</div>
-  <div class="f-links"><a href="about.html">About</a><a href="blog.html">Blog</a><a href="privacy.html">Privacy</a><a href="assess.html">Try Free</a><a href="/cdn-cgi/l/email-protection#b4c0d1d5d9f4c4c6d1d0ddd7d5c6d19ad5dd">Contact</a></div>
+  <div class="f-links"><a href="about.html">About</a><a href="blog.html">Blog</a><a href="privacy.html">Privacy</a><a href="assess.html">Try Free</a><a href="mailto:team@predicare.ai">Contact</a>
   <div class="f-copy">© 2026 PrediCare AI · predicare.ai</div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -358,7 +378,20 @@ function setP(t){
 function hWL(e){
   const em=document.getElementById('ei').value.trim();
   const ph=document.getElementById('pi').value.trim();
+
   document.getElementById('ei').style.borderColor='rgba(255,255,255,0.12)';
   document.getElementById('pi').style.borderColor='rgba(255,255,255,0.12)';
-  if(!em&&!ph){e.preventDefault();document.getElementById('ei').style.borderColor='#EF4444';document.getElementById('pi').style.borderColor='#EF4444';return;}
-  if(em&&!em.includes('@')){e.preventDefault();document.getElementById('ei').style.borderColor='#E
+
+  if(!em && !ph){
+    e.preventDefault();
+    document.getElementById('ei').style.borderColor='#EF4444';
+    document.getElementById('pi').style.borderColor='#EF4444';
+    return;
+  }
+
+  if(em && !em.includes('@')){
+    e.preventDefault();
+    document.getElementById('ei').style.borderColor='#EF4444';
+    return;
+  }
+}
