@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>You're on the Waitlist! — PrediCare AI</title>
-<meta name="description" content="Your PrediCare AI beta spot is confirmed. Share with friends to move up the list.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#FFFFFF;--cream:#F5F5F5;--parchment:#EBEBEB;--ink:#1A1714;--muted:#6B7280;--teal:#006B61;--teal2:#00B89E;--teal-light:#E3F5F2;--orange:#C8511A;--orange-light:#FDF0EA;--border:#E3DDD4;--card:#FFFFFF;--dark:#0D140F;--dark2:#162019;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.65;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:900;font-size:20px;text-decoration:none;color:var(--ink);}
-.nav-logo span{color:var(--teal);}
-.nav-links{display:flex;gap:22px;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
-.nav-links a:hover{color:var(--ink);}
-.nav-cta{background:var(--ink);color:#fff;padding:9px 20px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all 0.2s;}
-.nav-cta:hover{background:var(--teal);}
-main{max-width:720px;margin:0 auto;padding:120px 24px 80px;}
-/* HERO */
-.confirm-tag{display:inline-flex;align-items:center;gap:7px;background:var(--teal-light);border:1px solid rgba(0,107,97,0.2);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:22px;}
-.check-wrap{width:90px;height:90px;margin:0 auto 24px;position:relative;}
-.check-ring{position:absolute;inset:0;border-radius:50%;background:var(--teal-light);animation:ringPulse 2s ease-in-out infinite;}
-@keyframes ringPulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.12);opacity:0.2}}
-svg.check{width:90px;height:90px;position:relative;z-index:1;}
-.check-circle{fill:none;stroke:var(--teal);stroke-width:4;stroke-dasharray:245;stroke-dashoffset:245;animation:drawCircle 0.6s ease forwards;}
-.check-mark{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:drawMark 0.4s 0.6s ease forwards;}
-@keyframes drawCircle{to{stroke-dashoffset:0}}
-@keyframes drawMark{to{stroke-dashoffset:0}}
-.page-title{font-family:'Fraunces',serif;font-size:clamp(36px,5vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;text-align:center;}
-.page-title em{font-style:italic;color:var(--teal);}
-.page-sub{font-size:17px;color:var(--muted);text-align:center;max-width:480px;margin:0 auto 40px;line-height:1.7;}
-/* INFO CARDS */
-.info-g{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
-.info-c{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:transform 0.2s;}
-.info-c:hover{transform:translateY(-3px);}
-.info-ico{font-size:28px;margin-bottom:12px;}
-.info-t{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:6px;color:var(--ink);}
-.info-d{font-size:13px;color:var(--muted);line-height:1.6;}
-.info-c.highlight{background:var(--teal-light);border-color:rgba(0,107,97,0.2);}
-.info-c a{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:700;color:var(--teal);text-decoration:none;transition:gap 0.2s;}
-.info-c a:hover{gap:9px;}
-/* STEPS */
-.steps-card{background:var(--dark2);border-radius:16px;padding:26px;margin-bottom:24px;}
-.steps-title{font-size:11px;font-weight:700;color:var(--teal2);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;}
-.steps{display:flex;flex-direction:column;gap:16px;}
-.step{display:flex;gap:14px;align-items:flex-start;}
-.step-num{width:32px;height:32px;border-radius:50%;background:rgba(0,184,158,0.12);border:1px solid rgba(0,184,158,0.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;font-weight:900;color:var(--teal2);}
-.step-t{font-size:14px;font-weight:600;margin-bottom:3px;color:#fff;}
-.step-d{font-size:12px;color:#94A3B8;line-height:1.5;}
-/* REFERRAL */
-.ref-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-.ref-title{font-family:'Fraunces',serif;font-size:20px;font-weight:900;margin-bottom:6px;letter-spacing:-0.3px;color:var(--ink);}
-.ref-sub{font-size:13px;color:var(--muted);margin-bottom:18px;}
-.ref-link-row{display:flex;gap:10px;margin-bottom:16px;}
-.ref-link{flex:1;padding:11px 14px;background:var(--cream);border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--ink);font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.copy-btn{padding:11px 18px;background:var(--teal);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap;}
-.copy-btn:hover{background:var(--teal2);color:var(--dark);}
-.share-btns{display:flex;gap:10px;flex-wrap:wrap;}
-.share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;border:1.5px solid var(--border);color:var(--ink);transition:all 0.2s;background:var(--bg);}
-.share-btn:hover{border-color:var(--teal);color:var(--teal);}
-.share-btn.wa{background:#25D366;border-color:#25D366;color:#fff;}
-.share-btn.wa:hover{background:#1aad56;}
-/* CTA GRID */
-.cta-g{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
-.cta-primary{background:var(--teal);color:#fff;padding:16px 24px;border-radius:11px;text-decoration:none;font-weight:700;font-size:15px;text-align:center;transition:all 0.2s;display:block;}
-.cta-primary:hover{background:var(--teal2);color:var(--dark);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,107,97,0.2);}
-.cta-secondary{background:var(--card);color:var(--ink);padding:16px 24px;border-radius:11px;text-decoration:none;font-weight:600;font-size:15px;text-align:center;border:1.5px solid var(--border);transition:all 0.2s;display:block;}
-.cta-secondary:hover{border-color:var(--teal);color:var(--teal);}
-footer{background:var(--ink);padding:36px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
-.f-brand{font-family:'Fraunces',serif;font-weight:900;font-size:18px;color:#fff;}
-.f-links{display:flex;gap:22px;}
-.f-links a{font-size:13px;color:#6B7280;text-decoration:none;transition:color 0.2s;}
-.f-links a:hover{color:var(--teal2);}
-@media(max-width:700px){nav{padding:14px 20px;}.nav-links{display:none;}.info-g,.cta-g{grid-template-columns:1fr;}.ref-link-row{flex-direction:column;}.share-btns{flex-direction:column;}footer{flex-direction:column;text-align:center;padding:28px 20px;}}
-</style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9210161565544399"
-     crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're on the Waitlist! — PrediCare AI</title>
+  <meta name="robots" content="noindex" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-XXXXXXXXXX');
+    // Track conversion event
+    gtag('event','waitlist_signup',{'event_category':'conversion','event_label':'waitlist'});
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--teal:#0ABFA3;--teal-d:#07997F;--navy:#0B1F3A;--slate:#4A5568;--white:#fff}
+    body{font-family:'Inter',sans-serif;background:linear-gradient(160deg,#0B1F3A 0%,#0F3460 60%,rgba(10,191,163,0.2) 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 6vw;text-align:center}
+    a{text-decoration:none}
+
+    .card{background:var(--white);border-radius:28px;max-width:520px;width:100%;padding:52px 44px;box-shadow:0 40px 100px rgba(0,0,0,0.35)}
+
+    .check-circle{width:80px;height:80px;background:linear-gradient(135deg,var(--teal),var(--teal-d));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 28px;animation:pop .4s cubic-bezier(.175,.885,.32,1.275) both}
+    @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+
+    h1{font-family:'Sora',sans-serif;font-size:1.9rem;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.2}
+    h1 span{color:var(--teal)}
+    .sub{color:var(--slate);font-size:0.95rem;line-height:1.75;margin-bottom:32px}
+
+    .perks{background:#F7FBFA;border-radius:16px;padding:24px;margin-bottom:28px;text-align:left;display:flex;flex-direction:column;gap:14px}
+    .perk{display:flex;align-items:center;gap:14px;font-size:0.9rem;color:var(--navy);font-weight:500}
+    .perk-icon{width:36px;height:36px;background:rgba(10,191,163,0.12);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+
+    .share-label{font-size:0.8rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+    .share-btns{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+    .share-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:9px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:opacity .2s;color:white;border:none}
+    .share-btn:hover{opacity:0.88}
+    .btn-wa{background:#25D366}
+    .btn-li{background:#0A66C2}
+    .btn-tw{background:#000}
+
+    .assess-cta{display:block;background:var(--teal);color:white;padding:14px;border-radius:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.97rem;transition:background .2s}
+    .assess-cta:hover{background:var(--teal-d)}
+    .assess-sub{font-size:0.78rem;color:#A0AEC0;margin-top:10px}
+
+    .counter-bar{margin-top:24px;font-size:0.8rem;color:rgba(255,255,255,0.6)}
+    .counter-bar strong{color:var(--teal)}
+  </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a><a href="about.html">About</a>
-    <a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a>
-  </div>
-  <a href="assess.html" class="nav-cta">Try Risk Assessment →</a>
-</nav>
 
-<main>
-  <div style="text-align:center;">
-    <div class="confirm-tag">✓ Spot confirmed</div>
-    <div class="check-wrap">
-      <div class="check-ring"></div>
-      <svg class="check" viewBox="0 0 90 90">
-        <circle class="check-circle" cx="45" cy="45" r="38"/>
-        <polyline class="check-mark" points="28,45 40,57 62,33"/>
-      </svg>
-    </div>
-    <h1 class="page-title">You're on the<br><em>waitlist!</em></h1>
-    <p class="page-sub" id="personalisedSub">We'll notify you the moment PrediCare AI launches in India. Your beta spot is secured.</p>
-  </div>
+  <div class="card">
+    <div class="check-circle">✓</div>
+    <h1>You're on the<br/><span>PrediCare</span> waitlist!</h1>
+    <p class="sub">Check your inbox — we've sent you a confirmation email. Welcome to a community of people taking their health seriously.</p>
 
-  <div class="info-g">
-    <div class="info-c highlight">
-      <div class="info-ico">🎁</div>
-      <div class="info-t">3 months Premium free</div>
-      <div class="info-d">As a beta user, you'll get full Premium access for 3 months when we launch — weekly tracking, family profiles, wearable sync.</div>
+    <div class="perks">
+      <div class="perk"><div class="perk-icon">🎁</div>3 months Pro free — locked in for you</div>
+      <div class="perk"><div class="perk-icon">⚡</div>Priority access when we launch Q3 2026</div>
+      <div class="perk"><div class="perk-icon">🏆</div>Your name on the founding member wall</div>
     </div>
-    <div class="info-c">
-      <div class="info-ico">🔬</div>
-      <div class="info-t">Try free assessment now</div>
-      <div class="info-d">Don't wait for launch — check your risk for diabetes, heart disease, stroke and more right now. Free. No signup.</div>
-      <a href="assess.html">Check My Risk Now →</a>
-    </div>
-  </div>
 
-  <div class="steps-card">
-    <div class="steps-title">What happens next</div>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><div class="step-t">Check your email</div><div class="step-d">We'll send a confirmation and your personal referral code shortly. Check spam just in case!</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-t">Refer friends & family</div><div class="step-d">Share your referral link below. Every friend you bring moves you up the launch queue.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-t">Receive your launch invite</div><div class="step-d">When PrediCare AI goes live, you'll be among the first to get full access — with your 3 free Premium months activated.</div></div></div>
-    </div>
-  </div>
-
-  <div class="ref-card">
-    <div class="ref-title">Share & move up the queue 🚀</div>
-    <p class="ref-sub">Every friend who joins with your link moves you closer to launch-day access.</p>
-    <div class="ref-link-row">
-      <div class="ref-link" id="refLink">predicare.ai/waitlist?ref=PC00000</div>
-      <button class="copy-btn" onclick="copyRef()">Copy Link</button>
-    </div>
+    <div class="share-label">Help us grow — share with friends</div>
     <div class="share-btns">
-      <a href="#" id="waShare" class="share-btn wa" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        WhatsApp
-      </a>
-      <a href="#" id="twShare" class="share-btn" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X / Twitter
-      </a>
-      <a href="#" id="liShare" class="share-btn" target="_blank">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
+      <button class="share-btn btn-wa" onclick="shareWA()">💬 WhatsApp</button>
+      <button class="share-btn btn-li" onclick="shareLI()">in LinkedIn</button>
+      <button class="share-btn btn-tw" onclick="shareTW()">𝕏 Twitter</button>
     </div>
+
+    <a href="/assess" class="assess-cta">Try Your Free Health Risk Assessment →</a>
+    <p class="assess-sub">Takes 5 minutes. No login required. Completely free.</p>
   </div>
 
-  <div class="cta-g">
-    <a href="assess.html" class="cta-primary">🔬 Try Free Risk Assessment Now →</a>
-    <a href="index.html" class="cta-secondary">← Back to Homepage</a>
-  </div>
-</main>
-
-<footer>
-  <div class="f-brand">💚 PrediCare AI</div>
-  <div class="f-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a></div>
-  <div style="font-size:12px;color:#374151;">© 2026 PrediCare AI · predicare.ai</div>
-</footer>
+  <p class="counter-bar">You're joining <strong>2,413 people</strong> already on the waitlist 🚀</p>
 
 <script>
-(function(){
-  // Personalise greeting
-  const name=sessionStorage.getItem('pc_name');
-  const email=sessionStorage.getItem('pc_email');
-  if(name){document.getElementById('personalisedSub').textContent=`Thanks ${name}! We'll notify you the moment PrediCare AI launches. Your beta spot is secured.`;}
-
-  // Generate referral code
-  const seed=(email||name||'PC')+(Math.random()+'').slice(2,7);
-  let hash=0;for(let i=0;i<seed.length;i++){hash=((hash<<5)-hash)+seed.charCodeAt(i);hash|=0;}
-  const code='PC'+(Math.abs(hash)%100000).toString().padStart(5,'0');
-  const refUrl=`predicare.ai/waitlist?ref=${code}`;
-  document.getElementById('refLink').textContent=refUrl;
-
-  // Share links
-  const msg=encodeURIComponent(`I just joined the PrediCare AI waitlist — it predicts your diabetes, heart disease & cancer risk in 3 minutes. Free. Join here: https://${refUrl}`);
-  document.getElementById('waShare').href=`https://wa.me/?text=${msg}`;
-  document.getElementById('twShare').href=`https://twitter.com/intent/tweet?text=${msg}`;
-  document.getElementById('liShare').href=`https://www.linkedin.com/sharing/share-offsite/?url=https://predicare.ai&summary=${msg}`;
-})();
-
-function copyRef(){
-  const txt=document.getElementById('refLink').textContent;
-  navigator.clipboard.writeText('https://'+txt).then(()=>{
-    const btn=document.querySelector('.copy-btn');
-    btn.textContent='Copied! ✓';btn.style.background='#15803D';
-    setTimeout(()=>{btn.textContent='Copy Link';btn.style.background='';},2500);
-  });
-}
-
-// Confetti burst
-(function(){
-  const colors=['#006B61','#00B89E','#C8511A','#E3F5F2','#FDF0EA','#1A1714'];
-  setTimeout(()=>{
-    for(let i=0;i<60;i++){
-      const el=document.createElement('div');
-      el.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:-10px;width:${6+Math.random()*6}px;height:${6+Math.random()*6}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};animation:confettiFall ${1.5+Math.random()*2}s linear forwards;z-index:9999;`;
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(),4000);
-    }
-  },600);
-  const style=document.createElement('style');
-  style.textContent='@keyframes confettiFall{to{transform:translateY(105vh) rotate(720deg);opacity:0;}}';
-  document.head.appendChild(style);
-})();
+  var msg = "I just joined the PrediCare AI waitlist — they're building AI that predicts diabetes, heart disease & cancer before symptoms appear. India-first. Free. Check it out: https://predicare.ai/waitlist";
+  function shareWA(){ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank') }
+  function shareLI(){ window.open('https://www.linkedin.com/sharing/share-offsite/?url=https://predicare.ai','_blank') }
+  function shareTW(){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(msg),'_blank') }
 </script>
+
 </body>
 </html>

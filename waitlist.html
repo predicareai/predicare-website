@@ -1,175 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Join the Waitlist — PrediCare AI</title>
-<meta name="description" content="Join thousands taking charge of their health. Free beta access to PrediCare AI — India's first AI-powered predictive health platform.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#FFFFFF;--cream:#F5F5F5;--parchment:#EBEBEB;--ink:#1A1714;--muted:#6B7280;--teal:#006B61;--teal2:#00B89E;--teal-light:#E3F5F2;--orange:#C8511A;--orange-light:#FDF0EA;--border:#E3DDD4;--card:#FFFFFF;--dark:#0D140F;--dark2:#162019;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;line-height:1.65;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{display:flex;align-items:center;gap:9px;font-family:'Fraunces',serif;font-weight:900;font-size:20px;text-decoration:none;color:var(--ink);}
-.nav-logo span{color:var(--teal);}
-.nav-links{display:flex;gap:22px;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s;}
-.nav-links a:hover{color:var(--ink);}
-.nav-cta{background:var(--ink);color:#fff;padding:9px 20px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;transition:all 0.2s;}
-.nav-cta:hover{background:var(--teal);}
-.page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;}
-/* LEFT */
-.left{background:var(--dark2);padding:120px 64px 60px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
-.left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(0,184,158,0.1) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(200,81,26,0.07) 0%,transparent 60%);pointer-events:none;}
-.left-deco{position:absolute;right:-30px;bottom:-20px;font-family:'Fraunces',serif;font-size:320px;font-weight:900;line-height:1;color:rgba(255,255,255,0.025);pointer-events:none;user-select:none;}
-.left-inner{position:relative;z-index:1;max-width:520px;}
-.left-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,184,158,0.1);border:1px solid rgba(0,184,158,0.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:24px;}
-.left-badge::before{content:'●';font-size:8px;animation:blink 2s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.left h1{font-family:'Fraunces',serif;font-size:clamp(38px,3.5vw,52px);font-weight:900;line-height:1.0;letter-spacing:-1.5px;color:#fff;margin-bottom:20px;}
-.left h1 em{font-style:italic;color:var(--teal2);}
-.left-sub{font-size:16px;color:#94A3B8;line-height:1.75;max-width:440px;margin-bottom:36px;}
-.benefits{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
-.benefit{display:flex;gap:14px;align-items:flex-start;}
-.ben-ico{width:38px;height:38px;background:rgba(0,184,158,0.1);border:1px solid rgba(0,184,158,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.ben-title{font-size:14px;font-weight:600;margin-bottom:3px;color:#fff;}
-.ben-desc{font-size:12px;color:#94A3B8;line-height:1.5;}
-.testimonials{display:flex;flex-direction:column;gap:12px;}
-.testi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;}
-.testi-text{font-size:13px;color:#CBD5E1;line-height:1.65;margin-bottom:10px;font-style:italic;}
-.testi-author{display:flex;align-items:center;gap:9px;}
-.testi-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
-.testi-name{font-size:12px;font-weight:600;color:#fff;}
-.testi-loc{font-size:11px;color:#94A3B8;}
-/* RIGHT */
-.right{background:var(--bg);padding:120px 64px 60px;display:flex;flex-direction:column;justify-content:center;}
-.form-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.07);}
-.form-card::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,184,158,0.1) 0%,transparent 65%);}
-.form-card::after{content:'';position:absolute;bottom:-60px;left:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(200,81,26,0.07) 0%,transparent 65%);}
-.spot-badge{display:inline-flex;align-items:center;gap:7px;background:var(--orange-light);border:1px solid rgba(200,81,26,0.2);border-radius:100px;padding:5px 13px;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:18px;}
-.form-title{font-family:'Fraunces',serif;font-size:26px;font-weight:900;letter-spacing:-0.5px;margin-bottom:6px;color:var(--ink);position:relative;z-index:1;}
-.form-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6;position:relative;z-index:1;}
-.field{margin-bottom:14px;position:relative;z-index:1;}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-.field input{width:100%;padding:12px 14px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);color:var(--ink);font-size:14px;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;}
-.field input:focus{border-color:var(--teal);}
-.field input::placeholder{color:var(--muted);}
-.or-divider{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:11px;color:var(--muted);position:relative;z-index:1;}
-.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border);}
-.plan-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
-.plan-card{border:1.5px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;transition:all 0.2s;}
-.plan-card:hover{border-color:var(--teal);}
-.plan-card.selected{border-color:var(--teal);background:var(--teal-light);}
-.plan-card input[type=radio]{display:none;}
-.plan-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;color:var(--muted);}
-.plan-name{font-size:14px;font-weight:700;margin-bottom:2px;color:var(--ink);}
-.plan-price{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--teal);}
-.plan-price span{font-size:11px;font-weight:400;color:var(--muted);}
-.plan-card.selected .plan-price{color:var(--teal);}
-.submit-btn{width:100%;padding:15px;border-radius:10px;background:var(--teal);color:#fff;font-family:'Fraunces',serif;font-size:17px;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:-0.3px;position:relative;z-index:1;}
-.submit-btn:hover{background:var(--teal2);color:var(--dark);transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,107,97,0.2);}
-.submit-btn:disabled{background:var(--border);color:var(--muted);transform:none;box-shadow:none;cursor:not-allowed;}
-.form-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.5;position:relative;z-index:1;}
-.stats-bar{display:flex;gap:0;border-top:1px solid var(--border);margin-top:22px;padding-top:18px;position:relative;z-index:1;}
-.sb-item{flex:1;text-align:center;border-right:1px solid var(--border);padding:0 10px;}
-.sb-item:last-child{border-right:none;}
-.sb-n{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:var(--teal);display:block;}
-.sb-l{font-size:10px;color:var(--muted);margin-top:2px;display:block;}
-footer{background:var(--ink);padding:36px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
-.f-brand{font-family:'Fraunces',serif;font-weight:900;font-size:18px;color:#fff;}
-.f-links{display:flex;gap:22px;}
-.f-links a{font-size:13px;color:#6B7280;text-decoration:none;transition:color 0.2s;}
-.f-links a:hover{color:var(--teal2);}
-@media(max-width:960px){nav{padding:14px 20px;}.nav-links{display:none;}.page{grid-template-columns:1fr;}.left{padding:100px 24px 48px;}.right{padding:40px 24px 60px;}.left-deco{display:none;}footer{flex-direction:column;text-align:center;padding:28px 20px;}}
-</style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9210161565544399"
-     crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Waitlist — PrediCare AI</title>
+  <meta name="description" content="Join 2,400+ people on the PrediCare AI waitlist. Get 3 months Pro free + priority access when we launch in Q3 2026." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://predicare.ai/waitlist" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --teal:#0ABFA3;--teal-d:#07997F;--navy:#0B1F3A;--navy-m:#122952;
+      --slate:#4A5568;--white:#fff;--light:#F7FBFA;
+    }
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+    a{text-decoration:none;color:inherit}
+
+    /* NAV */
+    nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6vw;background:rgba(11,31,58,0.97);border-bottom:1px solid rgba(10,191,163,0.15)}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-icon{width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:18px}
+    .logo-text{font-family:'Sora',sans-serif;font-weight:700;font-size:1.2rem;color:var(--white)}
+    .logo-text span{color:var(--teal)}
+
+    /* MAIN */
+    main{flex:1;background:linear-gradient(160deg,#0B1F3A 0%,#0F3460 60%,rgba(10,191,163,0.25) 100%);display:flex;align-items:center;justify-content:center;padding:60px 6vw}
+    .card{background:var(--white);border-radius:24px;max-width:520px;width:100%;padding:48px;box-shadow:0 32px 80px rgba(11,31,58,0.3)}
+
+    .card-badge{display:inline-block;background:rgba(10,191,163,0.1);border:1px solid rgba(10,191,163,0.25);color:var(--teal);font-size:0.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:20px}
+    .card h1{font-family:'Sora',sans-serif;font-size:1.85rem;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.2}
+    .card h1 span{color:var(--teal)}
+    .card-sub{color:var(--slate);font-size:0.92rem;line-height:1.7;margin-bottom:28px}
+
+    /* BENEFITS */
+    .benefits{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .benefit{display:flex;align-items:center;gap:12px;font-size:0.88rem;color:var(--navy);font-weight:500}
+    .benefit-icon{width:28px;height:28px;background:rgba(10,191,163,0.1);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+
+    /* FORM */
+    .form-group{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input{width:100%;padding:13px 16px;border:1.5px solid #E2E8F0;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--navy);outline:none;transition:border-color .2s}
+    input:focus{border-color:var(--teal)}
+    input::placeholder{color:#A0AEC0}
+    select{width:100%;padding:13px 16px;border:1.5px solid #E2E8F0;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--navy);outline:none;background:white;cursor:pointer}
+    select:focus{border-color:var(--teal)}
+    .submit-btn{width:100%;background:var(--teal);color:white;border:none;padding:15px;border-radius:10px;font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;margin-top:4px}
+    .submit-btn:hover{background:var(--teal-d)}
+    .submit-btn:disabled{background:#A0AEC0;cursor:not-allowed}
+
+    .counter{text-align:center;font-size:0.8rem;color:var(--slate);margin-top:14px}
+    .counter strong{color:var(--teal)}
+    .privacy-note{text-align:center;font-size:0.75rem;color:#A0AEC0;margin-top:10px}
+
+    footer{background:var(--navy);padding:24px 6vw;color:rgba(255,255,255,0.4);font-size:0.8rem;text-align:center}
+    footer a{color:rgba(255,255,255,0.4);margin:0 10px}footer a:hover{color:var(--teal)}
+  </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="nav-logo">💚 PrediCare <span>AI</span></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a><a href="about.html">About</a>
-    <a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a>
-  </div>
-  <a href="assess.html" class="nav-cta">Try Risk Assessment →</a>
+  <a class="logo" href="/">
+    <div class="logo-icon">🩺</div>
+    <div class="logo-text">Predi<span>Care</span> AI</div>
+  </a>
 </nav>
 
-<div class="page">
-  <div class="left">
-    <div class="left-deco">P</div>
-    <div class="left-inner">
-      <div class="left-badge">Beta Access Open</div>
-      <h1>Join thousands<br>taking charge of<br>their <em>health.</em></h1>
-      <p class="left-sub">Be among the first to use PrediCare AI when we launch. Know your risk for diabetes, heart disease, cancer, stroke and more — years before symptoms.</p>
-      <div class="benefits">
-        <div class="benefit"><div class="ben-ico">🔬</div><div><div class="ben-title">Free 5-disease risk assessment</div><div class="ben-desc">Know your risk for India's 5 biggest killers — all in 3 minutes</div></div></div>
-        <div class="benefit"><div class="ben-ico">📊</div><div><div class="ben-title">3 months Premium free</div><div class="ben-desc">Beta users get full Premium access — weekly tracking, family profiles, wearable sync</div></div></div>
-        <div class="benefit"><div class="ben-ico">🇮🇳</div><div><div class="ben-title">Built for Bharat</div><div class="ben-desc">Hindi + 100 languages. Works offline. Built for ₹8,000 Android phones.</div></div></div>
-        <div class="benefit"><div class="ben-ico">🔒</div><div><div class="ben-title">Your data stays yours</div><div class="ben-desc">AES-256 encrypted. Stored in India. Never sold. DPDP Act compliant.</div></div></div>
-      </div>
-      <div class="testimonials">
-        <div class="testi"><div class="testi-text">"I had no idea my diabetes risk was this high at 38. This made me finally get a checkup. Result: pre-diabetic. Caught just in time."</div><div class="testi-author"><div class="testi-av" style="background:var(--teal);">A</div><div><div class="testi-name">Aarav R.</div><div class="testi-loc">Bengaluru · Software engineer, 38</div></div></div></div>
-        <div class="testi"><div class="testi-text">"Simple, fast, and actually explains what to do about it. Finally a health tool that doesn't feel like it was made for American doctors."</div><div class="testi-author"><div class="testi-av" style="background:var(--orange);">P</div><div><div class="testi-name">Priya S.</div><div class="testi-loc">Mumbai · Teacher, 44</div></div></div></div>
-      </div>
-    </div>
-  </div>
+<main>
+  <div class="card">
+    <div class="card-badge">🎉 Limited Founding Member Spots</div>
+    <h1>Join the <span>PrediCare</span> Waitlist</h1>
+    <p class="card-sub">Be among the first to access India's AI-powered preventive health platform. Founding members get exclusive perks when we launch in Q3 2026.</p>
 
-  <div class="right">
-    <div class="form-card">
-      <div class="spot-badge">🔥 Limited Beta Spots Remaining</div>
-      <div class="form-title">Reserve your spot</div>
-      <p class="form-sub">Enter your email or WhatsApp — we'll notify you the moment we launch. Takes 30 seconds.</p>
-      <form name="waitlist" method="POST" action="/waitlist-success.html" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
-        <input type="hidden" name="form-name" value="waitlist">
-        <p style="display:none"><input name="bot-field"></p>
-        <div class="field"><label>Email address <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="email" name="email" id="emailInput" placeholder="you@email.com"></div>
-        <div class="or-divider">or</div>
-        <div class="field"><label>WhatsApp / mobile <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="tel" name="phone" id="phoneInput" placeholder="+91 98765 43210"></div>
-        <div class="field"><label>Your name <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="text" name="name" id="nameInput" placeholder="First name"></div>
-        <div class="field"><label>City <span style="color:var(--muted);font-weight:400;">(optional)</span></label><input type="text" name="city" placeholder="e.g. Mumbai, Delhi, Hyderabad"></div>
-        <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:10px;position:relative;z-index:1;">Choose your plan</div>
-        <div class="plan-g">
-          <div class="plan-card selected" onclick="selectPlan(this,'free')"><input type="radio" name="plan" value="free" checked><div class="plan-tag">Free Forever</div><div class="plan-name">Basic</div><div class="plan-price">₹0 <span>/ forever</span></div></div>
-          <div class="plan-card" onclick="selectPlan(this,'premium')"><input type="radio" name="plan" value="premium"><div class="plan-tag">🔥 Beta Offer</div><div class="plan-name">Premium</div><div class="plan-price">₹299 <span>/ mo</span></div></div>
-        </div>
-        <button type="submit" class="submit-btn" id="submitBtn">Reserve My Spot →</button>
-      </form>
-      <p class="form-note">🔒 No spam. No credit card. Unsubscribe anytime.<br>Your data is encrypted and stored in India.</p>
-      <div class="stats-bar">
-        <div class="sb-item"><span class="sb-n">₹0</span><span class="sb-l">Free tier forever</span></div>
-        <div class="sb-item"><span class="sb-n">5</span><span class="sb-l">Diseases screened</span></div>
-        <div class="sb-item"><span class="sb-n">3 min</span><span class="sb-l">To your results</span></div>
-        <div class="sb-item"><span class="sb-n">100+</span><span class="sb-l">Languages</span></div>
-        <div class="sb-item"><span class="sb-n">3 mo</span><span class="sb-l">Premium free</span></div>
-      </div>
+    <div class="benefits">
+      <div class="benefit"><div class="benefit-icon">🎁</div>3 months of Pro plan — completely free</div>
+      <div class="benefit"><div class="benefit-icon">⚡</div>Priority access before public launch</div>
+      <div class="benefit"><div class="benefit-icon">🏆</div>Your name on our founding member wall</div>
+      <div class="benefit"><div class="benefit-icon">🩺</div>Free AI health risk assessment right now</div>
     </div>
+
+    <!-- 
+      IMPORTANT: Replace the form action URL below with your Mailchimp embed form URL.
+      Get it from: Mailchimp → Audience → Signup Forms → Embedded Forms → copy the action URL
+      It looks like: https://predicare.us21.list-manage.com/subscribe/post?u=XXXX&id=XXXX
+    -->
+    <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="POST" target="_blank" id="waitlist-form">
+      <div class="form-group">
+        <div class="form-row">
+          <input type="text" name="FNAME" placeholder="First name" required />
+          <input type="text" name="LNAME" placeholder="Last name" />
+        </div>
+        <input type="email" name="EMAIL" placeholder="Your email address" required />
+        <select name="CITY">
+          <option value="" disabled selected>Your city</option>
+          <option>Bengaluru</option>
+          <option>Mumbai</option>
+          <option>Delhi / NCR</option>
+          <option>Hyderabad</option>
+          <option>Chennai</option>
+          <option>Pune</option>
+          <option>Jaipur</option>
+          <option>Ahmedabad</option>
+          <option>Kolkata</option>
+          <option>Other</option>
+        </select>
+        <!-- Mailchimp anti-bot field — do not remove -->
+        <div style="position:absolute;left:-5000px" aria-hidden="true">
+          <input type="text" name="b_PLACEHOLDER_ANTISPAM" tabindex="-1" value="">
+        </div>
+        <button class="submit-btn" type="submit" id="submit-btn">
+          Claim My Founding Member Spot →
+        </button>
+      </div>
+    </form>
+
+    <p class="counter">Already joined: <strong>2,412 people</strong> from 34 cities</p>
+    <p class="privacy-note">🔒 No spam. Unsubscribe anytime. We respect your privacy.</p>
   </div>
-</div>
+</main>
 
 <footer>
-  <div class="f-brand">💚 PrediCare AI</div>
-  <div class="f-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="assess.html">Try Free</a><a href="privacy.html">Privacy</a><a href="/cdn-cgi/l/email-protection#d0a4b5b1bd90a0a2b5b4b9b3b1a2b5feb1b9">Contact</a></div>
-  <div style="font-size:12px;color:#374151;">© 2026 PrediCare AI · predicare.ai</div>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy Policy</a>
+  <a href="mailto:hello@predicare.ai">hello@predicare.ai</a>
+  <br/><br/>© 2026 PrediCare AI. Built with ❤️ in India.
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function selectPlan(el,plan){
-  document.querySelectorAll('.plan-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  el.querySelector('input[type=radio]').checked=true;
-}
-function handleSubmit(e){
-  const em=document.getElementById('emailInput').value.trim();
-  const ph=document.getElementById('phoneInput').value.trim();
-  document.getElementById('emailInput').style.borderColor='var(--border)';
-  document.getElementById('phoneInput').style.borderColor='var(--border)';
-  if(!em&&!ph){e.preventDefault();document.getElementById('emailInput').style.borderColor='#EF4444';document.getElementById('phoneInput').style.borderColor='#EF4444';return;}
-  if(em&&!em.includes('@')){e.preventDefault();document.getElementById('emailInput').style.borderColor='#EF4444';return;}
-  const nm=document.getElementById('nameInput').value.trim();
-  if(em)sessionStorage.setItem('pc_email',em);
-  if(nm)sessionStorage.setItem('pc_name',nm);
-  const btn=document.getElementById('submitBtn');
-  btn.textContent='Reserving your spot…';btn.disabled=true;
-}
-function showSuccess(){
-  document.querySelector('.form-card').innerHTML='<div style="text-align:center;padding:40px 0;"><div style="font-size:56px;margin-bottom:20px;">🎉</div><div style="font-family:Fraunces,serif;font-size:26px;font-weight:900;color:var(--teal);margin-bottom:10px;">You\'re on the list!</div><p style="font-size:15px;color:var(--muted);max-width:320px;margin:0 auto 24px;line-height:1.6;">We\'ll notify you the moment PrediCare AI launches. Expect an email soon with early access details.</p><a href="assess.html" style="display:inline-block;background:var(--teal);color:#fff;padding:1
+
+<script>
+  document.getElementById('waitlist-form').addEventListener('submit', function() {
+    var btn = document.getElementById('submit-btn');
+    btn.textContent = 'Joining...';
+    btn.disabled = true;
+    // Redirect to success page after short delay (Mailchimp opens in new tab)
+    setTimeout(function() {
+      window.location.href = '/waitlist-success';
+    }, 800);
+  });
+</script>
+
+</body>
+</html>
