@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrediCare AI — Brand & Social Media Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #0ABFA3; --teal-d: #07997F; --teal-l: #E6FAF7;
+      --navy: #0B1F3A; --slate: #4A5568; --light: #F7FBFA; --white: #fff;
+    }
+    body { font-family: 'Inter', sans-serif; background: #F0F4F8; color: var(--navy); }
+
+    header {
+      background: linear-gradient(135deg, #0B1F3A, #0F3460, #0ABFA3);
+      padding: 60px 8vw; color: white; text-align: center;
+    }
+    header h1 { font-family: 'Sora', sans-serif; font-size: 2.6rem; font-weight: 800; margin-bottom: 10px; }
+    header p { color: rgba(255,255,255,0.7); font-size: 1.05rem; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; display: flex; flex-direction: column; gap: 48px; }
+
+    .card { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+    .card-title {
+      font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+      padding-bottom: 16px; border-bottom: 2px solid var(--teal-l);
+    }
+    .card-sub { color: var(--slate); font-size: 0.92rem; margin-bottom: 32px; }
+    .tag {
+      display: inline-block; background: var(--teal-l); color: var(--teal);
+      font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 4px;
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 24px;
+    }
+
+    /* COLORS */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+    .color-swatch { border-radius: 14px; overflow: hidden; border: 1px solid #E2ECF4; }
+    .swatch-block { height: 80px; }
+    .swatch-info { padding: 14px; }
+    .swatch-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+    .swatch-hex { font-size: 0.82rem; color: var(--slate); font-family: monospace; }
+    .swatch-use { font-size: 0.78rem; color: var(--slate); margin-top: 4px; }
+
+    /* TYPOGRAPHY */
+    .type-row { padding: 20px 0; border-bottom: 1px solid #F1F5F9; }
+    .type-row:last-child { border-bottom: none; }
+    .type-sample { margin-bottom: 8px; }
+    .type-spec { font-size: 0.82rem; color: var(--slate); font-family: monospace; }
+
+    /* VOICE */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .voice-do { background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 12px; padding: 20px; }
+    .voice-dont { background: #FFF1F2; border: 1px solid #FCA5A5; border-radius: 12px; padding: 20px; }
+    .voice-label { font-weight: 800; font-size: 0.78rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; }
+    .voice-do .voice-label { color: #16A34A; }
+    .voice-dont .voice-label { color: #DC2626; }
+    .voice-item { font-size: 0.88rem; color: var(--slate); padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .voice-item:last-child { border: none; }
+
+    /* LINKEDIN */
+    .li-mockup {
+      border: 1px solid #E2ECF4; border-radius: 14px; overflow: hidden; margin-bottom: 24px;
+    }
+    .li-header {
+      background: linear-gradient(135deg, #0B1F3A, #0F3460);
+      height: 100px; position: relative;
+    }
+    .li-logo {
+      width: 70px; height: 70px; border-radius: 14px;
+      background: var(--teal); border: 3px solid white;
+      position: absolute; bottom: -35px; left: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .li-body { padding: 48px 24px 24px; }
+    .li-name { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; }
+    .li-tagline { color: var(--slate); font-size: 0.9rem; margin: 4px 0 16px; }
+    .li-about { font-size: 0.92rem; line-height: 1.7; color: #374151; }
+
+    /* TWITTER */
+    .tweet { border: 1px solid #E2ECF4; border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+    .tweet-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .tweet-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #0B1F3A, #0ABFA3);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 0.9rem;
+    }
+    .tweet-name { font-weight: 700; font-size: 0.95rem; }
+    .tweet-handle { font-size: 0.82rem; color: var(--slate); }
+    .tweet-text { font-size: 0.95rem; line-height: 1.65; color: #1F2937; margin-bottom: 12px; }
+    .tweet-tag { color: #0ABFA3; }
+    .tweet-meta { font-size: 0.78rem; color: #9CA3AF; }
+    .tweet-type { font-size: 0.72rem; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 8px; }
+    .cal-day-header { text-align: center; font-size: 0.72rem; font-weight: 700; color: var(--slate); padding: 6px; }
+    .cal-cell {
+      border: 1px solid #E2ECF4; border-radius: 8px; padding: 8px;
+      font-size: 0.72rem; min-height: 64px;
+    }
+    .cal-date { font-weight: 700; margin-bottom: 4px; color: var(--navy); }
+    .cal-content { color: var(--slate); line-height: 1.4; }
+    .cal-type-edu { border-left: 3px solid #0ABFA3; }
+    .cal-type-story { border-left: 3px solid #6366F1; }
+    .cal-type-stat { border-left: 3px solid #F59E0B; }
+    .cal-type-engage { border-left: 3px solid #EC4899; }
+    .cal-type-news { border-left: 3px solid #10B981; }
+    .cal-empty { background: #F9FAFB; border-color: #F1F5F9; }
+
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--slate); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .logo-showcase { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; margin: 20px 0; }
+    .logo-variant {
+      border-radius: 12px; padding: 24px 32px;
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem;
+    }
+    .logo-icon-sm { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+    @media (max-width: 600px) {
+      .voice-grid { grid-template-columns: 1fr; }
+      .calendar-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🩺 PrediCare AI — Brand & Social Media Kit</h1>
+  <p>Everything you need to build a consistent, compelling brand presence from Day 1</p>
+</header>
+
+<div class="container">
+
+  <!-- SECTION 1: BRAND IDENTITY -->
+  <div class="card">
+    <div class="tag">01 — Brand Identity</div>
+    <div class="card-title">Color Palette</div>
+    <div class="card-sub">These four colors are the visual foundation of everything PrediCare builds — from the app to pitch decks to social posts.</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0ABFA3;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">PrediCare Teal</div>
+          <div class="swatch-hex">#0ABFA3</div>
+          <div class="swatch-use">Primary CTA, highlights, links</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0B1F3A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Navy</div>
+          <div class="swatch-hex">#0B1F3A</div>
+          <div class="swatch-use">Headlines, backgrounds, authority</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0F3460;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Midnight Blue</div>
+          <div class="swatch-hex">#0F3460</div>
+          <div class="swatch-use">Gradients, secondary backgrounds</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#E6FAF7;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Light</div>
+          <div class="swatch-hex">#E6FAF7</div>
+          <div class="swatch-use">Backgrounds, tags, hover states</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#F7FBFA;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Soft White</div>
+          <div class="swatch-hex">#F7FBFA</div>
+          <div class="swatch-use">Page backgrounds, card fills</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#4A5568;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Body Slate</div>
+          <div class="swatch-hex">#4A5568</div>
+          <div class="swatch-use">Body copy, secondary text</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="card">
+    <div class="tag">01 — Brand Identity</div>
+    <div class="card-title">Typography System</div>
+    <div class="card-sub">Use Sora for all headlines and key moments. Inter for all body copy. Never mix in other typefaces.</div>
+
+    <div class="type-row">
+      <div class="type-sample" style="font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;color:#0B1F3A;line-height:1.1;">Predict. Prevent. Protect.</div>
+      <div class="type-spec">Sora 800 · Hero Headlines · 2.4rem+</div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:#0B1F3A;">AI That Saves Lives Before They're at Risk</div>
+      <div class="type-spec">Sora 700 · Section Titles · 1.4–1.8rem</div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-size:1rem;font-weight:400;color:#4A5568;line-height:1.7;">PrediCare analyzes 200+ health signals to give you a personalized disease risk score — and a plan to beat it.</div>
+      <div class="type-spec">Inter 400 · Body Copy · 0.9–1.05rem</div>
+    </div>
+    <div class="type-row">
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;color:#0ABFA3;letter-spacing:.12em;text-transform:uppercase;">AI Health Platform · Preventive Care · India</div>
+      <div class="type-spec">Inter 700 · Labels & Tags · 0.75–0.82rem · uppercase · tracked</div>
+    </div>
+  </div>
+
+  <!-- LOGO -->
+  <div class="card">
+    <div class="tag">01 — Brand Identity</div>
+    <div class="card-title">Logo Variants</div>
+    <div class="card-sub">The logo always combines the stethoscope icon (🩺) with the wordmark. Use the dark version on light backgrounds, light version on dark backgrounds.</div>
+    <div class="logo-showcase">
+      <div class="logo-variant" style="background:#0B1F3A;color:white;">
+        <div class="logo-icon-sm" style="background:#0ABFA3;">🩺</div>
+        Predi<span style="color:#0ABFA3;">Care</span> AI
+      </div>
+      <div class="logo-variant" style="background:#F7FBFA;color:#0B1F3A;border:1px solid #E2ECF4;">
+        <div class="logo-icon-sm" style="background:#0ABFA3;">🩺</div>
+        Predi<span style="color:#0ABFA3;">Care</span> AI
+      </div>
+      <div class="logo-variant" style="background:#0ABFA3;color:white;">
+        <div class="logo-icon-sm" style="background:#0B1F3A;">🩺</div>
+        Predi<span style="color:#0B1F3A;">Care</span> AI
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--slate);margin-top:8px;">✦ Minimum size: 120px wide. Always maintain clear space equal to the height of the "P" on all sides.</p>
+  </div>
+
+  <!-- BRAND VOICE -->
+  <div class="card">
+    <div class="tag">01 — Brand Identity</div>
+    <div class="card-title">Brand Voice & Tone</div>
+    <div class="card-sub">PrediCare's voice is the intersection of a world-class doctor and a trusted friend. Authoritative but warm. Science-backed but human.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:28px;">
+      <div style="background:var(--teal-l);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🔬</div>
+        <div style="font-weight:700;margin-bottom:6px;">Evidence-Based</div>
+        <div style="font-size:0.82rem;color:var(--slate);">Every claim is backed by clinical data. We don't exaggerate.</div>
+      </div>
+      <div style="background:var(--teal-l);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">💬</div>
+        <div style="font-weight:700;margin-bottom:6px;">Plain Language</div>
+        <div style="font-size:0.82rem;color:var(--slate);">No jargon. If your grandmother can't understand it, rewrite it.</div>
+      </div>
+      <div style="background:var(--teal-l);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">💪</div>
+        <div style="font-weight:700;margin-bottom:6px;">Empowering</div>
+        <div style="font-size:0.82rem;color:var(--slate);">We give people control over their health — never fear.</div>
+      </div>
+      <div style="background:var(--teal-l);border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🌏</div>
+        <div style="font-weight:700;margin-bottom:6px;">India-First</div>
+        <div style="font-size:0.82rem;color:var(--slate);">We speak to India's reality — affordability, languages, context.</div>
+      </div>
+    </div>
+
+    <div class="voice-grid">
+      <div class="voice-do">
+        <div class="voice-label">✅ Do Say</div>
+        <div class="voice-item">"Know your risk. Own your health."</div>
+        <div class="voice-item">"Your AI health companion — available 24/7."</div>
+        <div class="voice-item">"Based on 50 million clinical records."</div>
+        <div class="voice-item">"Built for India. Priced for India."</div>
+        <div class="voice-item">"Prevention is more powerful than cure."</div>
+        <div class="voice-item">"Trusted by doctors. Loved by patients."</div>
+      </div>
+      <div class="voice-dont">
+        <div class="voice-label">❌ Never Say</div>
+        <div class="voice-item">"We can cure your disease." (Never promise cures)</div>
+        <div class="voice-item">"You might be dying." (No fear-mongering)</div>
+        <div class="voice-item">"Our AI is 100% accurate." (No false certainty)</div>
+        <div class="voice-item">"Consult us instead of your doctor." (Always complement, never replace)</div>
+        <div class="voice-item">Complex medical abbreviations without explanation</div>
+        <div class="voice-item">Claims not backed by your clinical validation data</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKEDIN -->
+  <div class="card">
+    <div class="tag">02 — LinkedIn Company Page</div>
+    <div class="card-title">LinkedIn Company Page Copy</div>
+    <div class="card-sub">Copy and paste this directly into your LinkedIn Company Page setup. Optimized for discoverability and investor credibility.</div>
+
+    <div class="li-mockup">
+      <div class="li-header">
+        <div class="li-logo">🩺</div>
+      </div>
+      <div class="li-body">
+        <div class="li-name">PrediCare AI</div>
+        <div class="li-tagline">AI Healthcare Platform · Predict. Prevent. Protect. · Bihar-first, pan-India</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+          <span style="background:var(--teal-l);color:var(--teal);font-size:0.78rem;font-weight:600;padding:4px 10px;border-radius:4px;">Preventive Health</span>
+          <span style="background:var(--teal-l);color:var(--teal);font-size:0.78rem;font-weight:600;padding:4px 10px;border-radius:4px;">Artificial Intelligence</span>
+          <span style="background:var(--teal-l);color:var(--teal);font-size:0.78rem;font-weight:600;padding:4px 10px;border-radius:4px;">HealthTech</span>
+          <span style="background:var(--teal-l);color:var(--teal);font-size:0.78rem;font-weight:600;padding:4px 10px;border-radius:4px;">India</span>
+        </div>
+        <div class="li-about">
+          <strong>PrediCare AI</strong> is an AI-powered preventive health platform that predicts disease risk before symptoms appear — making early detection and prevention accessible to 2–3 billion people worldwide.<br><br>
+          
+          80% of the world's most deadly diseases — diabetes, cardiovascular disease, cancer — are preventable with early intervention. Yet the current healthcare system is built to treat, not predict. PrediCare is changing that.<br><br>
+
+          <strong>🔮 What We Do</strong><br>
+          Our multimodal AI engine analyzes 200+ health biomarkers, lifestyle signals, and genetic risk factors to generate personalized 5-year disease risk scores with ≥80% accuracy. We then build a hyper-personalized prevention plan — nutrition, exercise, monitoring, and medication — tailored to your specific risk profile.<br><br>
+
+          <strong>🇮🇳 Why India First</strong><br>
+          India has 77M diabetics, 60M+ heart disease patients, and a healthcare system serving 1.4B people with 1/10th the infrastructure of developed nations. We're building Hindi-first, offline-capable, ₹0–799/month technology that works for every Indian — urban and rural.<br><br>
+
+          <strong>📈 The Opportunity</strong><br>
+          $3.7T global healthcare market · $48B+ preventive AI segment · Targeting 100K users by 2027, 3B by 2036.<br><br>
+
+          <strong>🤝 We're Looking For</strong><br>
+          ✦ Beta users across Bihar &amp; Hindi belt<br>
+          ✦ Hospital and insurance partners<br>
+          ✦ Seed investors ($500K round open)<br>
+          ✦ Technical co-founders (CTO, ML Lead)<br><br>
+
+          📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9febfafef2dfefedfafbf6fcfeedfab1fef6">[email&#160;protected]</a> · predicare.ai
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--light);border-radius:12px;padding:24px;margin-top:8px;">
+      <div style="font-weight:700;margin-bottom:12px;font-size:0.9rem;">📋 Page Settings Checklist</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.85rem;color:var(--slate);">
+        <div>✅ Company type: <strong>Startup</strong></div>
+        <div>✅ Industry: <strong>Hospitals and Health Care</strong></div>
+        <div>✅ Company size: <strong>2–10 employees</strong></div>
+        <div>✅ Headquarters: <strong>Patna, Bihar, India</strong></div>
+        <div>✅ Founded: <strong>2026</strong></div>
+        <div>✅ Specialties: AI, Preventive Health, HealthTech, India</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWITTER -->
+  <div class="card">
+    <div class="tag">03 — Twitter / X Profile</div>
+    <div class="card-title">Twitter/X Bio & Handle</div>
+    <div class="card-sub">Optimized for maximum impact in 160 characters. Your profile is your first impression — make it count.</div>
+
+    <div style="background:var(--light);border-radius:14px;padding:24px;margin-bottom:28px;border:1px solid #E2ECF4;">
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#0B1F3A,#0ABFA3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;">🩺</div>
+        <div>
+          <div style="font-weight:800;font-size:1rem;">PrediCare AI</div>
+          <div style="color:#536471;font-size:0.9rem;margin-bottom:10px;">@PrediCareAI</div>
+          <div style="font-size:0.95rem;line-height:1.6;margin-bottom:10px;">🔬 AI that predicts disease before symptoms appear<br>🇮🇳 Built for India's 1.4B people · Hindi + 10 languages<br>🎯 Diabetes · Heart Disease · Cancer risk detection<br>📊 Launching Q3 2026 in Bengaluru &amp; Jaipur<br>💡 DM for partnerships &amp; early access</div>
+          <div style="color:#0ABFA3;font-size:0.9rem;">🔗 predicare.ai</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.85rem;margin-bottom:28px;">
+      <div style="background:var(--teal-l);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--teal);margin-bottom:8px;">📌 Pinned Tweet Strategy</div>
+        <div style="color:var(--slate);">Pin your launch announcement or a viral stat-based thread. Update every 4–6 weeks. Should always drive waitlist signups.</div>
+      </div>
+      <div style="background:var(--teal-l);border-radius:10px;padding:16px;">
+        <div style="font-weight:700;color:var(--teal);margin-bottom:8px;">🏷️ Recommended Hashtags</div>
+        <div style="color:var(--slate);">#HealthTech #AIHealth #PreventiveCare #IndiaHealth #DigitalHealth #HealthAI #Startup #IndiaStartup</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT CALENDAR -->
+  <div class="card">
+    <div class="tag">03 — Twitter / X Content Calendar</div>
+    <div class="card-title">4-Week Twitter Content Calendar</div>
+    <div class="card-sub">5 tweets per week · Mix of education, storytelling, data, engagement, and news. Post at 8–9 AM IST for maximum reach.</div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#0ABFA3;"></div>Educational</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6366F1;"></div>Story/Human</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F59E0B;"></div>Data/Stats</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EC4899;"></div>Engagement</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#10B981;"></div>Product/News</div>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div style="font-weight:700;font-size:1rem;margin:20px 0 12px;color:var(--navy);">📅 Week 1 — Launch & Awareness</div>
+    <div class="tweet">
+      <div class="tweet-type">Monday — Data/Stats</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">77 million Indians have diabetes.<br><br>40% of them don't know it yet.<br><br>They'll find out only after a heart attack, kidney failure, or blindness.<br><br>This is the problem we're solving at @PrediCareAI<br><br>Predict before it happens. 🔬<br><br><span class="tweet-tag">#HealthTech #IndiaHealth #AI</span></div>
+      <div class="tweet-meta">📌 PIN THIS — Great launch tweet</div>
+    </div>
+
+    <div class="tweet">
+      <div class="tweet-type">Wednesday — Educational Thread</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">5 signs your body is showing pre-diabetes risk RIGHT NOW (most people ignore all 5):<br><br>1/ Constant thirst even after drinking water<br>2/ Unexplained fatigue after meals<br>3/ Tingling in hands or feet<br>4/ Slow-healing cuts or bruises<br>5/ Blurry vision in the afternoon<br><br>These aren't random. They're your body sending signals.<br><br>The question is — are you listening?<br><br><span class="tweet-tag">#PreventiveCare #DiabetesIndia</span></div>
+      <div class="tweet-meta">Thread format — post as 5 separate tweets for max engagement</div>
+    </div>
+
+    <div class="tweet">
+      <div class="tweet-type">Friday — Engagement</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">Quick poll for my Twitter family 👇<br><br>When did you last get a full health checkup?<br><br>🗳️ This year<br>🗳️ 2–3 years ago<br>🗳️ Never, honestly<br>🗳️ "I'll do it next month" (classic)<br><br>Your answer might change after we launch. 👀<br><br><span class="tweet-tag">#HealthCheck #IndiaHealth</span></div>
+      <div class="tweet-meta">Polls get 3–5x more engagement than regular tweets</div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div style="font-weight:700;font-size:1rem;margin:28px 0 12px;color:var(--navy);">📅 Week 2 — Education & Authority</div>
+    <div class="tweet">
+      <div class="tweet-type">Tuesday — Story/Human Interest</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">My father had his first heart attack at 52.<br><br>No warning. No symptoms. No preparation.<br><br>The doctor said: "If we'd caught this 3 years ago, we could have prevented it."<br><br>That sentence is why I'm building PrediCare AI.<br><br>80% of heart attacks are preventable. 80%.<br><br>We just need to catch the signals earlier. 🔮<br><br><span class="tweet-tag">#FounderStory #PreventiveCare #HeartHealth</span></div>
+      <div class="tweet-meta">Founder story tweets build the deepest trust — share yours</div>
+    </div>
+
+    <div class="tweet">
+      <div class="tweet-type">Thursday — Educational</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">How PrediCare's AI actually works (non-technical version):<br><br>Step 1: You answer 50 questions about your health, family history, and lifestyle. Takes 5 minutes.<br><br>Step 2: Our model — risk models benchmarked against publicly available clinical research datasets and partner hospital data — compares your profile to millions of real health outcomes.<br><br>Step 3: You get a risk score for 14 conditions, a clear explanation, and a personalized action plan.<br><br>That's it. No blood test. No doctor visit. Just data and AI. 🧬<br><br><span class="tweet-tag">#AIHealth #HealthTech #HowItWorks</span></div>
+      <div class="tweet-meta">Transparency builds trust — people love seeing behind the curtain</div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div style="font-weight:700;font-size:1rem;margin:28px 0 12px;color:var(--navy);">📅 Week 3 — Social Proof & Traction</div>
+    <div class="tweet">
+      <div class="tweet-type">Monday — Product News</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">We just crossed 500 waitlist signups in 7 days. 🎉<br><br>And we haven't run a single ad.<br><br>The most common reason people signed up?<br><br>"My parent was just diagnosed with diabetes. I want to know my risk before it happens to me."<br><br>Prevention matters. Thank you for believing in it. 🙏<br><br>Join the list → predicare.ai<br><br><span class="tweet-tag">#HealthTech #Milestone</span></div>
+      <div class="tweet-meta">Milestone tweets build momentum and FOMO — post every major milestone</div>
+    </div>
+
+    <div class="tweet">
+      <div class="tweet-type">Wednesday — Data/Stats</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">The most expensive healthcare cost in India?<br><br>It's not treatment.<br>It's not hospitalisation.<br>It's not surgery.<br><br>It's the 5 years of undetected disease that made the surgery necessary.<br><br>The ROI on preventive care is 10:1.<br><br>₹1 in prevention saves ₹10 in treatment.<br><br>We're building the prevention layer. 🛡️<br><br><span class="tweet-tag">#PreventiveCare #HealthEconomics #IndiaHealth</span></div>
+      <div class="tweet-meta">Economic framing resonates strongly with both users and investors</div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div style="font-weight:700;font-size:1rem;margin:28px 0 12px;color:var(--navy);">📅 Week 4 — Community & Conversion</div>
+    <div class="tweet">
+      <div class="tweet-type">Monday — Engagement</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">Hottest take in healthcare:<br><br>The best doctor appointment you'll have in the next 10 years won't happen in a clinic.<br><br>It'll happen on your phone, at 11pm, when an AI catches a risk pattern your annual checkup missed.<br><br>Agree or disagree? 👇<br><br><span class="tweet-tag">#FutureOfHealth #AIHealth #HotTake</span></div>
+      <div class="tweet-meta">Controversial/opinion tweets drive replies and reach — use sparingly but powerfully</div>
+    </div>
+
+    <div class="tweet">
+      <div class="tweet-type">Friday — Conversion / CTA</div>
+      <div class="tweet-header">
+        <div class="tweet-avatar">PC</div>
+        <div><div class="tweet-name">PrediCare AI</div><div class="tweet-handle">@PrediCareAI</div></div>
+      </div>
+      <div class="tweet-text">Launching across Bihar &amp; the Hindi belt · Q3 2026. Pan-India by Q1 2027.<br><br>We're accepting 1,000 early access users who will:<br><br>✦ Get 3 months of Pro free<br>✦ Shape the product with direct feedback<br>✦ Be recognized as founding members forever<br><br>500 spots left.<br><br>Join → predicare.ai<br><br>RT if you know someone who should know their health risk. 🙏<br><br><span class="tweet-tag">#EarlyAccess #HealthTech #Bengaluru #Jaipur</span></div>
+      <div class="tweet-meta">End every week with a clear CTA — drive people to your waitlist</div>
+    </div>
+  </div>
+
+  <!-- QUICK WINS -->
+  <div class="card" style="background:linear-gradient(135deg,#0B1F3A,#0F3460);color:white;">
+    <div class="tag" style="background:rgba(10,191,163,0.2);color:#0ABFA3;">04 — Quick Wins Checklist</div>
+    <div class="card-title" style="color:white;border-color:rgba(255,255,255,0.1);">Your First 30 Days — Brand Launch Checklist</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;font-size:0.88rem;">
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Register predicare.ai domain + social handles immediately</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Deploy landing page + connect Mailchimp for waitlist</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Create LinkedIn company page + post 3x per week</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Launch Twitter/X and follow 100 healthtech founders</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Post your founder story on LinkedIn (personal account)</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Submit to Product Hunt, Hacker News, YC Startup Directory</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,0.8);">Join 5 WhatsApp groups of doctors + health enthusiasts</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;">
+        <span style="color:#0ABFA3;font-weight:800;">✦</span>
+        <span style="color:rgba(255,255,255,

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PrediCare — Go Live Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0A0A;--surface:#141414;--card:#1A1A1A;--border:#262626;
+  --teal:#00C2A3;--teal-pale:rgba(0,194,163,0.08);
+  --gold:#F0C040;--rose:#FF5A5A;--blue:#5B8DEF;
+  --white:#fff;--text:#E0E0E0;--muted:#666;
+}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 0 80px}
+
+.top-bar{
+  background:var(--teal);padding:12px 6vw;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.top-bar-text{font-weight:800;font-size:0.9rem;color:#000}
+.top-bar-time{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:rgba(0,0,0,0.6)}
+
+.hero{max-width:860px;margin:0 auto;padding:56px 6vw 40px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:16px}
+h1 em{font-style:normal;color:var(--teal)}
+.subtitle{font-size:1rem;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:40px}
+
+.timeline{display:flex;gap:0;margin-bottom:48px;overflow-x:auto;padding-bottom:4px}
+.tl-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 20px;border-right:1px solid var(--border);
+  flex-shrink:0;
+}
+.tl-step:last-child{border:none}
+.tl-num{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:0.82rem;
+  background:var(--card);border:2px solid var(--border);color:var(--muted);
+}
+.tl-step.done .tl-num{background:var(--teal);border-color:var(--teal);color:#000}
+.tl-step.active .tl-num{background:var(--gold);border-color:var(--gold);color:#000;animation:pulse2 1.5s infinite}
+@keyframes pulse2{0%,100%{box-shadow:0 0 0 0 rgba(240,192,64,0.4)}50%{box-shadow:0 0 0 8px rgba(240,192,64,0)}}
+.tl-label{font-size:0.72rem;color:var(--muted);white-space:nowrap;font-weight:600}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--teal)}
+
+/* PHASE CARDS */
+.phases{max-width:860px;margin:0 auto;padding:0 6vw;display:flex;flex-direction:column;gap:16px}
+
+.phase{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.phase.active-phase{border-color:var(--teal)}
+
+.phase-header{
+  padding:20px 28px;display:flex;align-items:center;gap:16px;
+  cursor:pointer;user-select:none;
+}
+.phase-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;font-weight:600;flex-shrink:0;
+}
+.badge-now{background:rgba(240,192,64,0.15);color:var(--gold);border:1px solid rgba(240,192,64,0.3)}
+.badge-next{background:rgba(91,141,239,0.1);color:var(--blue);border:1px solid rgba(91,141,239,0.2)}
+.badge-then{background:rgba(136,136,136,0.08);color:var(--muted);border:1px solid var(--border)}
+.badge-done{background:rgba(0,194,163,0.1);color:var(--teal);border:1px solid rgba(0,194,163,0.2)}
+
+.phase-title{font-weight:800;font-size:1.05rem;color:var(--white);flex:1}
+.phase-eta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted)}
+.phase-chevron{color:var(--muted);transition:transform .2s}
+.phase.open .phase-chevron{transform:rotate(90deg)}
+
+.phase-body{display:none;padding:0 28px 28px}
+.phase.open .phase-body{display:block}
+
+/* STEPS */
+.step-list{display:flex;flex-direction:column;gap:0}
+.step{
+  display:flex;gap:16px;padding:20px 0;
+  border-bottom:1px solid var(--border);
+}
+.step:last-child{border:none}
+.step-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.step-content{flex:1}
+.step-title{font-weight:700;font-size:0.95rem;color:var(--white);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step-body{font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:10px}
+
+/* CODE BLOCKS */
+.code-block{
+  background:#0D0D0D;border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;margin:10px 0;
+  font-family:'JetBrains Mono',monospace;font-size:0.82rem;
+  color:#A8D8A8;line-height:1.6;position:relative;overflow-x:auto;
+}
+.code-block .comment{color:#555}
+.code-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px;
+}
+
+/* URL PILL */
+.url-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,194,163,0.08);border:1px solid rgba(0,194,163,0.2);
+  padding:8px 16px;border-radius:8px;margin:8px 0;
+  font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--teal);
+}
+
+/* CALLOUT */
+.callout{
+  padding:16px 20px;border-radius:12px;margin:12px 0;
+  display:flex;gap:12px;align-items:flex-start;font-size:0.85rem;line-height:1.6;
+}
+.callout-tip{background:rgba(0,194,163,0.06);border:1px solid rgba(0,194,163,0.15);color:var(--teal)}
+.callout-warn{background:rgba(255,90,90,0.06);border:1px solid rgba(255,90,90,0.15);color:#FF8A80}
+.callout-info{background:rgba(91,141,239,0.06);border:1px solid rgba(91,141,239,0.15);color:#90B4FF}
+.callout-icon{flex-shrink:0;font-size:1rem}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.check-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:10px 14px;cursor:pointer;
+  transition:border-color .15s;
+}
+.check-row:hover{border-color:rgba(0,194,163,0.3)}
+.check-box{
+  width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.check-row.ticked .check-box{background:var(--teal);border-color:var(--teal)}
+.check-row.ticked .check-box::after{content:'✓';font-size:0.65rem;color:#000;font-weight:900}
+.check-row.ticked .check-label{text-decoration:line-through;color:var(--muted)}
+.check-label{font-size:0.88rem;color:var(--text)}
+
+/* SUCCESS BOX */
+.success-box{
+  background:rgba(0,194,163,0.06);border:1px solid rgba(0,194,163,0.2);
+  border-radius:14px;padding:24px;margin-top:20px;
+}
+.success-box h3{font-size:1rem;font-weight:800;color:var(--teal);margin-bottom:8px}
+.success-box p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+
+.tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:3px;font-weight:600;
+}
+.tag-free{background:rgba(0,194,163,0.12);color:var(--teal)}
+.tag-paid{background:rgba(255,90,90,0.1);color:#FF8A80}
+.tag-5min{background:rgba(240,192,64,0.1);color:var(--gold)}
+.tag-critical{background:rgba(255,90,90,0.12);color:var(--rose)}
+
+.final-card{
+  max-width:860px;margin:40px auto 0;padding:0 6vw;
+}
+.final-inner{
+  background:linear-gradient(135deg,#0D2B25,#0A1F3A);
+  border:1px solid rgba(0,194,163,0.2);border-radius:20px;padding:40px;
+  text-align:center;
+}
+.final-inner h2{font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:10px}
+.final-inner p{color:var(--muted);font-size:0.9rem;margin-bottom:24px;line-height:1.7}
+.final-url{
+  font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:600;
+  color:var(--teal);background:rgba(0,194,163,0.06);
+  border:1px solid rgba(0,194,163,0.2);padding:14px 32px;border-radius:10px;
+  display:inline-block;margin-bottom:8px;
+}
+.final-sub{font-size:0.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+@media(max-width:600px){
+  .phase-eta{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-text">🚀 Goal: predicare.in is LIVE within 60 minutes</div>
+  <div class="top-bar-time">Follow these steps in order</div>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Deployment Guide · Day 1</div>
+  <h1>From zero to <em>live website</em><br>in under 60 minutes.</h1>
+  <p class="subtitle">Four phases. No coding required. Every step is free except the domain (₹700/year). By the end of this guide, predicare.in will be live and collecting real email signups.</p>
+
+  <div class="timeline">
+    <div class="tl-step active">
+      <div class="tl-num">1</div>
+      <div class="tl-label">Register Domain</div>
+      <div class="tl-time">~10 min</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">2</div>
+      <div class="tl-label">Setup GitHub</div>
+      <div class="tl-time">~10 min</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">3</div>
+      <div class="tl-label">Deploy on Vercel</div>
+      <div class="tl-time">~15 min</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">4</div>
+      <div class="tl-label">Connect Domain</div>
+      <div class="tl-time">~10 min</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">5</div>
+      <div class="tl-label">Mailchimp Waitlist</div>
+      <div class="tl-time">~15 min</div>
+    </div>
+  </div>
+</div>
+
+<div class="phases">
+
+  <!-- PHASE 1: DOMAIN -->
+  <div class="phase active-phase open" id="p1">
+    <div class="phase-header" onclick="togglePhase('p1')">
+      <span class="phase-badge badge-now">Do First</span>
+      <div class="phase-title">Phase 1 — Register predicare.in</div>
+      <div class="phase-eta">~10 minutes · ₹700</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">🌐</div>
+          <div class="step-content">
+            <div class="step-title">Go to BigRock or GoDaddy India <span class="tag tag-paid">₹600–800/yr</span></div>
+            <div class="step-body">BigRock is recommended — it's Indian, INR pricing, and UPI-friendly. GoDaddy works too but prices in USD by default.</div>
+            <div class="url-pill">🔗 bigrock.in &nbsp;→&nbsp; search "predicare.in"</div>
+            <div class="url-pill">🔗 godaddy.com &nbsp;→&nbsp; search "predicare.in"</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(91,141,239,0.1)">🔍</div>
+          <div class="step-content">
+            <div class="step-title">Search and add predicare.in to cart</div>
+            <div class="step-body">If predicare.in shows as available — add it immediately. Also consider adding predicare.co.in as a backup (very cheap). Do NOT buy premium/suggested alternatives the registrar recommends — they're just upsells.</div>
+            <div class="callout callout-warn">
+              <span class="callout-icon">⚠️</span>
+              <span>Skip the "privacy protection", "SSL certificate", and "website builder" upsells during checkout. Vercel gives you free SSL automatically. You don't need any extras.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">💳</div>
+          <div class="step-content">
+            <div class="step-title">Pay via UPI / card and complete registration</div>
+            <div class="step-body">Register for 2 years minimum — it's cheaper per year and signals commitment to investors. After payment, you'll get an email confirmation. Keep your BigRock/GoDaddy login credentials safe — you'll need them in Phase 4.</div>
+            <div class="callout callout-tip">
+              <span class="callout-icon">💡</span>
+              <span><strong>Important:</strong> After registration, go to your domain settings and enable "Auto-Renew". Losing your domain because you forgot to renew would be a disaster.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">📧</div>
+          <div class="step-content">
+            <div class="step-title">Register social handles right now <span class="tag tag-free">Free</span></div>
+            <div class="step-body">While your domain registers, immediately claim these handles before anyone else does:</div>
+            <div class="checklist" id="cl1">
+              <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Twitter/X — @PrediCareAI (or @PrediCare_IN)</span></div>
+              <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">LinkedIn Company — "PrediCare AI"</span></div>
+              <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Instagram — @predicare.in or @predicareai</span></div>
+              <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">YouTube — PrediCare AI</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="success-box">
+        <h3>✅ Phase 1 Complete when:</h3>
+        <p>You have a confirmation email from BigRock/GoDaddy saying predicare.in is registered in your name. Social handles are claimed. Move to Phase 2.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: GITHUB -->
+  <div class="phase open" id="p2">
+    <div class="phase-header" onclick="togglePhase('p2')">
+      <span class="phase-badge badge-next">Phase 2</span>
+      <div class="phase-title">Upload Your Site to GitHub</div>
+      <div class="phase-eta">~10 minutes · Free</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <span>GitHub is where your website files live. Vercel (Phase 3) reads from GitHub to publish your site. Think of GitHub as your "source" and Vercel as the "publisher". Both are free.</span>
+      </div>
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(136,136,136,0.1)">🐙</div>
+          <div class="step-content">
+            <div class="step-title">Create a GitHub account <span class="tag tag-free">Free</span></div>
+            <div class="step-body">Go to github.com and sign up if you don't have an account. Use your <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="621607030f22121007060b010310074c0b0c">[email&#160;protected]</a> email (once it's set up) or your personal email for now.</div>
+            <div class="url-pill">🔗 github.com → Sign Up</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(136,136,136,0.1)">📁</div>
+          <div class="step-content">
+            <div class="step-title">Create a new repository called "predicare-website"</div>
+            <div class="step-body">Click the green "New" button on your GitHub dashboard. Name it exactly:</div>
+            <div class="code-block">predicare-website</div>
+            <div class="step-body">Set it to <strong style="color:#fff">Public</strong>. Check "Add a README file". Click "Create repository".</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(91,141,239,0.1)">⬆️</div>
+          <div class="step-content">
+            <div class="step-title">Upload your landing page file <span class="tag tag-critical">Critical</span></div>
+            <div class="step-body">In your new repository, click <strong style="color:#fff">"Add file" → "Upload files"</strong>. Upload the file you downloaded from this kit. <strong style="color:#fff">Rename it to exactly:</strong></div>
+            <div class="code-block">index.html</div>
+            <div class="step-body">This name is critical — Vercel looks for index.html as the homepage automatically. Then click <strong style="color:#fff">"Commit changes"</strong>.</div>
+            <div class="callout callout-tip">
+              <span class="callout-icon">💡</span>
+              <span>Also upload the MVP prototype file as <strong>assess.html</strong> — this will make it available at predicare.in/assess automatically.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="success-box">
+        <h3>✅ Phase 2 Complete when:</h3>
+        <p>You can see index.html (and assess.html) inside your predicare-website repository on github.com. Move to Phase 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: VERCEL -->
+  <div class="phase open" id="p3">
+    <div class="phase-header" onclick="togglePhase('p3')">
+      <span class="phase-badge badge-next">Phase 3</span>
+      <div class="phase-title">Deploy on Vercel — Your Site Goes Live</div>
+      <div class="phase-eta">~15 minutes · Free</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">▲</div>
+          <div class="step-content">
+            <div class="step-title">Go to vercel.com and sign up with GitHub <span class="tag tag-free">Free</span></div>
+            <div class="step-body">Click "Sign Up" → "Continue with GitHub". This connects Vercel to your GitHub account automatically. The free tier is generous — more than enough for your launch.</div>
+            <div class="url-pill">🔗 vercel.com → Sign Up with GitHub</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">🔗</div>
+          <div class="step-content">
+            <div class="step-title">Import your predicare-website repository</div>
+            <div class="step-body">On your Vercel dashboard, click <strong style="color:#fff">"Add New Project"</strong>. You'll see your GitHub repositories listed. Click <strong style="color:#fff">"Import"</strong> next to predicare-website.</div>
+            <div class="callout callout-info">
+              <span class="callout-icon">ℹ️</span>
+              <span>On the configuration screen, leave all settings as default. Framework Preset: "Other". Root Directory: "./". Click Deploy.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">⚡</div>
+          <div class="step-content">
+            <div class="step-title">Click Deploy — wait 60 seconds</div>
+            <div class="step-body">Vercel will build and deploy your site in about 60 seconds. You'll see a success screen with a temporary URL like:</div>
+            <div class="code-block">predicare-website-abc123.vercel.app</div>
+            <div class="step-body">Click that URL. <strong style="color:#fff">Your website is now live on the internet.</strong> Share it with 5 people immediately while you continue with Phase 4.</div>
+            <div class="callout callout-tip">
+              <span class="callout-icon">💡</span>
+              <span>Every time you update index.html on GitHub, Vercel automatically redeploys within 30 seconds. This is your publish workflow going forward — edit file → push to GitHub → live in 30 seconds.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="success-box">
+        <h3>✅ Phase 3 Complete when:</h3>
+        <p>You can open predicare-website-XXXX.vercel.app in a browser and see your PrediCare landing page. Move to Phase 4 to connect your real domain.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: DOMAIN CONNECTION -->
+  <div class="phase open" id="p4">
+    <div class="phase-header" onclick="togglePhase('p4')">
+      <span class="phase-badge badge-next">Phase 4</span>
+      <div class="phase-title">Connect predicare.in to Your Live Site</div>
+      <div class="phase-eta">~10 minutes · Free</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <span>Right now your site is at a Vercel URL. This phase connects predicare.in so your site appears at the real domain. DNS changes can take 5 minutes to 48 hours to propagate — usually under 30 minutes in India.</span>
+      </div>
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">⚙️</div>
+          <div class="step-content">
+            <div class="step-title">Add your domain in Vercel settings</div>
+            <div class="step-body">In your Vercel project, go to <strong style="color:#fff">Settings → Domains</strong>. Type in:</div>
+            <div class="code-block">predicare.in</div>
+            <div class="step-body">Also add:</div>
+            <div class="code-block">www.predicare.in</div>
+            <div class="step-body">Vercel will show you DNS records you need to add. Keep this tab open.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">🔧</div>
+          <div class="step-content">
+            <div class="step-title">Add DNS records in BigRock / GoDaddy</div>
+            <div class="step-body">Log into your domain registrar. Go to <strong style="color:#fff">DNS Management</strong> for predicare.in. Add these records exactly as shown by Vercel:</div>
+
+            <div class="code-label">A Record (for predicare.in)</div>
+            <div class="code-block">
+Type: A<br>
+Host: @ <span class="comment">(or leave blank)</span><br>
+Value: 76.76.21.21 <span class="comment">(Vercel's IP — confirm in your Vercel dashboard)</span><br>
+TTL: 600
+            </div>
+
+            <div class="code-label">CNAME Record (for www.predicare.in)</div>
+            <div class="code-block">
+Type: CNAME<br>
+Host: www<br>
+Value: cname.vercel-dns.com<br>
+TTL: 600
+            </div>
+
+            <div class="callout callout-warn">
+              <span class="callout-icon">⚠️</span>
+              <span>Always use the exact values Vercel shows you — the IP address above is an example. Vercel's actual values shown in your dashboard are what matter.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">⏳</div>
+          <div class="step-content">
+            <div class="step-title">Wait for DNS propagation (5–60 minutes)</div>
+            <div class="step-body">Go back to Vercel. The domain status will change from "Invalid" to a green checkmark when it's connected. You can also check propagation status at:</div>
+            <div class="url-pill">🔗 whatsmydns.net → enter predicare.in → check A record</div>
+            <div class="step-body">When you see green checkmarks across India/Asia, your site is live at predicare.in. Vercel automatically adds free HTTPS/SSL — no action needed.</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="success-box">
+        <h3>✅ Phase 4 Complete when:</h3>
+        <p>You can open predicare.in in a browser and see your website with the padlock (🔒) icon in the address bar. If it shows "Not Secure" — wait another 10 minutes for SSL to provision.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: MAILCHIMP -->
+  <div class="phase open" id="p5">
+    <div class="phase-header" onclick="togglePhase('p5')">
+      <span class="phase-badge badge-next">Phase 5</span>
+      <div class="phase-title">Set Up Your Waitlist — Start Collecting Emails</div>
+      <div class="phase-eta">~15 minutes · Free</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">📬</div>
+          <div class="step-content">
+            <div class="step-title">Create a Mailchimp account <span class="tag tag-free">Free up to 500 contacts</span></div>
+            <div class="step-body">Go to mailchimp.com → Sign Up Free. Use your personal email for now (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b2f3e3a361b2b293e3f32383a293e753235">[email&#160;protected]</a> comes later). The free plan supports 500 contacts and 1,000 emails/month — enough for your entire launch phase.</div>
+            <div class="url-pill">🔗 mailchimp.com → Sign Up Free</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">👥</div>
+          <div class="step-content">
+            <div class="step-title">Create an Audience called "PrediCare Waitlist"</div>
+            <div class="step-body">In Mailchimp: <strong style="color:#fff">Audience → Create Audience</strong>. Name: "PrediCare Waitlist". From email: your email. From name: "PrediCare AI". This is the list where all your waitlist signups will be stored.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(91,141,239,0.1)">⚙️</div>
+          <div class="step-content">
+            <div class="step-title">Set up welcome email automation</div>
+            <div class="step-body">Go to <strong style="color:#fff">Automations → Classic Automations → Welcome new subscribers</strong>. Write this welcome email:</div>
+            <div class="code-block">
+Subject: You're on the PrediCare waitlist 🩺<br><br>
+Hi [First Name],<br><br>
+You're one of the first people to join the PrediCare waitlist — thank you.<br><br>
+We're building AI that predicts disease before symptoms appear, built specifically for India.<br><br>
+We launch in Bihar & Hindi belt in Q3 2026 — Bihar & Hindi belt first, pan-India by Q1 2027. As a founding member, you'll get:<br>
+→ 3 months of Pro free<br>
+→ Priority access before public launch<br>
+→ Your name in our founding member wall<br><br>
+In the meantime, try our beta health risk assessment:<br>
+predicare.in/assess<br><br>
+It takes 5 minutes and it's free.<br><br>
+— The PrediCare Team<br>
+predicare.in
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">🔗</div>
+          <div class="step-content">
+            <div class="step-title">Connect your Mailchimp form to the landing page <span class="tag tag-critical">Critical</span></div>
+            <div class="step-body">In Mailchimp: <strong style="color:#fff">Audience → Signup forms → Embedded forms</strong>. Copy the form action URL — it looks like:</div>
+            <div class="code-block">https://predicare.us21.list-manage.com/subscribe/post?u=XXXXX&amp;id=XXXXX</div>
+            <div class="step-body">Open your index.html file. Find the email input section (search for "cta-form") and update the form tag to point to your Mailchimp URL. Then re-upload to GitHub — Vercel redeploys automatically in 30 seconds.</div>
+            <div class="callout callout-tip">
+              <span class="callout-icon">💡</span>
+              <span>Alternatively, use <strong>Mailchimp's hosted form page</strong> — just link your CTA button to that URL directly. Simpler to set up, works perfectly for launch.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="success-box">
+        <h3>✅ Phase 5 Complete when:</h3>
+        <p>You enter a test email on predicare.in, click "Get Early Access", and receive the welcome email in your inbox. Your waitlist is now live and collecting real signups.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: AFTER LAUNCH -->
+  <div class="phase open" id="p6">
+    <div class="phase-header" onclick="togglePhase('p6')">
+      <span class="phase-badge badge-done">After Launch</span>
+      <div class="phase-title">The First 3 Things to Do Once You're Live</div>
+      <div class="phase-eta">Do immediately</div>
+      <div class="phase-chevron">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="step-list">
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(0,194,163,0.1)">📸</div>
+          <div class="step-content">
+            <div class="step-title">Screenshot your live site and post it everywhere</div>
+            <div class="step-body">Take a screenshot of predicare.in live in your browser. Post it on LinkedIn: <em>"predicare.in is live. We're building AI that predicts disease before it happens. Join the waitlist — link in comments."</em> Post the same on Twitter/X and WhatsApp. This is your launch moment. Own it.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(240,192,64,0.1)">📱</div>
+          <div class="step-content">
+            <div class="step-title">Send the URL to 50 people personally</div>
+            <div class="step-body">Open WhatsApp. Message every person you know — friend, family, colleague, classmate — with a personal note: <em>"I just launched my startup today. Would mean everything if you signed up: predicare.in"</em>. Personal requests convert 10x better than broadcast messages.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-icon" style="background:rgba(91,141,239,0.1)">📊</div>
+          <div class="step-content">
+            <div class="step-title">Add Google Analytics to track visitors</div>
+            <div class="step-body">Go to analytics.google.com → Create Property → Web → predicare.in. Copy your Measurement ID (looks like G-XXXXXXXXXX). Add this script before the &lt;/head&gt; tag in your index.html:</div>
+            <div class="code-block">
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"&gt;&lt;/script&gt;<br>
+&lt;script&gt;<br>
+&nbsp;&nbsp;window.dataLayer = window.dataLayer || [];<br>
+&nbsp;&nbsp;function gtag(){dataLayer.push(arguments);}<br>
+&nbsp;&nbsp;gtag('js', new Date());<br>
+&nbsp;&nbsp;gtag('config', 'G-XXXXXXXX');<br>
+&lt;/script&gt;
+            </div>
+            <div class="step-body">Now you'll see live visitor data — where they came from, how long they stayed, which city. Essential for understanding your early traction.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:24px;padding:20px;background:var(--surface);border-radius:12px;border:1px solid var(--border)">
+        <div style="font-weight:800;color:var(--white);margin-bottom:14px;font-size:0.95rem">🎯 Launch Day Checklist</div>
+        <div class="checklist">
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">predicare.in registered ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Site live on Vercel ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">predicare.in pointing to live site ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Mailchimp waitlist connected ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Welcome email working ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">assess.html live at predicare.in/assess ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Google Analytics installed ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Screenshot posted on LinkedIn ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">Link sent to 50 people on WhatsApp ✓</span></div>
+          <div class="check-row" onclick="tick(this)"><div class="check-box"></div><span class="check-label">First signups confirmed in Mailchimp ✓</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="final-card">
+  <div class="final-inner">
+    <h2>You're about to be a live founder.</h2>
+    <p>Most people who have the idea never register the domain.<br>You're doing it today. That already puts you in the top 1%.</p>
+    <div class="final-url">predicare.in</div><br>
+    <div class="final-sub">Your websi

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PrediCare AI — Investor Teaser</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Figtree:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── SCREEN VIEW ── */
+:root{
+  --teal:#007A67; --teal-l:#00BFA5; --teal-pale:#E0F5F2;
+  --navy:#081A2E; --navy-m:#0F2A45;
+  --gold:#B8860B; --off:#F7FAFA;
+  --text:#1A2E3B; --muted:#5A7A6A;
+  --border:#C8E0DB;
+}
+
+body{
+  font-family:'Figtree',sans-serif;
+  background:#E8EEED;
+  display:flex;align-items:flex-start;justify-content:center;
+  min-height:100vh;padding:40px 20px;
+}
+
+.page{
+  width:794px; /* A4 width */
+  min-height:1123px; /* A4 height */
+  background:#fff;
+  box-shadow:0 8px 60px rgba(0,0,0,0.18);
+  border-radius:3px;
+  overflow:hidden;
+  position:relative;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+}
+
+/* ── HEADER BAND ── */
+.page-header{
+  background:var(--navy);
+  padding:32px 44px 28px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:end;
+  position:relative;
+  overflow:hidden;
+}
+.page-header::before{
+  content:'';
+  position:absolute;
+  top:-60px;right:-40px;
+  width:280px;height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,191,165,0.18),transparent 70%);
+}
+.page-header::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--teal-l),#00D4B0,var(--teal-l));
+}
+
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.brand-mark{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--teal-l);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  box-shadow:0 0 24px rgba(0,191,165,0.4);
+}
+.brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:700;color:#fff;
+  letter-spacing:-.01em;
+}
+.brand-name span{color:var(--teal-l)}
+
+.header-left{}
+.header-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.15rem;font-weight:600;line-height:1.2;
+  color:#fff;
+  max-width:420px;
+  margin-bottom:12px;
+}
+.header-tagline em{font-style:italic;color:var(--teal-l)}
+.header-sub{
+  font-size:0.82rem;color:rgba(255,255,255,0.5);
+  line-height:1.65;max-width:400px;
+}
+
+.header-right{}
+.ask-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+  padding:20px 24px;
+  text-align:center;
+  min-width:160px;
+}
+.ask-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px}
+.ask-amount{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--teal-l);line-height:1}
+.ask-stage{font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:4px}
+.ask-div{width:40px;height:1px;background:rgba(255,255,255,0.1);margin:10px auto}
+.ask-use{font-size:0.68rem;color:rgba(255,255,255,0.35);line-height:1.5}
+
+/* ── MAIN BODY ── */
+.page-body{
+  padding:28px 44px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  background:var(--off);
+}
+
+/* ── SECTIONS ── */
+.section{
+  background:#fff;
+  border-radius:12px;
+  border:1px solid var(--border);
+  padding:18px 20px;
+  overflow:hidden;
+}
+.section.full-width{
+  grid-column:1/-1;
+}
+.section.navy-bg{
+  background:var(--navy-m);
+  border-color:transparent;
+}
+.section.teal-bg{
+  background:var(--teal-pale);
+  border-color:var(--border);
+}
+
+.sec-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.sec-label::before{content:'';width:16px;height:2px;background:var(--teal);border-radius:1px}
+.sec-label.light{color:var(--teal-l)}
+.sec-label.light::before{background:var(--teal-l)}
+
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:700;
+  color:var(--text);margin-bottom:12px;line-height:1.2;
+}
+.sec-title.light{color:#fff}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-item{
+  background:var(--teal-pale);
+  border-radius:8px;padding:10px 12px;
+  border:1px solid var(--border);
+}
+.stat-item.dark{background:rgba(0,191,165,0.1);border-color:rgba(0,191,165,0.2)}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;color:var(--teal);line-height:1;
+}
+.stat-item.dark .stat-n{color:var(--teal-l)}
+.stat-l{font-size:0.65rem;color:var(--muted);margin-top:1px;line-height:1.3}
+.stat-item.dark .stat-l{color:rgba(255,255,255,0.4)}
+
+/* PROBLEM ITEMS */
+.prob-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--teal-pale)}
+.prob-item:last-child{border:none}
+.prob-icon{font-size:0.9rem;flex-shrink:0;margin-top:1px}
+.prob-text{font-size:0.75rem;color:var(--text);line-height:1.5}
+.prob-text strong{color:var(--teal);font-weight:700}
+
+/* SOLUTION PILLARS */
+.pillars{display:flex;flex-direction:column;gap:7px}
+.pillar{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:8px 10px;background:var(--teal-pale);
+  border-radius:8px;border-left:3px solid var(--teal);
+}
+.pillar-icon{font-size:1rem;flex-shrink:0}
+.pillar-title{font-size:0.75rem;font-weight:700;color:var(--text);margin-bottom:1px}
+.pillar-desc{font-size:0.67rem;color:var(--muted);line-height:1.4}
+
+/* MARKET FUNNEL */
+.funnel{display:flex;flex-direction:column;gap:6px}
+.funnel-row{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 12px;border-radius:7px;
+}
+.funnel-row.f1{background:rgba(0,122,103,0.12);border:1px solid rgba(0,122,103,0.2)}
+.funnel-row.f2{background:rgba(0,122,103,0.08);border:1px solid rgba(0,122,103,0.15)}
+.funnel-row.f3{background:var(--teal-pale);border:1px solid var(--border)}
+.funnel-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;width:28px}
+.funnel-amount{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--teal)}
+.funnel-desc{font-size:0.63rem;color:var(--muted);line-height:1.3;flex:1}
+
+/* BUSINESS MODEL */
+.biz-rows{display:flex;flex-direction:column;gap:5px}
+.biz-row{display:flex;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--teal-pale)}
+.biz-row:last-child{border:none}
+.biz-segment{font-size:0.72rem;font-weight:700;color:var(--text);flex:1.2}
+.biz-model{font-size:0.65rem;color:var(--muted);flex:2}
+.biz-arpu{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--teal);text-align:right;flex:.8}
+
+/* TRACTION (full-width navy) */
+.traction-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.trac-item{text-align:center}
+.trac-n{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--teal-l);line-height:1}
+.trac-l{font-size:0.62rem;color:rgba(255,255,255,0.4);margin-top:3px;line-height:1.3}
+
+/* ROADMAP */
+.roadmap{display:flex;gap:0;position:relative}
+.roadmap::before{
+  content:'';position:absolute;top:14px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--teal-l));
+  z-index:0;
+}
+.rm-item{flex:1;text-align:center;position:relative;z-index:1}
+.rm-dot{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--teal);border:3px solid #fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;color:#fff;font-weight:800;
+  margin:0 auto 8px;
+  box-shadow:0 2px 8px rgba(0,122,103,0.3);
+}
+.rm-phase{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:3px}
+.rm-title{font-size:0.68rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.rm-detail{font-size:0.6rem;color:var(--muted);line-height:1.4}
+
+/* TEAM */
+.team-row{display:flex;gap:10px}
+.team-member{flex:1;text-align:center;padding:10px 8px;background:var(--teal-pale);border-radius:8px;border:1px solid var(--border)}
+.team-avatar{width:36px;height:36px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;color:#fff;margin:0 auto 6px}
+.team-name{font-size:0.7rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.team-role{font-size:0.6rem;color:var(--muted)}
+.team-seeking{
+  flex:1;text-align:center;padding:10px 8px;
+  background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(0,122,103,0.03) 4px,rgba(0,122,103,0.03) 8px);
+  border-radius:8px;border:1.5px dashed var(--border);
+}
+.team-seeking-icon{font-size:1rem;margin-bottom:4px}
+.team-seeking-text{font-size:0.62rem;color:var(--muted);line-height:1.4}
+
+/* ── FOOTER BAND ── */
+.page-footer{
+  background:var(--navy);
+  padding:14px 44px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid var(--teal);
+}
+.footer-left{display:flex;gap:24px}
+.footer-item{display:flex;align-items:center;gap:6px}
+.footer-item-icon{font-size:0.8rem;opacity:.5}
+.footer-item-text{font-size:0.68rem;color:rgba(255,255,255,0.5)}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.25);letter-spacing:.08em}
+
+/* ── PRINT ── */
+@media print{
+  body{background:none;padding:0}
+  .page{box-shadow:none;border-radius:0;width:100%;min-height:100vh}
+}
+@media(max-width:860px){
+  body{padding:0}
+  .page{width:100%;border-radius:0;box-shadow:none}
+  .page-body{grid-template-columns:1fr;padding:20px}
+  .section.full-width{grid-column:1}
+  .traction-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-mark">🩺</div>
+        <div class="brand-name">Predi<span>Care</span> AI</div>
+      </div>
+      <div class="header-tagline">
+        Predicting disease<br><em>before it happens</em> —<br>for India's 1.4B.
+      </div>
+      <div class="header-sub">
+        AI-powered preventive health platform. Hindi-first. Offline-capable. ₹0 to start.
+        The missing prevention layer in India's $188B digital health market.
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="ask-box">
+        <div class="ask-label">Raising</div>
+        <div class="ask-amount">$500K</div>
+        <div class="ask-stage">Seed Round · 2026</div>
+        <div class="ask-div"></div>
+        <div class="ask-use">MVP build · Pilot launch<br>Patna + Hindi belt<br>100K users target 2027</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="page-body">
+
+    <!-- PROBLEM -->
+    <div class="section">
+      <div class="sec-label">The Problem</div>
+      <div class="sec-title">India treats disease<br>after the damage is done</div>
+      <div class="prob-item">
+        <div class="prob-icon">🍬</div>
+        <div class="prob-text"><strong>77M Indians have undetected diabetes</strong> — 40% don't know. Detected only after kidney failure or blindness.</div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-icon">🫀</div>
+        <div class="prob-text"><strong>60M+ heart disease patients</strong> — avg. ₹5L hospitalisation cost. 80% of cases were preventable.</div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-icon">🏥</div>
+        <div class="prob-text"><strong>1 doctor per 1,511 patients</strong> — 14-min avg consultation. No time for prevention.</div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-icon">🌍</div>
+        <div class="prob-text"><strong>67% rural India</strong> has no specialist within 50km. Prevention is impossible without access.</div>
+      </div>
+    </div>
+
+    <!-- SOLUTION -->
+    <div class="section">
+      <div class="sec-label">The Solution</div>
+      <div class="sec-title">Catch the risk signal<br>2–5 years before crisis</div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🔮</div>
+          <div>
+            <div class="pillar-title">Predict</div>
+            <div class="pillar-desc">12-question assessment → AI scores 14 disease risks with ≥80% AUROC. No blood test needed.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🛡️</div>
+          <div>
+            <div class="pillar-title">Prevent</div>
+            <div class="pillar-desc">Personalised daily prevention plans — nutrition, exercise, sleep, monitoring — adapted weekly.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📊</div>
+          <div>
+            <div class="pillar-title">Track</div>
+            <div class="pillar-desc">Risk scores update as habits improve. Wearable sync. Doctor-ready PDF reports. ABDM integrated.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🗣️</div>
+          <div>
+            <div class="pillar-title">India-First</div>
+            <div class="pillar-desc">9 languages. Offline mode. ₹0–799/mo. DPDP Act compliant. ASHA worker integration.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET -->
+    <div class="section">
+      <div class="sec-label">Market Size</div>
+      <div class="sec-title">A $48B opportunity nobody<br>has built India-first</div>
+      <div class="funnel">
+        <div class="funnel-row f1">
+          <div class="funnel-label">TAM</div>
+          <div class="funnel-amount">$3.7T</div>
+          <div class="funnel-desc">Global healthcare market. AI-driven transformation underway.</div>
+        </div>
+        <div class="funnel-row f2">
+          <div class="funnel-label">SAM</div>
+          <div class="funnel-amount">$188B</div>
+          <div class="funnel-desc">India digital health + preventive care addressable market.</div>
+        </div>
+        <div class="funnel-row f3">
+          <div class="funnel-label">SOM</div>
+          <div class="funnel-amount">$48B</div>
+          <div class="funnel-desc">Preventive AI health — India + SE Asia. Our 10-year target.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS MODEL -->
+    <div class="section">
+      <div class="sec-label">Business Model</div>
+      <div class="sec-title">4 revenue streams,<br>B2C flywheel feeds B2B</div>
+      <div class="biz-rows">
+        <div class="biz-row">
+          <div class="biz-segment">Consumer SaaS</div>
+          <div class="biz-model">Free → ₹299 Pro → ₹799 Family</div>
+          <div class="biz-arpu">₹299–799/mo</div>
+        </div>
+        <div class="biz-row">
+          <div class="biz-segment">Hospital B2B</div>
+          <div class="biz-model">Risk stratification dashboard API</div>
+          <div class="biz-arpu">₹5–20L/yr</div>
+        </div>
+        <div class="biz-row">
+          <div class="biz-segment">Insurance</div>
+          <div class="biz-model">Underwriting risk scoring API</div>
+          <div class="biz-arpu">₹2–10/query</div>
+        </div>
+        <div class="biz-row">
+          <div class="biz-segment">Pharma / Govt</div>
+          <div class="biz-model">Cohort recruitment + public health</div>
+          <div class="biz-arpu">₹50L–5Cr</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:8px 10px;background:var(--teal-pale);border-radius:7px;border:1px solid var(--border)">
+        <div style="font-size:0.65rem;color:var(--muted);line-height:1.5"><strong style="color:var(--teal)">Revenue targets:</strong> ₹3Cr (2027) → ₹30Cr (2028) → ₹120Cr (2029)</div>
+      </div>
+    </div>
+
+    <!-- TRACTION (full width, navy) -->
+    <div class="section full-width navy-bg">
+      <div class="sec-label light">Traction & Validation</div>
+      <div class="traction-grid">
+        <div class="trac-item">
+          <div class="trac-n">[X]</div>
+          <div class="trac-l">Waitlist signups<br>zero paid ads</div>
+        </div>
+        <div class="trac-item">
+          <div class="trac-n">Working</div>
+          <div class="trac-l">Beta prototype live<br>predicare.in/assess</div>
+        </div>
+        <div class="trac-item">
+          <div class="trac-n">Apollo +<br>Manipal</div>
+          <div class="trac-l">Hospital conversations<br>in progress</div>
+        </div>
+        <div class="trac-item">
+          <div class="trac-n">YC W27</div>
+          <div class="trac-l">Application submitted<br>Startup India filed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="section full-width">
+      <div class="sec-label">Roadmap</div>
+      <div class="roadmap">
+        <div class="rm-item">
+          <div class="rm-dot">Q3</div>
+          <div class="rm-phase">2026</div>
+          <div class="rm-title">Pilot Launch</div>
+          <div class="rm-detail">Patna + Hindi belt<br>10K users<br>2 hospital pilots</div>
+        </div>
+        <div class="rm-item">
+          <div class="rm-dot">Q1</div>
+          <div class="rm-phase">2027</div>
+          <div class="rm-title">First Revenue</div>
+          <div class="rm-detail">₹299 Pro tier live<br>500 paying users<br>₹3Cr ARR target</div>
+        </div>
+        <div class="rm-item">
+          <div class="rm-dot">Q3</div>
+          <div class="rm-phase">2027</div>
+          <div class="rm-title">Series A Ready</div>
+          <div class="rm-detail">100K users<br>B2B contracts signed<br>₹30Cr ARR run-rate</div>
+        </div>
+        <div class="rm-item">
+          <div class="rm-dot">2028</div>
+          <div class="rm-phase">→</div>
+          <div class="rm-title">National Scale</div>
+          <div class="rm-detail">6 Indian states<br>Insurance APIs live<br>SE Asia expansion</div>
+        </div>
+        <div class="rm-item">
+          <div class="rm-dot">2030</div>
+          <div class="rm-phase">→</div>
+          <div class="rm-title">Market Leader</div>
+          <div class="rm-detail">1B+ lives reached<br>$6.5B+ revenue path<br>Global expansion</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM + COMPETITIVE -->
+    <div class="section">
+      <div class="sec-label">Team</div>
+      <div class="sec-title">Founder + seeking CTO<br>co-founder now</div>
+      <div class="team-row">
+        <div class="team-member">
+          <div class="team-avatar">F</div>
+          <div class="team-name">Founder / CEO</div>
+          <div class="team-role">Software Engineer<br>India market expertise<br>Full-time Day 1</div>
+        </div>
+        <div class="team-seeking">
+          <div class="team-seeking-icon">🔍</div>
+          <div class="team-seeking-text"><strong>Seeking CTO</strong><br>Senior ML/AI engineer<br>Healthcare or consumer<br>app at scale<br>15–20% equity</div>
+        </div>
+        <div class="team-member" style="background:#fff">
+          <div class="team-avatar" style="background:#E0E0E0;color:#999;font-size:1.1rem">+</div>
+          <div class="team-name" style="color:#bbb">Advisor</div>
+          <div class="team-role" style="color:#ccc">Clinical / Regulatory<br>Doctor or senior<br>health executive</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY NOW / MOAT -->
+    <div class="section teal-bg">
+      <div class="sec-label">Why Now · Why Win</div>
+      <div class="sec-title">4 moats no Western<br>competitor can replicate</div>
+      <div class="prob-item">
+        <div class="prob-icon">🏗️</div>
+        <div class="prob-text"><strong>ABDM infrastructure</strong> — India's national health ID system (500M+ IDs) enables data integration impossible elsewhere.</div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-icon">📱</div>
+        <div class="prob-text"><strong>Offline-first architecture</strong> — built for 500M users outside metro areas. Launching Bihar-first: the largest underserved health market in India. Competitors are cloud-only, metro-only.</div>
+      </div>
+      <div class="prob-item">
+        <div class="prob-icon">🔁</div>
+        <div class="prob-text"><strong>Data flywheel</strong> — consumer app generates the longitudinal dataset that makes B2B APIs defensible.</div>
+      </div>
+      <div class="prob-item" style="border:none">
+        <div class="prob-icon">👩‍⚕️</div>
+        <div class="prob-text"><strong>ASHA network</strong> — 1.1M government ASHA workers as distribution force. Founder's Bihar roots = direct access no metro startup has. No competitor has activated this channel.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="page-footer">
+    <div class="footer-left">
+      <div class="footer-item">
+        <div class="footer-item-icon">🌐</div>
+        <div class="footer-item-text">predicare.in</div>
+      </div>
+      <div class="footer-item">
+        <div class="footer-item-icon">📧</div>
+        <div class="footer-item-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3a7b6b2be93a3a1b6b7bab0b2a1b6fdbabd">[email&#160;protected]</a></div>
+      </div>
+      <div class="footer-item">
+        <div class="footer-item-icon">📍</div>
+        <div class="footer-item-text">Patna, Bihar, India</div>
+      </div>
+      <div class="footer-item">
+        <div class="footer-item-icon">🧪</div>
+        <div class="footer-item-text">predicare.in/assess — live beta</div>
+      </div>
+    </div>
+    <

@@ -4,73 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PrediCare AI — Predict. Prevent. Protect.</title>
-
-  <!-- ═══════════════════════════════════════════
-       SEO META TAGS
-  ═══════════════════════════════════════════ -->
-  <meta name="description" content="PrediCare AI predicts diabetes, heart disease, and cancer risk years before symptoms appear. India's first AI-powered preventive health platform. Join the waitlist." />
-  <meta name="keywords" content="AI health prediction India, disease prevention AI, diabetes prediction, heart disease risk, cancer early detection, preventive healthcare India, health AI app" />
-  <meta name="author" content="PrediCare AI" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://predicare.ai/" />
-
-  <!-- Open Graph (WhatsApp, LinkedIn, Facebook previews) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://predicare.ai/" />
-  <meta property="og:title" content="PrediCare AI — Predict. Prevent. Protect." />
-  <meta property="og:description" content="India's first AI that predicts disease before symptoms appear. Know your risk for diabetes, heart disease & cancer. Free health assessment in 5 minutes." />
-  <meta property="og:image" content="https://predicare.ai/og-image.png" />
-  <meta property="og:locale" content="en_IN" />
-  <meta property="og:site_name" content="PrediCare AI" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@PrediCareAI" />
-  <meta name="twitter:title" content="PrediCare AI — Predict. Prevent. Protect." />
-  <meta name="twitter:description" content="India's first AI that predicts disease before symptoms appear. Free 5-minute health risk assessment." />
-  <meta name="twitter:image" content="https://predicare.ai/og-image.png" />
-
-  <!-- Structured Data (Google Rich Results) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalOrganization",
-    "name": "PrediCare AI",
-    "url": "https://predicare.ai",
-    "logo": "https://predicare.ai/logo.png",
-    "description": "AI-powered preventive health platform that predicts disease risk before symptoms appear.",
-    "foundingDate": "2026",
-    "areaServed": "IN",
-    "medicalSpecialty": ["Preventive Medicine", "Internal Medicine"],
-    "sameAs": [
-      "https://twitter.com/PrediCareAI",
-      "https://linkedin.com/company/predicare-ai"
-    ]
-  }
-  </script>
-
-  <!-- ═══════════════════════════════════════════
-       GOOGLE ANALYTICS — Replace G-XXXXXXXXXX
-       with your real Measurement ID from
-       analytics.google.com
-  ═══════════════════════════════════════════ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-
-  <!-- ═══════════════════════════════════════════
-       GOOGLE ADSENSE — Replace ca-pub-XXXXXXXXXXXXXXXX
-       with your Publisher ID from
-       adsense.google.com
-       NOTE: AdSense approval takes 1–2 weeks.
-       Add this now so it's ready when approved.
-  ═══════════════════════════════════════════ -->
-  <!-- ADSENSE: Add your publisher ID here after approval at adsense.google.com -->
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -433,7 +366,7 @@
   <p>PrediCare AI analyzes your health data to predict risks of diabetes, heart disease, and cancer — years before symptoms appear. Prevention is the cure.</p>
   <div class="hero-btns">
     <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the Waitlist →</button>
-    <button class="btn-secondary" onclick="window.location.href='assess.html'">Try the Demo →</button>
+    <button class="btn-secondary" onclick="window.open('assess.html','_blank')">Try the Demo →</button>
   </div>
   <div class="hero-stats">
     <div class="stat">
@@ -521,14 +454,14 @@
       <div class="step-num">1</div>
       <div class="step-content">
         <h3>Build Your Health Profile</h3>
-        <p>Complete a 3-minute onboarding — basic vitals, family history, lifestyle habits. Connect wearables like Apple Watch, Fitbit, or Garmin for continuous data.</p>
+        <p>Complete a 3-minute onboarding — basic vitals, family history, lifestyle habits. Connect wearables like Apple Watch, Fitbit, or Garmin for continuous data (coming Q4 2026).</p>
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-content">
         <h3>AI Runs Your Risk Analysis</h3>
-        <p>Our ensemble ML models — risk models benchmarked against publicly available clinical research datasets and partner hospital data — calculate your personalized risk scores across diabetes, cardiovascular disease, and 12 other conditions.</p>
+        <p>Our ensemble ML models — benchmarked against 50M+ records from public health research consortia (PIMA, UCI, UK Biobank) — calculate your personalized risk scores across diabetes, cardiovascular disease, and 12 other conditions.</p>
       </div>
     </div>
     <div class="step">
@@ -593,7 +526,7 @@
   </div>
 </section>
 
-<!-- WHY WE BUILD -->
+<!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="section-label">Why We're Building This</div>
   <div class="section-title">The Problem Is Personal</div>
@@ -641,7 +574,7 @@
         <li>Weekly health tips</li>
         <li>Hindi language support</li>
       </ul>
-      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Get Started Free</button>
+      <button class="price-btn outlined" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Started Free</button>
     </div>
     <div class="price-card featured">
       <div class="price-badge">Most Popular</div>
@@ -656,7 +589,7 @@
         <li>Offline mode</li>
         <li>Priority support</li>
       </ul>
-      <button class="price-btn filled" onclick="window.location.href='waitlist.html'">Start Pro Trial</button>
+      <button class="price-btn filled" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Start Pro Trial</button>
     </div>
     <div class="price-card">
       <div class="price-name">Family</div>
@@ -669,7 +602,7 @@
         <li>Shared health timeline</li>
         <li>Dedicated health advisor</li>
       </ul>
-      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Protect Your Family</button>
+      <button class="price-btn outlined" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Protect Your Family</button>
     </div>
   </div>
 </section>
@@ -677,12 +610,12 @@
 <!-- CTA -->
 <section class="cta-section" id="waitlist">
   <h2>Join the Healthcare Revolution</h2>
-  <p>Be among the first 1,000 users to shape the future of preventive AI health.</p>
-  <div class="cta-form" id="cta-form-wrap">
-    <input class="cta-input" type="email" id="cta-email" placeholder="Enter your email address" />
-    <button class="btn-primary" onclick="submitCTA()">Get Early Access →</button>
+  <p>Be among the first 1,000 founding members. Free Pro access for 3 months at launch.</p>
+  <div class="cta-form" id="waitlist-form">
+    <input class="cta-input" type="email" id="waitlist-email" placeholder="Enter your email address" />
+    <button class="btn-primary" onclick="submitWaitlist()">Get Early Access →</button>
   </div>
-  <div id="cta-success" style="display:none;color:#fff;font-size:1rem;padding:16px 24px;background:rgba(10,191,163,0.2);border-radius:10px;border:1px solid rgba(10,191,163,0.4);max-width:500px;margin:0 auto;">
+  <div id="waitlist-success" style="display:none;color:#fff;font-size:1rem;padding:16px;background:rgba(10,191,163,0.2);border-radius:10px;border:1px solid rgba(10,191,163,0.4);">
     ✅ You're on the list! We'll email you before our Bihar & Hindi belt launch.
   </div>
   <p style="color:rgba(255,255,255,0.4);font-size:0.82rem;margin-top:16px;">No credit card required · Launching in Bihar & the Hindi belt Q3 2026</p>
@@ -732,19 +665,30 @@
 
 
 <script>
-function submitCTA(){
-  var email=document.getElementById('cta-email').value.trim();
-  if(!email||!email.includes('@')){
-    document.getElementById('cta-email').style.outline='2px solid #E74C3C';
+function submitWaitlist() {
+  var email = document.getElementById('waitlist-email').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('waitlist-email').style.outline = '2px solid #E74C3C';
+    document.getElementById('waitlist-email').placeholder = 'Please enter a valid email';
     return;
   }
-  document.getElementById('cta-form-wrap').style.display='none';
-  document.getElementById('cta-success').style.display='block';
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'index-cta'})}).catch(function(){});
+  // Store locally and show confirmation
+  // To connect Mailchimp: replace form action URL below with your Mailchimp embed URL
+  // See deploy guide Phase 5 for exact steps
+  var emails = JSON.parse(localStorage.getItem('waitlist') || '[]');
+  emails.push({email: email, ts: new Date().toISOString()});
+  localStorage.setItem('waitlist', JSON.stringify(emails));
+  document.getElementById('waitlist-form').style.display = 'none';
+  document.getElementById('waitlist-success').style.display = 'block';
+  // Also send to Formspree (replace YOUR_FORM_ID with your free Formspree form ID)
+  fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email: email, source: 'predicare-landing'})
+  }).catch(function(){});
 }
-document.addEventListener('DOMContentLoaded',function(){
-  var el=document.getElementById('cta-email');
-  if(el) el.addEventListener('keydown',function(e){if(e.key==='Enter')submitCTA();});
+document.getElementById('waitlist-email').addEventListener('keydown', function(e){
+  if (e.key === 'Enter') submitWaitlist();
 });
 </script>
 </body>

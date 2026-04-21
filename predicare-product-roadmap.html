@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrediCare AI — Product Build Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0E13;
+  --surface: #141720;
+  --surface2: #1A1F2E;
+  --teal: #00D4B8;
+  --teal2: #007A6E;
+  --orange: #FF6B35;
+  --purple: #8B5CF6;
+  --green: #22C55E;
+  --yellow: #F59E0B;
+  --red: #EF4444;
+  --white: #F1F5F9;
+  --gray: #64748B;
+  --border: rgba(255,255,255,0.06);
+  --font: 'Space Grotesk', sans-serif;
+  --mono: 'Fira Code', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--white); line-height: 1.6; }
+
+/* NAV */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,14,19,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-size: 15px; font-weight: 700; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-link {
+  padding: 6px 14px; border-radius: 6px;
+  font-size: 12px; font-weight: 500; color: var(--gray);
+  cursor: pointer; transition: all 0.15s; text-decoration: none;
+}
+.nav-link:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+.nav-badge {
+  background: rgba(0,212,184,0.12);
+  border: 1px solid rgba(0,212,184,0.3);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+/* HERO */
+.hero {
+  padding: 72px 48px 56px;
+  max-width: 900px;
+}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,107,53,0.1);
+  border: 1px solid rgba(255,107,53,0.25);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px;
+  color: var(--orange);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.hero h1 .teal { color: var(--teal); }
+.hero p {
+  font-size: 17px;
+  color: #8899BB;
+  max-width: 600px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+.hstat { }
+.hstat .n { font-size: 28px; font-weight: 700; color: var(--teal); }
+.hstat .l { font-size: 11px; color: var(--gray); font-weight: 500; margin-top: 2px; }
+
+/* MAIN CONTENT */
+.content { padding: 0 48px 80px; max-width: 1100px; }
+
+/* SECTION HEADER */
+.sec-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px; margin-top: 56px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-num {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--teal2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--white);
+  flex-shrink: 0;
+}
+.sec-title { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.sec-sub { font-size: 13px; color: var(--gray); margin-top: 2px; }
+
+/* PHASE CARDS */
+.phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.phase-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.phase-card:hover { border-color: rgba(0,212,184,0.25); }
+.phase-card .phase-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 4px;
+  margin-bottom: 12px;
+}
+.phase-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+.phase-card p { font-size: 12.5px; color: #8899BB; line-height: 1.6; margin-bottom: 14px; }
+.phase-card .duration { font-size: 11px; color: var(--gray); font-family: var(--mono); }
+.phase-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+
+/* SPRINT TABLE */
+.sprint-container { margin-bottom: 32px; }
+.sprint-week {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.sprint-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sprint-header:hover { background: rgba(255,255,255,0.02); }
+.sprint-week-num { font-family: var(--mono); font-size: 11px; color: var(--teal); font-weight: 600; min-width: 60px; }
+.sprint-title { font-size: 14px; font-weight: 600; color: var(--white); }
+.sprint-phase-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.sprint-expand { color: var(--gray); font-size: 12px; transition: transform 0.2s; }
+.sprint-body { display: none; padding: 0 20px 16px; border-top: 1px solid var(--border); }
+.sprint-body.open { display: block; }
+.sprint-tasks { margin-top: 14px; }
+.task-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 13px;
+  color: #94A3B8;
+}
+.task-item:last-child { border-bottom: none; }
+.task-check {
+  width: 18px; height: 18px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  flex-shrink: 0; margin-top: 1px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  transition: all 0.15s;
+}
+.task-check:hover { border-color: var(--teal); }
+.task-check.done { background: var(--teal); border-color: var(--teal); color: #000; }
+.task-label { flex: 1; }
+.task-owner { font-size: 10px; color: var(--gray); font-family: var(--mono); margin-left: auto; flex-shrink: 0; }
+.sprint-deliverable {
+  margin-top: 12px;
+  background: rgba(0,212,184,0.06);
+  border: 1px solid rgba(0,212,184,0.15);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--teal);
+}
+.sprint-deliverable strong { font-weight: 600; }
+
+/* TECH STACK */
+.tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.tech-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.tech-card h4 { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; }
+.tech-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+.tech-item:last-child { border-bottom: none; }
+.tech-item .tech-name { font-weight: 500; color: var(--white); }
+.tech-item .tech-reason { font-size: 11px; color: var(--gray); }
+.tech-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* HIRING PLAN */
+.hire-timeline { position: relative; padding-left: 24px; }
+.hire-timeline::before { content:''; position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+.hire-item { position: relative; margin-bottom: 24px; }
+.hire-dot { position: absolute; left: -24px; top: 3px; width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--teal); background: var(--bg); }
+.hire-dot.now { background: var(--teal); }
+.hire-when { font-size: 11px; font-family: var(--mono); color: var(--teal); margin-bottom: 3px; }
+.hire-role { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.hire-detail { font-size: 12px; color: #8899BB; }
+.hire-equity { display: inline-block; margin-top: 6px; font-size: 11px; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25); border-radius: 4px; padding: 2px 8px; color: #A78BFA; font-family: var(--mono); }
+
+/* BUILD OPTIONS */
+.options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.option-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+}
+.option-card.recommended { border-color: rgba(0,212,184,0.35); }
+.option-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
+.option-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.option-card .verdict { font-size: 13px; color: #8899BB; margin-bottom: 12px; line-height: 1.5; }
+.pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; }
+.pros li { list-style: none; color: var(--green); padding: 2px 0; }
+.pros li::before { content: '✓ '; }
+.cons li { list-style: none; color: #F87171; padding: 2px 0; }
+.cons li::before { content: '✗ '; }
+
+/* MVP FEATURES */
+.feature-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+.feature-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+.feature-table td { padding: 12px 14px; font-size: 13px; color: #94A3B8; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+.feature-table tr:hover td { background: rgba(255,255,255,0.02); }
+.feature-table td strong { color: var(--white); }
+.priority-p1 { color: var(--red); font-weight: 600; font-size: 11px; font-family: var(--mono); }
+.priority-p2 { color: var(--yellow); font-weight: 600; font-size: 11px; font-family: var(--mono); }
+.priority-p3 { color: var(--gray); font-weight: 600; font-size: 11px; font-family: var(--mono); }
+.effort-chip { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-family: var(--mono); font-weight: 600; }
+.e-s { background: rgba(34,197,94,0.12); color: var(--green); }
+.e-m { background: rgba(245,158,11,0.12); color: var(--yellow); }
+.e-l { background: rgba(239,68,68,0.12); color: #F87171; }
+
+/* LAUNCH CHECKLIST */
+.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.checklist-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.checklist-section h4 { font-size: 13px; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; font-size: 12.5px; color: #8899BB; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.check-item:last-child { border-bottom: none; }
+.check-box { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; margin-top: 1px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; font-size: 9px; }
+.check-box:hover { border-color: var(--teal); }
+.check-box.done { background: var(--teal); border-color: var(--teal); color: #000; }
+
+/* PROGRESS BAR */
+.progress-wrap { margin-bottom: 32px; }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+.progress-label span:first-child { color: var(--gray); }
+.progress-label span:last-child { color: var(--teal); font-family: var(--mono); font-weight: 600; }
+.progress-bar { height: 6px; background: var(--surface2); border-radius: 100px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--teal2), var(--teal)); border-radius: 100px; transition: width 0.5s ease; }
+
+/* CALLOUT */
+.callout {
+  background: rgba(255,107,53,0.06);
+  border: 1px solid rgba(255,107,53,0.2);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.callout h4 { font-size: 14px; font-weight: 700; color: var(--orange); margin-bottom: 6px; }
+.callout p { font-size: 13px; color: #8899BB; line-height: 1.6; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.content > * { animation: fadeIn 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-brand">💚 PrediCare AI — Product Build Roadmap</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#phase">Phases</a>
+    <a class="nav-link" href="#build">Build Path</a>
+    <a class="nav-link" href="#stack">Tech Stack</a>
+    <a class="nav-link" href="#sprints">Sprints</a>
+    <a class="nav-link" href="#hiring">Hiring</a>
+    <a class="nav-link" href="#launch">Launch</a>
+  </div>
+  <div class="nav-badge">🚀 Day 1 Execution Guide</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-kicker">⚡ How to Actually Build PrediCare</div>
+  <h1>From idea to <span class="teal">1 million users</span> — in 24 months</h1>
+  <p>A practical, no-BS roadmap for building PrediCare AI. What to build first, who to hire, which tech to use, and exactly what to do each week for the next 6 months.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="n">6</div><div class="l">Build Phases</div></div>
+    <div class="hstat"><div class="n">24</div><div class="l">Week Sprint Plan</div></div>
+    <div class="hstat"><div class="n">3</div><div class="l">Build Path Options</div></div>
+    <div class="hstat"><div class="n">Day 1</div><div class="l">Start today</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- CURRENT PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label"><span>Foundation (Docs & Strategy)</span><span>100%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+    <div class="progress-label" style="margin-top:10px"><span>Product Build</span><span>5%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
+    <div class="progress-label" style="margin-top:10px"><span>GTM / Launch</span><span>0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">🎯</div>
+    <div>
+      <h4>The single most important truth about building PrediCare</h4>
+      <p>You do NOT need to build everything at once. The MVP is one thing: a health risk score that shocks users into action. Get that one thing right, get 1,000 people using it, and everything else follows. The biggest startup killer is building too much before talking to users.</p>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 1: PHASES ═══ -->
+  <div id="phase" class="sec-header">
+    <div class="sec-num">1</div>
+    <div><div class="sec-title">6 Build Phases</div><div class="sec-sub">How PrediCare evolves from prototype to platform</div></div>
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-card">
+      <div class="phase-accent" style="background:var(--orange)"></div>
+      <span class="phase-tag" style="background:rgba(255,107,53,0.12); color:var(--orange)">Phase 0 — NOW</span>
+      <h3>Foundation Complete</h3>
+      <p>All strategy, docs, legal prep, and working HTML prototype done. The product exists on paper and in a browser demo. Now it's time to build the real thing.</p>
+      <div class="duration">Weeks 0–2 · Status: ✓ Done</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-accent" style="background:var(--teal)"></div>
+      <span class="phase-tag" style="background:rgba(0,212,184,0.1); color:var(--teal)">Phase 1 — NEXT</span>
+      <h3>Register + Hire CTO</h3>
+      <p>Incorporate the company. Find your CTO co-founder. This unlocks everything: equity grants, contracts, ABDM sandbox, bank account, and the ability to hire properly.</p>
+      <div class="duration">Weeks 2–8 · Blocker: CTO search</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-accent" style="background:var(--purple)"></div>
+      <span class="phase-tag" style="background:rgba(139,92,246,0.1); color:var(--purple)">Phase 2</span>
+      <h3>MVP Build (Real App)</h3>
+      <p>Build the actual mobile app with a real ML risk model, real user accounts, and one killer feature: the 5-disease risk score. iOS + Android via React Native.</p>
+      <div class="duration">Weeks 8–20 · Team: Founder + CTO</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-accent" style="background:var(--green)"></div>
+      <span class="phase-tag" style="background:rgba(34,197,94,0.1); color:var(--green)">Phase 3</span>
+      <h3>Beta Launch (India)</h3>
+      <p>Launch privately in Patna + Hindi belt. 1,000 beta users. Gather feedback obsessively. Partner with 2–3 clinics. Iterate weekly. Don't scale yet — learn first.</p>
+      <div class="duration">Weeks 20–32 · Target: 10K users</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-accent" style="background:var(--yellow)"></div>
+      <span class="phase-tag" style="background:rgba(245,158,11,0.1); color:var(--yellow)">Phase 4</span>
+      <h3>Series A → Scale</h3>
+      <p>Raise $8–12M Series A. Expand across Hindi belt — Bihar, UP, Rajasthan, MP, Jharkhand (500M+ people). Launch insurance partnerships. Add diagnostic AI. Hit 1M MAU. Begin FDA process for global expansion.</p>
+      <div class="duration">Months 12–24 · Target: 1M users</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-accent" style="background:#F87171"></div>
+      <span class="phase-tag" style="background:rgba(239,68,68,0.1); color:#F87171">Phase 5</span>
+      <h3>Platform + Global</h3>
+      <p>PrediCare becomes a platform. Hospital OS. Government health AI. SE Asia expansion. 50M+ users. ABDM data flywheel compounding. The moat becomes unassailable.</p>
+      <div class="duration">Year 2–5 · Target: 50M users</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: BUILD PATH ═══ -->
+  <div id="build" class="sec-header">
+    <div class="sec-num">2</div>
+    <div><div class="sec-title">3 Build Path Options</div><div class="sec-sub">Choose based on your current CTO situation</div></div>
+  </div>
+
+  <div class="options-grid">
+    <div class="option-card recommended">
+      <div class="option-tag" style="color:var(--teal)">✦ Recommended</div>
+      <h3>Path A: CTO Co-Founder</h3>
+      <div class="verdict">Find a CTO within 60 days, build natively. Hardest but highest quality and best equity/cost outcome. Best for long-term.</div>
+      <div class="pros-cons">
+        <ul class="pros"><li>Full control</li><li>Best equity structure</li><li>Custom AI possible</li><li>Fastest iteration</li></ul>
+        <ul class="cons"><li>Takes 30–90 days</li><li>High equity cost (20%)</li><li>Finding one is hard</li></ul>
+      </div>
+    </div>
+    <div class="option-card">
+      <div class="option-tag" style="color:var(--yellow)">⚡ Fast Track</div>
+      <h3>Path B: Outsource MVP</h3>
+      <div class="verdict">Hire an India ML studio (Minddeft, Tarka Labs, Apptunix) to build MVP in 4 months for ₹20–40L while CTO search continues.</div>
+      <div class="pros-cons">
+        <ul class="pros"><li>Fast (4 months)</li><li>No equity given</li><li>Known cost</li></ul>
+        <ul class="cons"><li>₹20–40L cash</li><li>Quality risk</li><li>IP handover needed</li><li>Vendor dependency</li></ul>
+      </div>
+    </div>
+    <div class="option-card">
+      <div class="option-tag" style="color:var(--purple)">🔧 No-Code First</div>
+      <h3>Path C: No-Code to Validate</h3>
+      <div class="verdict">Build v0.1 with Bubble + Retool + GPT API in 2 weeks. Validate with 100 users. Prove traction before hiring CTO or outsourcing.</div>
+      <div class="pros-cons">
+        <ul class="pros"><li>2 weeks to live</li><li>Near-zero cost</li><li>Validates before spending</li></ul>
+        <ul class="cons"><li>Not scalable</li><li>Limited ML depth</li><li>Must rebuild later</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">💡</div>
+    <div>
+      <h4>The recommended strategy: Paths C → A</h4>
+      <p>Start with Path C (no-code) TODAY to get your first 100 users and validate the core risk score concept. Use that traction to attract a CTO co-founder (Path A). Showing a live product with real users is 10x more convincing to a technical co-founder than a pitch deck.</p>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: MVP FEATURES ═══ -->
+  <div class="sec-header">
+    <div class="sec-num">3</div>
+    <div><div class="sec-title">What to Build — MVP Feature List</div><div class="sec-sub">Ruthlessly prioritized — only P1 in the first version</div></div>
+  </div>
+
+  <table class="feature-table">
+    <thead><tr><th>Feature</th><th>Priority</th><th>Effort</th><th>Why it matters</th><th>Build with</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>12-question health risk assessment</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-s">Small</span></td>
+        <td>The hook — gives users an immediate "wow" risk score across 5 diseases</td>
+        <td>React Native / Bubble</td>
+      </tr>
+      <tr>
+        <td><strong>5-disease risk score dashboard</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-s">Small</span></td>
+        <td>The product — visual ring chart showing risk % for diabetes, heart, cancer, stroke, BP</td>
+        <td>React Native + D3</td>
+      </tr>
+      <tr>
+        <td><strong>Personalized prevention plan</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-m">Medium</span></td>
+        <td>The retention hook — daily actions users can take to reduce their scores</td>
+        <td>Rule engine + GPT API</td>
+      </tr>
+      <tr>
+        <td><strong>User account + profile</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-s">Small</span></td>
+        <td>Required for personalization and re-engagement</td>
+        <td>Firebase Auth</td>
+      </tr>
+      <tr>
+        <td><strong>Doctor referral CTA</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-s">Small</span></td>
+        <td>Safety & trust — high-risk users must be referred, not left hanging</td>
+        <td>Static link / Practo API</td>
+      </tr>
+      <tr>
+        <td><strong>Hindi language support</strong></td>
+        <td><span class="priority-p1">P1 · CORE</span></td>
+        <td><span class="effort-chip e-m">Medium</span></td>
+        <td>Unlocks 400M Hindi speakers — essential for India GTM</td>
+        <td>i18n library</td>
+      </tr>
+      <tr>
+        <td><strong>Wearable sync (Fitbit/Apple Watch)</strong></td>
+        <td><span class="priority-p2">P2</span></td>
+        <td><span class="effort-chip e-m">Medium</span></td>
+        <td>Improves prediction accuracy — adds "wow" for tech users</td>
+        <td>HealthKit / Google Fit API</td>
+      </tr>
+      <tr>
+        <td><strong>Weekly health re-assessment</strong></td>
+        <td><span class="priority-p2">P2</span></td>
+        <td><span class="effort-chip e-m">Medium</span></td>
+        <td>Tracks progress — drives streak retention</td>
+        <td>Push notifications + cron</td>
+      </tr>
+      <tr>
+        <td><strong>ABDM health records integration</strong></td>
+        <td><span class="priority-p2">P2</span></td>
+        <td><span class="effort-chip e-l">Large</span></td>
+        <td>The data moat — starts building the flywheel</td>
+        <td>ABDM Sandbox API</td>
+      </tr>
+      <tr>
+        <td><strong>Family health profiles</strong></td>
+        <td><span class="priority-p2">P2</span></td>
+        <td><span class="effort-chip e-m">Medium</span></td>
+        <td>India context — people manage health for entire family, drives referrals</td>
+        <td>Firebase + UI</td>
+      </tr>
+      <tr>
+        <td><strong>Full symptom checker AI</strong></td>
+        <td><span class="priority-p3">P3</span></td>
+        <td><span class="effort-chip e-l">Large</span></td>
+        <td>Phase 2 feature — requires CMO validation before launch</td>
+        <td>Custom NLP model</td>
+      </tr>
+      <tr>
+        <td><strong>Offline mode</strong></td>
+        <td><span class="priority-p3">P3</span></td>
+        <td><span class="effort-chip e-l">Large</span></td>
+        <td>Rural India moat — critical but complex, Phase 2+</td>
+        <td>On-device ML + SQLite</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ SECTION 4: TECH STACK ═══ -->
+  <div id="stack" class="sec-header">
+    <div class="sec-num">4</div>
+    <div><div class="sec-title">Recommended Tech Stack</div><div class="sec-sub">Chosen for speed, talent availability in India, and healthcare compliance</div></div>
+  </div>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h4>📱 Frontend / App</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">React Native</div><div class="tech-reason">One codebase, iOS + Android. Huge talent pool in India.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Expo</div><div class="tech-reason">Faster development, OTA updates without App Store delays.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">React Native Paper</div><div class="tech-reason">Material UI components — faster UI building.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Victory Native</div><div class="tech-reason">Charts for risk score visualization.</div></div></div>
+    </div>
+    <div class="tech-card">
+      <h4>⚙️ Backend / API</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Python + FastAPI</div><div class="tech-reason">Best language for ML + API. Fast, typed, async.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Firebase</div><div class="tech-reason">Auth, Firestore DB, push notifications — all-in-one for MVP.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Google Cloud Healthcare API</div><div class="tech-reason">HIPAA-compliant. FHIR support for ABDM integration.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Redis</div><div class="tech-reason">Caching for risk score computation performance.</div></div></div>
+    </div>
+    <div class="tech-card">
+      <h4>🧠 AI / ML</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">scikit-learn</div><div class="tech-reason">MVP risk scoring model — fast to train, interpretable.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">TensorFlow Lite</div><div class="tech-reason">On-device model for offline predictions in Phase 2.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">OpenAI API / Claude API</div><div class="tech-reason">Prevention plan generation (GPT-4 / Claude Sonnet).</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">PIMA / UCI datasets</div><div class="tech-reason">Public health datasets to train v1 model before ABDM.</div></div></div>
+    </div>
+    <div class="tech-card">
+      <h4>🔐 Security & Compliance</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">DPDP Act 2023</div><div class="tech-reason">India's data privacy law — compliance from Day 1.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">AES-256 encryption</div><div class="tech-reason">All health data at rest and in transit.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Vault by HashiCorp</div><div class="tech-reason">Secret management for API keys and credentials.</div></div></div>
+    </div>
+    <div class="tech-card">
+      <h4>📊 Analytics & Growth</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Mixpanel</div><div class="tech-reason">User event tracking, retention funnels, cohort analysis.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Hotjar</div><div class="tech-reason">Session recording, heatmaps for UX improvement.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">Mailchimp</div><div class="tech-reason">Waitlist management, onboarding emails.</div></div></div>
+    </div>
+    <div class="tech-card">
+      <h4>🚀 DevOps / Infrastructure</h4>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Vercel</div><div class="tech-reason">Web/landing page hosting — free, fast, CI/CD built in.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--teal)"></div><div><div class="tech-name">Google Cloud (Mumbai)</div><div class="tech-reason">Data residency in India — required for ABDM.</div></div></div>
+      <div class="tech-item"><div class="tech-dot" style="background:var(--gray)"></div><div><div class="tech-name">GitHub + Actions</div><div class="tech-reason">Version control, CI/CD, automated testing.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 5: SPRINT PLAN ═══ -->
+  <div id="sprints" class="sec-header">
+    <div class="sec-num">5</div>
+    <div><div class="sec-title">24-Week Sprint Plan</div><div class="sec-sub">Week-by-week tasks — click to expand each sprint</div></div>
+  </div>
+
+  <div class="sprint-container">
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 1–2</span>
+        <span class="sprint-title">Register domain · Launch landing page · Start CTO search</span>
+        <span class="sprint-phase-badge" style="background:rgba(255,107,53,0.12); color:var(--orange)">Foundation</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Register predicare.in on BigRock or Namecheap (₹700)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Deploy landing page on Vercel (it's ready — just needs upload)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Connect Mailchimp waitlist form to landing page</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Post founder story LinkedIn post (template is in Outreach Kit)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Post on Twitter/X + WhatsApp groups asking for beta testers</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Message 20 engineers on LinkedIn about CTO co-founder role</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Sign up for YC Co-Founder Matching + iSPIRT Slack</span><span class="task-owner">Founder</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> predicare.in live with waitlist. 100+ signups. 20 CTO conversations started.</div>
+      </div>
+    </div>
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 3–4</span>
+        <span class="sprint-title">Deploy MVP prototype · Talk to 50 users · Validate pain</span>
+        <span class="sprint-phase-badge" style="background:rgba(0,212,184,0.1); color:var(--teal)">Validate</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Deploy the MVP HTML prototype to predicare.in/assess</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Share prototype with 50 people — get them to complete the risk assessment</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Run 10 user interviews (30 min each) — record with Otter.ai</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Document top 3 user complaints and top 3 things they loved</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Visit 2 local clinics — ask doctors about their biggest patient challenge</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Continue CTO outreach — aim for 5 video calls this week</span><span class="task-owner">Founder</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> 50 users tested prototype. 10 interviews done. Clear list of what to build first. 1 doctor relationship started.</div>
+      </div>
+    </div>
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 5–8</span>
+        <span class="sprint-title">Incorporate company · Build no-code v0.2 · Pitch investors</span>
+        <span class="sprint-phase-badge" style="background:rgba(139,92,246,0.1); color:var(--purple)">Legal + Build</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Hire a CA and file SPICe+ for Private Limited Company (₹10–15K)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Apply for DPIIT Startup India recognition (free, online)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Open company bank account (HDFC or Kotak)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Build no-code v0.2 with Bubble — add user accounts + risk score saving</span><span class="task-owner">Founder / Bubble</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Send Investor 1-pager to 20 angels from Outreach Kit list</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Submit YC W27 application (it's written — just paste and submit)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Make a final CTO decision: found them? Proceed to sign. Not found? Start Path B outsourcing.</span><span class="task-owner">Founder</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> Company registered. YC applied. 300+ waitlist signups. 5 investor conversations open. CTO decision made.</div>
+      </div>
+    </div>
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 9–16</span>
+        <span class="sprint-title">Build real app · ML risk model · Hindi language</span>
+        <span class="sprint-phase-badge" style="background:rgba(34,197,94,0.1); color:var(--green)">MVP Build</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Set up React Native project with Expo + Firebase Auth</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Train v1 risk ML model using PIMA diabetes + Cleveland heart disease datasets</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Build risk score dashboard UI with animated rings</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Integrate Claude/GPT API for prevention plan generation</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Add Hindi i18n translation across all screens</span><span class="task-owner">CTO + hire translator</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Add doctor referral flow (link to Practo for high-risk users)</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Onboard CMO advisor — get clinical validation of risk model</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Close seed round (at least first tranche $500K)</span><span class="task-owner">Founder</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> Working app on TestFlight/Play Console. Real ML model live. Hindi UI complete. CMO signed. First seed tranche closed.</div>
+      </div>
+    </div>
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 17–20</span>
+        <span class="sprint-title">Private beta · 1,000 users · Collect data + fix bugs</span>
+        <span class="sprint-phase-badge" style="background:rgba(245,158,11,0.1); color:var(--yellow)">Beta</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Submit to App Store + Google Play Store</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Invite all waitlist users to beta — target 1,000 installs in Week 1</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Set up Mixpanel — track DAU, risk assessment completion rate, retention D7/D30</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Weekly user interview calls — 5 users per week, always</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Fix top 10 bugs reported in first 2 weeks</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Partner with 2 Mumbai clinics — they share with patients, you share data insights</span><span class="task-owner">Founder</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> 1,000 real users. D7 retention >40%. 2 clinic partnerships. Series A fundraising narrative ready.</div>
+      </div>
+    </div>
+
+    <div class="sprint-week">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <span class="sprint-week-num">WK 21–24</span>
+        <span class="sprint-title">Public launch · Press · Series A prep · 10,000 users</span>
+        <span class="sprint-phase-badge" style="background:rgba(0,212,184,0.1); color:var(--teal)">Launch</span>
+        <span class="sprint-expand">▼</span>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-tasks">
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Public launch — announce on LinkedIn, Twitter, WhatsApp, Reddit r/india, Product Hunt</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Send press kit to YourStory, Inc42, Livemint Health Desk</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Enable in-app premium subscription (₹299/mo) — first paid users</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Begin Series A outreach — Kalaari, Healthquad, Blume (using Outreach Kit)</span><span class="task-owner">Founder</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Apply for ABDM sandbox access (takes 4–6 weeks to approve)</span><span class="task-owner">CTO</span></div>
+          <div class="task-item"><div class="task-check" onclick="toggleCheck(this)"></div><span class="task-label">Hit 10,000 installs. Celebrate. Then immediately ask: what's breaking at scale?</span><span class="task-owner">Team</span></div>
+        </div>
+        <div class="sprint-deliverable"><strong>✓ Deliverable:</strong> 10,000 users. First revenue. Press coverage. Series A conversations open. ABDM in pipeline.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 6: HIRING PLAN ═══ -->
+  <div id="hiring" class="sec-header">
+    <div class="sec-num">6</div>
+    <div><div class="sec-title">Hiring Roadmap</div><div class="sec-sub">Who to hire, when, and what to offer</div></div>
+  </div>
+
+  <div class="hire-timeline">
+    <div class="hire-item">
+      <div class="hire-dot now"></div>
+      <div class="hire-when">NOW — Week 1–8</div>
+      <div class="hire-role">CTO / Co-Founder</div>
+      <div class="hire-detail">AI/ML engineer with mobile experience. Python, TensorFlow, React Native. 5+ years. Has shipped products. Believes in the mission. Where to find: YC Matching, iSPIRT Slack, LinkedIn, IIT alumni networks.</div>
+      <div class="hire-equity">20–25% equity · 4yr vest / 1yr cliff</div>
+    </div>
+    <div class="hire-item">
+      <div class="hire-dot"></div>
+      <div class="hire-when">Month 3–4 — After seed close</div>
+      <div class="hire-role">CMO Advisor (part-time)</div>
+      <div class="hire-detail">MBBS or MD with interest in preventive medicine and technology. Validates clinical claims. Opens hospital doors. Speaks at conferences. Where to find: Apollo Hospitals alumni, AIIMS network, LinkedIn.</div>
+      <div class="hire-equity">1–2% equity · 2yr vest</div>
+    </div>
+    <div class="hire-item">
+      <div class="hire-dot"></div>
+      <div class="hire-when">Month 4–6 — Post-beta launch</div>
+      <div class="hire-role">Full-Stack Engineer #1</div>
+      <div class="hire-detail">React Native + Python. 3+ years. Will own the mobile app front-to-back. First full-time engineering hire. Salary: ₹12–18L + 0.5–1% ESOP. Where to find: LinkedIn, Instahyre, AngelList.</div>
+      <div class="hire-equity">0.5–1% ESOP</div>
+    </div>
+    <div class="hire-item">
+      <div class="hire-dot"></div>
+      <div class="hire-when">Month 6–8 — Post first 10K users</div>
+      <div class="hire-role">Business Development / Partnerships</div>
+      <div class="hire-detail">Hospital and insurer relationships. Ideally from healthcare background. Speaks to government. Knows how to navigate ABDM. Salary: ₹10–14L + 0.25–0.5% ESOP.</div>
+      <div class="hire-equity">0.25–0.5% ESOP</div>
+    </div>
+    <div class="hire-item">
+      <div class="hire-dot"></div>
+      <div class="hire-when">Month 9–12 — Series A</div>
+      <div class="hire-role">ML Engineer + Data Scientist</div>
+      <div class="hire-detail">Takes over AI model ownership from CTO. Trains on ABDM data. Builds v2 multi-disease prediction models. PhD or strong research background preferred.</div>
+      <div class="hire-equity">0.5% ESOP</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 7: LAUNCH CHECKLIST ═══ -->
+  <div id="launch" class="sec-header">
+    <div class="sec-num">7</div>
+    <div><div class="sec-title">Launch Checklist</div><div class="sec-sub">Everything that must be done before you go public</div></div>
+  </div>
+
+  <div class="checklist-grid">
+    <div class="checklist-section">
+      <h4>⚙️ Technical</h4>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>predicare.in domain live with HTTPS</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>App Store listing + screenshots uploaded</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Google Play Store listing live</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Crash reporting (Sentry) configured</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Mixpanel analytics tracking key events</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Privacy policy + T&C published at predicare.in/privacy</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Data encrypted at rest (AES-256)</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>All health data stays on AWS Mumbai region (ap-south-1)</div>
+    </div>
+    <div class="checklist-section">
+      <h4>💼 Business</h4>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Private Limited Company registered</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Company bank account open</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>DPIIT Startup India recognition applied</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Co-founder agreement signed (if CTO onboarded)</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>IP Assignment deed executed</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>PrediCare trademark filed (Class 44)</div>
+    </div>
+    <div class="checklist-section">
+      <h4>📣 Marketing</h4>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>500+ waitlist emails collected</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>LinkedIn company page live</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Twitter/X profile (@predicare_ai) set up</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Founder LinkedIn post published (personal brand)</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Press kit sent to YourStory + Inc42</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>2 doctor / clinic testimonials collected</div>
+    </div>
+    <div class="checklist-section">
+      <h4>🏥 Clinical & Compliance</h4>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>CMO advisor signed and briefed</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>Risk score model validated by doctor</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>"Not a diagnosis" disclaimer on all predictions</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>High-risk user doctor referral flow working</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>ABDM sandbox access applied for</div>
+      <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div>CDSCO SaMD classification reviewed with legal</div>
+    </div>
+  </div>
+
+  <div style="margin-top:48px; padding:32px; background:linear-gradient(135deg, rgba(0,212,184,0.08), rgba(139,92,246,0.06)); border:1px solid rgba(0,212,184,0.2); border-radius:16px; text-align:center;">
+    <div style="font-size:32px; margin-bottom:12px">🚀</div>
+    <div style="font-size:22px; font-weight:700; letter-spacing:-0.5px; margin-bottom:8px">You have everything you need to start.</div>
+    <div style="font-size:14px; color:#8899BB; max-width:500px; margin:0 auto 24px">The business plan, pitch deck, MVP prototype, legal guide, GTM plan, outreach kit — it's all built. The only thing missing is execution. Start with Week 1 Sprint today.</div>
+    <div style="font-size:16px; font-weight:600; color:var(--teal)">predicare.in · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3a2b2f230e3e3c2b2a272d2f3c2b602720">[email&#160;protected]</a></div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleSprint(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.sprint-expand');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.textContent = 

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PrediCare AI — Health Risk Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#FFFFFF;
+  --off:#F5F7F6;
+  --teal:#00BFA5;
+  --teal-d:#00897B;
+  --teal-pale:#E0F5F2;
+  --navy:#0A2540;
+  --slate:#556B7D;
+  --border:#DDE4E1;
+  --red:#EF5350;
+  --amber:#FF8F00;
+  --green:#43A047;
+  --ink:#1A2E3B;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--off);color:var(--ink);min-height:100vh;overflow-x:hidden}
+
+/* ── PULSE LINE BACKGROUND ── */
+body::before{
+  content:'';
+  position:fixed;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  animation:scan 3s ease-in-out infinite;
+  z-index:9999;
+}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* ── HEADER ── */
+header{
+  background:var(--navy);
+  padding:18px 5vw;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(10,37,64,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-pulse{
+  width:34px;height:34px;border-radius:9px;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;position:relative;
+}
+.logo-pulse::after{
+  content:'';position:absolute;inset:-3px;border-radius:12px;
+  border:2px solid var(--teal);opacity:.4;
+  animation:ring 2s ease-out infinite;
+}
+@keyframes ring{0%{transform:scale(1);opacity:.4}100%{transform:scale(1.5);opacity:0}}
+.logo-text{font-size:1.15rem;font-weight:800;color:#fff;letter-spacing:-.01em}
+.logo-text span{color:var(--teal)}
+.header-right{display:flex;align-items:center;gap:16px}
+.progress-label{font-size:0.78rem;color:rgba(255,255,255,0.45);font-weight:500}
+.progress-bar{width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .5s ease;width:0%}
+
+/* ── MAIN LAYOUT ── */
+.app{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+
+/* ── SCREEN ── */
+.screen{display:none;animation:fadeUp .4s ease}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── WELCOME SCREEN ── */
+.welcome-hero{
+  background:var(--navy);
+  border-radius:24px;padding:52px 40px;
+  text-align:center;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.welcome-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(0,191,165,0.15),transparent);
+}
+.welcome-eyebrow{
+  font-size:0.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;position:relative;
+}
+.welcome-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  line-height:1.2;color:#fff;margin-bottom:16px;position:relative;
+}
+.welcome-title em{font-style:italic;color:var(--teal)}
+.welcome-sub{color:rgba(255,255,255,0.55);font-size:1rem;line-height:1.7;max-width:480px;margin:0 auto 36px;position:relative}
+
+.stat-row{
+  display:flex;justify-content:center;gap:32px;
+  padding:24px;background:rgba(255,255,255,0.04);
+  border-radius:14px;border:1px solid rgba(255,255,255,0.07);
+  margin-bottom:32px;flex-wrap:wrap;position:relative;
+}
+.stat-item{text-align:center}
+.stat-n{font-family:'Libre Baskerville',serif;font-size:1.6rem;color:var(--teal);font-weight:700}
+.stat-l{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:3px;letter-spacing:.04em}
+
+.btn-start{
+  background:var(--teal);color:var(--navy);
+  padding:16px 48px;border-radius:100px;
+  font-size:1rem;font-weight:800;border:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(0,191,165,0.4);
+  transition:all .25s;position:relative;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-start:hover{background:#00D4B8;transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,191,165,0.5)}
+.btn-arrow{font-size:1.1rem;transition:transform .2s}
+.btn-start:hover .btn-arrow{transform:translateX(4px)}
+
+.trust-row{
+  display:flex;justify-content:center;gap:24px;flex-wrap:wrap;
+  margin-top:16px;
+}
+.trust-item{
+  font-size:0.78rem;color:rgba(255,255,255,0.35);
+  display:flex;align-items:center;gap:6px;
+}
+.trust-item span{font-size:0.9rem}
+
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.info-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+}
+.info-card-icon{font-size:1.6rem;margin-bottom:12px}
+.info-card h4{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+.info-card p{font-size:0.83rem;color:var(--slate);line-height:1.6}
+
+/* ── QUESTION SCREEN ── */
+.q-header{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:20px;padding:28px 32px;margin-bottom:20px;
+}
+.q-section-tag{
+  font-size:0.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.q-section-tag::before{content:'';width:20px;height:2px;background:var(--teal);border-radius:1px}
+.q-number{font-size:0.82rem;color:var(--slate);font-weight:500;margin-bottom:12px}
+.q-text{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.1rem,2.5vw,1.35rem);
+  line-height:1.45;color:var(--navy);
+}
+.q-why{
+  font-size:0.8rem;color:var(--slate);margin-top:10px;
+  padding:10px 14px;background:var(--teal-pale);border-radius:8px;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.q-why-icon{flex-shrink:0;font-size:0.9rem}
+
+/* ── ANSWER OPTIONS ── */
+.answers{display:flex;flex-direction:column;gap:10px}
+.answer-btn{
+  background:var(--white);border:2px solid var(--border);
+  border-radius:14px;padding:16px 20px;
+  text-align:left;font-family:'Outfit',sans-serif;
+  font-size:0.95rem;font-weight:500;color:var(--ink);
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:14px;
+}
+.answer-btn:hover{border-color:var(--teal);background:var(--teal-pale);transform:translateX(4px)}
+.answer-btn.selected{border-color:var(--teal);background:var(--teal-pale);color:var(--teal-d);font-weight:700}
+.answer-letter{
+  width:30px;height:30px;border-radius:8px;
+  background:var(--off);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:700;color:var(--slate);
+  flex-shrink:0;transition:all .2s;
+}
+.answer-btn.selected .answer-letter{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* Slider */
+.slider-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px}
+.slider-value{
+  font-family:'Libre Baskerville',serif;font-size:3rem;font-weight:700;
+  color:var(--navy);text-align:center;margin-bottom:6px;
+}
+.slider-unit{font-size:0.9rem;color:var(--slate);text-align:center;margin-bottom:24px}
+input[type=range]{
+  width:100%;height:6px;border-radius:3px;
+  -webkit-appearance:none;appearance:none;
+  background:linear-gradient(to right,var(--teal) 0%,var(--teal) var(--pct,50%),var(--border) var(--pct,50%));
+  outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--teal);border:3px solid #fff;
+  box-shadow:0 2px 8px rgba(0,191,165,0.4);
+  transition:transform .15s;
+}
+input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
+.slider-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--slate);margin-top:8px}
+
+/* Nav buttons */
+.q-nav{display:flex;gap:12px;margin-top:20px}
+.btn-back{
+  padding:14px 24px;border-radius:100px;
+  background:transparent;border:2px solid var(--border);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;
+  color:var(--slate);cursor:pointer;transition:all .2s;
+}
+.btn-back:hover{border-color:var(--slate);color:var(--ink)}
+.btn-next{
+  flex:1;padding:14px 24px;border-radius:100px;
+  background:var(--navy);border:none;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:0.95rem;
+  color:#fff;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-next:hover{background:var(--teal);transform:translateY(-1px)}
+.btn-next:disabled{background:var(--border);color:var(--slate);cursor:not-allowed;transform:none}
+
+/* ── ANALYZING SCREEN ── */
+.analyzing{text-align:center;padding:60px 20px}
+.pulse-ring{
+  width:100px;height:100px;border-radius:50%;
+  background:var(--teal-pale);border:3px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;margin:0 auto 32px;
+  animation:breathe 2s ease-in-out infinite;
+  position:relative;
+}
+.pulse-ring::before,.pulse-ring::after{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  border:2px solid var(--teal);opacity:.5;
+  animation:ripple 2s ease-out infinite;
+}
+.pulse-ring::after{animation-delay:.5s}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes ripple{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
+.analyzing h2{
+  font-family:'Libre Baskerville',serif;font-size:1.6rem;
+  color:var(--navy);margin-bottom:12px;
+}
+.analyzing p{color:var(--slate);font-size:0.95rem;margin-bottom:36px}
+.analyze-steps{
+  display:flex;flex-direction:column;gap:10px;
+  max-width:360px;margin:0 auto;
+}
+.a-step{
+  display:flex;align-items:center;gap:12px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;padding:12px 16px;font-size:0.88rem;
+  transition:all .4s;opacity:.3;
+}
+.a-step.done{opacity:1;border-color:var(--teal);background:var(--teal-pale)}
+.a-step.done .a-step-icon{color:var(--teal)}
+.a-step-icon{font-size:1rem;flex-shrink:0}
+
+/* ── RESULTS SCREEN ── */
+.results-header{
+  background:var(--navy);border-radius:24px;
+  padding:36px 36px 28px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.results-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),#00D4B8,var(--teal));
+}
+.results-greeting{font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:6px}
+.results-title{
+  font-family:'Libre Baskerville',serif;font-size:1.6rem;
+  color:#fff;margin-bottom:20px;
+}
+.overall-score-row{
+  display:flex;align-items:center;gap:24px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:20px 24px;
+  flex-wrap:wrap;gap:16px;
+}
+.overall-ring{
+  width:70px;height:70px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;
+  color:#fff;flex-shrink:0;position:relative;
+}
+.overall-label{
+  font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:4px;
+}
+.overall-desc{font-size:0.83rem;color:rgba(255,255,255,0.5);line-height:1.5}
+
+/* Risk cards */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.risk-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:20px;
+  transition:transform .2s;
+}
+.risk-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.08)}
+.risk-disease{font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.risk-level{
+  font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:12px;
+}
+.risk-low{background:#E8F5E9;color:#2E7D32}
+.risk-moderate{background:#FFF3E0;color:#E65100}
+.risk-high{background:#FFEBEE;color:#C62828}
+.risk-bar-wrap{height:6px;background:var(--off);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.risk-bar-fill{height:100%;border-radius:3px;transition:width 1s ease .3s}
+.risk-pct{font-size:0.78rem;color:var(--slate);text-align:right}
+
+/* Recommendations */
+.rec-section{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:20px}
+.rec-title{font-weight:800;font-size:1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.rec-item{
+  display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px solid var(--off);
+}
+.rec-item:last-child{border:none;padding-bottom:0}
+.rec-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--teal-pale);display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.rec-text h5{font-size:0.9rem;font-weight:700;margin-bottom:3px}
+.rec-text p{font-size:0.82rem;color:var(--slate);line-height:1.55}
+
+/* CTA */
+.results-cta{
+  background:linear-gradient(135deg,var(--navy),#0D3B6E);
+  border-radius:20px;padding:32px;text-align:center;
+}
+.results-cta h3{
+  font-family:'Libre Baskerville',serif;font-size:1.3rem;
+  color:#fff;margin-bottom:8px;
+}
+.results-cta p{color:rgba(255,255,255,0.55);font-size:0.88rem;margin-bottom:24px;line-height:1.6}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn-cta-primary{
+  background:var(--teal);color:var(--navy);
+  padding:13px 28px;border-radius:100px;
+  font-weight:800;font-size:0.9rem;border:none;cursor:pointer;
+  transition:all .2s;
+}
+.btn-cta-primary:hover{background:#00D4B8;transform:translateY(-1px)}
+.btn-cta-secondary{
+  background:transparent;color:#fff;
+  padding:13px 28px;border-radius:100px;
+  font-weight:700;font-size:0.9rem;
+  border:1.5px solid rgba(255,255,255,0.2);cursor:pointer;
+  transition:all .2s;
+}
+.btn-cta-secondary:hover{border-color:var(--teal);color:var(--teal)}
+.btn-restart{
+  background:transparent;color:var(--slate);
+  padding:10px;border:none;cursor:pointer;
+  font-size:0.83rem;margin-top:12px;
+  text-decoration:underline;
+  font-family:'Outfit',sans-serif;
+}
+
+@media(max-width:560px){
+  .risk-grid{grid-template-columns:1fr}
+  .info-cards{grid-template-columns:1fr}
+  .overall-score-row{flex-direction:column;text-align:center}
+  .stat-row{gap:20px}
+  .welcome-hero{padding:36px 24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-pulse">🩺</div>
+    <div class="logo-text">Predi<span>Care</span></div>
+  </div>
+  <div class="header-right">
+    <div class="progress-label" id="progress-label">Step 0 of 12</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ══ SCREEN: WELCOME ══ -->
+  <div class="screen active" id="screen-welcome">
+    <div class="welcome-hero">
+      <div class="welcome-eyebrow">AI Health Risk Assessment</div>
+      <h1 class="welcome-title">Know your risk before<br><em>it becomes a crisis</em></h1>
+      <p class="welcome-sub">Answer 12 questions. Get your personalized disease risk score for diabetes, heart disease, and more — in under 5 minutes.</p>
+      <div class="stat-row">
+        <div class="stat-item"><div class="stat-n">12</div><div class="stat-l">Questions</div></div>
+        <div class="stat-item"><div class="stat-n">5 min</div><div class="stat-l">To complete</div></div>
+        <div class="stat-item"><div class="stat-n">5 risks</div><div class="stat-l">Analyzed</div></div>
+        <div class="stat-item"><div class="stat-n">Free</div><div class="stat-l">Always</div></div>
+      </div>
+      <button class="btn-start" onclick="startAssessment()">
+        Start Assessment <span class="btn-arrow">→</span>
+      </button>
+      <div class="trust-row">
+        <div class="trust-item"><span>🔒</span> Private & secure</div>
+        <div class="trust-item"><span>🩺</span> Clinically informed</div>
+        <div class="trust-item"><span>🇮🇳</span> Built for India</div>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-icon">🔮</div>
+        <h4>Predict Before Symptoms</h4>
+        <p>Our AI identifies risk patterns 2–5 years before most conditions become clinically apparent. Current beta covers 5 key conditions — full 14-disease dashboard launching Q3 2026 — Bihar & Hindi belt first, pan-India by Q1 2027.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🛡️</div>
+        <h4>Personalized Prevention</h4>
+        <p>You'll receive specific, actionable steps tailored to your unique risk profile and lifestyle.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📊</div>
+        <h4>Evidence-Based Scoring</h4>
+        <p>Risk models benchmarked against leading clinical research datasets spanning 50M+ de-identified records from public health consortia across populations similar to yours.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🤝</div>
+        <h4>Doctor-Ready Reports</h4>
+        <p>Share your results directly with your physician for a more productive consultation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: QUESTIONS ══ -->
+  <div class="screen" id="screen-questions">
+    <div class="q-header">
+      <div class="q-section-tag" id="q-section">Basic Profile</div>
+      <div class="q-number" id="q-number">Question 1 of 12</div>
+      <div class="q-text" id="q-text">Loading...</div>
+      <div class="q-why" id="q-why"><span class="q-why-icon">💡</span><span id="q-why-text"></span></div>
+    </div>
+    <div id="q-answer-area"></div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: ANALYZING ══ -->
+  <div class="screen" id="screen-analyzing">
+    <div class="analyzing">
+      <div class="pulse-ring">🧬</div>
+      <h2>Analyzing your health profile…</h2>
+      <p>Our AI is running your responses through<br>5 key disease risk models right now.</p>
+      <div class="analyze-steps">
+        <div class="a-step" id="as-1"><span class="a-step-icon">📋</span> Processing health profile</div>
+        <div class="a-step" id="as-2"><span class="a-step-icon">🔬</span> Running diabetes risk model</div>
+        <div class="a-step" id="as-3"><span class="a-step-icon">🫀</span> Analyzing cardiovascular risk</div>
+        <div class="a-step" id="as-4"><span class="a-step-icon">📊</span> Calculating BMI & metabolic risk</div>
+        <div class="a-step" id="as-5"><span class="a-step-icon">🛡️</span> Building prevention plan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: RESULTS ══ -->
+  <div class="screen" id="screen-results">
+    <div class="results-header">
+      <div class="results-greeting" id="results-greeting">Your Health Risk Report</div>
+      <div class="results-title" id="results-title">Here's what your body is telling us</div>
+      <div class="overall-score-row">
+        <div class="overall-ring" id="overall-ring">—</div>
+        <div>
+          <div class="overall-label" id="overall-label">Overall Risk Level</div>
+          <div class="overall-desc" id="overall-desc">Loading your personalized analysis…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="risk-grid" id="risk-grid"></div>
+
+    <div class="rec-section">
+      <div class="rec-title">🎯 Your Top 4 Actions This Month</div>
+      <div id="rec-list"></div>
+    </div>
+
+    <div class="results-cta">
+      <h3>This is just the beginning</h3>
+      <p>Join 1,000 founding members to get your full 14-disease risk dashboard (launching Q3 2026), weekly prevention coaching, wearable sync, and doctor-ready PDF reports — free for 3 months.</p>
+      <div class="cta-btns">
+        <button class="btn-cta-primary">Join Early Access →</button>
+        <button class="btn-cta-secondary">Share My Results</button>
+      </div>
+      <button class="btn-restart" onclick="restart()">↩ Take assessment again</button>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+const questions = [
+  {
+    section:"Basic Profile", text:"How old are you?",
+    why:"Age is the single strongest predictor of chronic disease risk — risk roughly doubles every decade after 35.",
+    type:"slider", min:18, max:80, default:35, unit:"years old",
+    key:"age"
+  },
+  {
+    section:"Basic Profile", text:"What is your biological sex?",
+    why:"Men and women face different disease risk profiles. Men have higher early heart disease risk; women face higher autoimmune risk.",
+    type:"options", options:["Male","Female","Prefer not to say"], key:"sex"
+  },
+  {
+    section:"Basic Profile", text:"What is your approximate weight?",
+    why:"Body weight combined with height gives us your BMI — a core metabolic risk indicator.",
+    type:"slider", min:40, max:150, default:70, unit:"kg", key:"weight"
+  },
+  {
+    section:"Basic Profile", text:"What is your approximate height?",
+    why:"Used with your weight to calculate BMI and metabolic risk baseline.",
+    type:"slider", min:140, max:210, default:165, unit:"cm", key:"height"
+  },
+  {
+    section:"Lifestyle", text:"How would you describe your physical activity level?",
+    why:"Physical inactivity increases type 2 diabetes risk by 50% and heart disease risk by 35%.",
+    type:"options",
+    options:["Sedentary (mostly sitting, no exercise)","Light (1–2 times per week)","Moderate (3–4 times per week)","Active (5+ times per week, intense)"],
+    key:"activity"
+  },
+  {
+    section:"Lifestyle", text:"How would you describe your typical diet?",
+    why:"Diet quality is the #1 modifiable risk factor for diabetes, cardiovascular disease, and certain cancers.",
+    type:"options",
+    options:["Mostly processed / fast food","Mixed — some healthy, some not","Mostly home-cooked, balanced","Very healthy — low sugar, high fibre"],
+    key:"diet"
+  },
+  {
+    section:"Lifestyle", text:"How many hours of sleep do you get on a typical night?",
+    why:"Both under-sleeping (<6h) and oversleeping (>9h) significantly increase metabolic and cardiovascular risk.",
+    type:"options",
+    options:["Less than 5 hours","5–6 hours","7–8 hours (recommended)","More than 9 hours"],
+    key:"sleep"
+  },
+  {
+    section:"Lifestyle", text:"Do you smoke or use tobacco?",
+    why:"Tobacco use doubles the risk of heart attack, triples stroke risk, and is the leading cause of preventable cancer.",
+    type:"options",
+    options:["Never smoked","Quit more than 1 year ago","Occasional / social smoker","Daily smoker"],
+    key:"smoking"
+  },
+  {
+    section:"Medical History", text:"Has a doctor ever told you that you have high blood pressure (hypertension)?",
+    why:"Hypertension affects 1 in 4 Indian adults and dramatically amplifies heart, kidney, and stroke risk.",
+    type:"options", options:["No, blood pressure is normal","Yes, but it's controlled with medication","Yes, and it's not well controlled","I don't know / never checked"],
+    key:"bp"
+  },
+  {
+    section:"Medical History", text:"Has a doctor ever told you that you have high blood sugar or pre-diabetes?",
+    why:"Pre-diabetes affects 136 million Indians and converts to full diabetes within 5 years in 1 in 3 cases without intervention.",
+    type:"options", options:["No, blood sugar is normal","Pre-diabetic (borderline high)","Yes, I have Type 2 diabetes","I don't know / never tested"],
+    key:"sugar"
+  },
+  {
+    section:"Family History", text:"Do any of your blood relatives (parents, siblings) have diabetes or heart disease?",
+    why:"Family history doubles to quadruples your genetic risk for diabetes and cardiovascular disease.",
+    type:"options",
+    options:["No family history","Diabetes in family","Heart disease in family","Both diabetes and heart disease in family"],
+    key:"family"
+  },
+  {
+    section:"Stress & Mental Health", text:"How would you rate your average stress level over the past 3 months?",
+    why:"Chronic high stress elevates cortisol, which raises blood sugar, blood pressure, and inflammation — all core disease drivers.",
+    type:"options",
+    options:["Low — generally calm and relaxed","Moderate — occasional stressful periods","High — frequently stressed","Very high — stressed almost every day"],
+    key:"stress"
+  }
+];
+
+let current = 0;
+let answers = {};
+let sliderVal = null;
+
+function startAssessment(){
+  showScreen('screen-questions');
+  renderQuestion(0);
+  updateProgress();
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  const pct = Math.round((current/questions.length)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-label').textContent = `Step ${current} of ${questions.length}`;
+}
+
+function renderQuestion(idx){
+  const q = questions[idx];
+  document.getElementById('q-section').textContent = q.section;
+  document.getElementById('q-number').textContent = `Question ${idx+1} of ${questions.length}`;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-why-text').textContent = q.why;
+
+  const area = document.getElementById('q-answer-area');
+  area.innerHTML = '';
+  document.getElementById('btn-next').disabled = !(q.key in answers);
+
+  if(q.type === 'options'){
+    const div = document.createElement('div');
+    div.className = 'answers';
+    q.options.forEach((opt,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'answer-btn' + (answers[q.key] === opt ? ' selected' : '');
+      btn.innerHTML = `<span class="answer-letter">${String.fromCharCode(65+i)}</span>${opt}`;
+      btn.onclick = ()=>{
+        answers[q.key] = opt;
+        document.querySelectorAll('.answer-btn').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('btn-next').disabled = false;
+      };
+      div.appendChild(btn);
+    });
+    area.appendChild(div);
+  } else if(q.type === 'slider'){
+    const val = answers[q.key] ?? q.default;
+    sliderVal = val;
+    const div = document.createElement('div');
+    div.className = 'slider-wrap';
+    div.innerHTML = `
+      <div class="slider-value" id="sv">${val}</div>
+      <div class="slider-unit">${q.unit}</div>
+      <input type="range" min="${q.min}" max="${q.max}" value="${val}" id="sl"
+        oninput="updateSlider(this,${q.min},${q.max},'${q.key}')"/>
+      <div class="slider-labels"><span>${q.min}</span><span>${q.max}</span></div>`;
+    area.appendChild(div);
+    updateSliderTrack(document.querySelector('#sl'), q.min, q.max);
+    answers[q.key] = val;
+    document.getElementById('btn-next').disabled = false;
+  }
+}
+
+function updateSlider(el,min,max,key){
+  const v = parseInt(el.value);
+  document.getElementById('sv').textContent = v;
+  answers[key] = v;
+  sliderVal = v;
+  updateSliderTrack(el,min,max);
+  document.getElementById('btn-next').disabled = false;
+}
+
+function updateSliderTrack(el,min,max){
+  if(!el) return;
+  const pct = ((parseInt(el.value)-min)/(max-min))*100;
+  el.style.setProperty('--pct', pct+'%');
+}
+
+function goNext(){
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion(current);
+    updateProgress();
+  } else {
+    runAnalysis();
+  }
+}
+
+function goBack(){
+  if(current > 0){
+    current--;
+    renderQuestion(current);
+    updateProgress();
+  } else {
+    showScreen('screen-welcome');
+    current = 0;
+    updateProgress();
+  }
+}
+
+function runAnalysis(){
+  showScreen('screen-analyzing');
+  const steps = ['as-1','as-2','as-3','as-4','as-5'];
+  steps.forEach((id,i)=>{
+    setTimeout(()=>{
+      document.getElementById(id).classList.add('done');
+    }, 600 + i*700);
+  });
+  setTimeout(()=>showResults(), 5000);
+}
+
+function calcRisks(){
+  const a = answers;
+  const age = a.age || 35;
+  const bmi = a.weight && a.height ? a.weight / ((a.height/100)**2) : 23;
+
+  // Diabetes risk
+  let db = 10;
+  if(age > 45) db += 15; if(age > 55) db += 10;
+  if(bmi > 25) db += 12; if(bmi > 30) db += 10;
+  if(a.activity === 'Sedentary (mostly sitting, no exercise)') db += 18;
+  else if(a.activity === 'Light (1–2 times per week)') db += 8;
+  if(a.diet === 'Mostly processed / fast food') db += 15;
+  else if(a.diet === 'Mixed — some healthy, some not') db += 6;
+  if(a.sugar === 'Pre-diabetic (borderline high)') db += 30;
+  else if(a.sugar === "Yes, I have Type 2 diabetes") db = 95;
+  if(a.family && a.family.includes('Diabetes')) db += 15;
+  if(a.stress === 'Very high — stressed almost every day') db += 8;
+  db = Math.min(db, 95);
+
+  // Heart disease risk
+  let hd = 8;
+  if(age > 45) hd += 14; if(age > 55) hd += 10;
+  if(a.sex === 'Male') hd += 8;
+  if(bmi > 27) hd += 10; if(bmi > 32) hd += 8;
+  if(a.activity === 'Sedentary (mostly sitting, no exercise)') hd += 16;
+  if(a.smoking === 'Daily smoker') hd += 24;
+  else if(a.smoking === 'Occasional / social smoker') hd += 12;
+  if(a.bp === 'Yes, and it\'s not well controlled') hd += 22;
+  else if(a.bp === 'Yes, but it\'s controlled with medication') hd += 10;
+  if(a.family && a.family.includes('Heart disease')) hd += 16;
+  if(a.stress === 'Very high — stressed almost every day') hd += 10;
+  hd = Math.min(hd, 90);
+
+  // Obesity / metabolic
+  let ob = 5;
+  if(bmi > 23) ob += 15; if(bmi > 27) ob += 20; if(bmi > 30) ob += 25;
+  if(a.activity === 'Sedentary (mostly sitting, no exercise)') ob += 20;
+  if(a.diet === 'Mostly processed / fast food') ob += 18;
+  if(a.sleep === 'Less than 5 hours') ob += 12;
+  ob = Math.min(ob, 90);
+
+  // Hypertension risk
+  let ht = 8;
+  if(age > 40) ht += 14; if(age > 55) ht += 10;
+  if(bmi > 27) ht += 14; if(a.smoking === 'Daily smoker') ht += 14;
+  if(a.stress === 'Very high — stressed almost every day') ht += 14;
+  if(a.activity === 'Sedentary (mostly sitting, no exercise)') ht += 10;
+  if(a.bp !== 'No, blood pressure is normal' && a.bp !== undefined) ht += 25;
+  ht = Math.min(ht, 90);
+
+  // Sleep / mental health
+  let sl = 5;
+  if(a.sleep === 'Less than 5 hours') sl += 35;
+  else if(a.sleep === '5–6 hours') sl += 18;
+  else if(a.sleep === 'More than 9 hours') sl += 14;
+  if(a.stress === 'Very high — stressed almost every day') sl += 28;
+  else if(a.stress === 'High — frequently stressed') sl += 16;
+  sl = Math.min(sl, 90);
+
+  return {
+    diabetes: Math.round(db),
+    heart: Math.round(hd),
+    metabolic: Math.round(ob),
+    hypertension: Math.round(ht),
+    sleep: Math.round(sl)
+  };
+}
+
+function riskLevel(pct){ return pct < 30 ? 'low' : pct < 55 ? 'moderate' : 'high'; }
+function riskLabel(pct){ return pct < 30 ? 'Low Risk' : pct < 55 ? 'Moderate Risk' : 'High Risk'; }
+function riskColor(pct){ return pct < 30 ? 'var(--green)' : pct < 55 ? 'var(--amber)' : 'var(--red)'; }
+
+function showResults(){
+  const risks = calcRisks();
+  const avg = Math.round(Object.values(risks).reduce((a,b)=>a+b)/5);
+
+  // Overall
+  const ring = document.getElementById('overall-ring');
+  ring.textContent = avg + '%';
+  ring.style.background = `radial-gradient(circle, rgba(10,37,64,0.9), rgba(10,37,64,0.95))`;
+  ring.style.border = `3px solid ${riskColor(avg)}`;
+  ring.style.color = riskColor(avg);
+
+  document.getElementById('overall-label').textContent = riskLabel(avg) + ' — Overall';
+  document.getElementById('overall-desc').textContent =
+    avg < 30
+      ? 'Your lifestyle signals are generally healthy. Keep it up and stay proactive.'
+      : avg < 55
+      ? 'You have some risk areas worth monitoring closely. Small changes now make a big difference.'
+      : 'Several risk factors are elevated. Early action is the most powerful thing you can do right now.';
+
+  // Risk cards
+  const riskData = [
+    {disease:'Diabetes Risk', pct:risks.diabetes, icon:'🍬'},
+    {disease:'Heart Disease Risk', pct:risks.heart, icon:'🫀'},
+    {disease:'Metabolic / BMI Risk', pct:risks.metabolic, icon:'⚖️'},
+    {disease:'Hypertension Risk', pct:risks.hypertension, icon:'🩸'},
+    {disease:'Sleep & Stress Risk', pct:risks.sleep, icon:'😴'}
+  ];
+
+  const grid = document.getElementById('risk-grid');
+  grid.innerHTML = '';
+  riskData.forEach(r=>{
+    const card = document.createElement('div');
+    card.className = 'risk-card';
+    card.innerHTML = `
+      <div class="risk-disease">${r.icon} ${r.disease}</div>
+      <span class="risk-level risk-${riskLevel(r.pct)}">${riskLabel(r.pct)}</span>
+      <div class="risk-bar-wrap"><div class="risk-bar-fill" style="width:${r.pct}%;background:${riskColor(r.pct)}"></div></div>
+      <div class="risk-pct">${r.pct}% risk score</div>`;
+    grid.appendChild(card);
+  });
+
+  // Recommendations
+  const allRecs = [];
+  if(risks.diabetes > 30) allRecs.push({icon:'🍎',title:'Reduce refined sugar & white rice',body:'Replace with whole grains, legumes, and vegetables. This single change can reduce diabetes risk by up to 30%.'});
+  if(answers.activity === 'Sedentary (mostly sitting, no exercise)' || risks.heart > 30) allRecs.push({icon:'🚶',title:'Start a 20-minute daily walk',body:'Even 20 minutes of brisk walking 5 days a week reduces cardiovascular and metabolic risk by 20–35%.'});
+  if(risks.hypertension > 30) allRecs.push({icon:'🧘',title:'Reduce salt intake + manage stress',body:'Lowering daily sodium to <2g and practising 10 minutes of daily mindfulness can lower blood pressure meaningfully.'});
+  if(answers.sleep === 'Less than 5 hours' || answers.sleep === '5–6 hours') allRecs.push({icon:'😴',title:'Prioritize 7–8 hours of sleep',body:'Sleep deprivation increases cortisol, blood sugar, and hunger hormones — directly elevating metabolic risk.'});
+  if(answers.smoking === 'Daily smoker' || answers.smoking === 'Occasional / social smoker') allRecs.push({icon:'🚭',title:'Start a tobacco cessation plan',body:'Quitting smoking reduces heart attack risk by 50% within 1 year. Ask your doctor about nicotine replacement therapy.'});
+  allRecs.push({icon:'🩺',title:'Get a full blood panel this month',body:'A fasting glucose, HbA1c, lipid profile, and blood pressure check costs ₹500–800 and gives you the real numbers.'});
+
+  const recList = document.getElementById('rec-list');
+  recList.innerHTML = '';
+  allRecs.slice(0,4).forEach(r=>{
+    const item = document.createElement('div');
+    item.className = 'rec-item';
+    item.innerHTML = `<div class="rec-icon">${r.icon}</div><div class="rec-text"><h5>${r.title}</h5><p>${r.body}</p></div>`;
+    recList.appendChild(item);
+  });
+
+  showScreen('screen-results');
+}
+
+function restart(){
+  current = 0;
+  answers = {};
+  sliderVal = null;
+  updateProgress();
+  showScreen('screen-welcome');
+}
+
+// Init
+updateProgress();
+</script>
+</body>
+</html>

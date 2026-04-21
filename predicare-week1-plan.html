@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PrediCare AI — Week 1 Launch Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E0E0E; --surface:#161616; --card:#1C1C1C;
+  --border:#2A2A2A; --teal:#00C2A3; --teal-dim:#007A67;
+  --gold:#F0C040; --rose:#FF5A5A; --blue:#5B8DEF;
+  --white:#FFFFFF; --muted:#888; --text:#E8E8E8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:20px 6vw;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:99;
+}
+.h-logo{font-family:'Instrument Serif',serif;font-size:1.3rem;color:var(--white);display:flex;align-items:center;gap:8px}
+.h-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.h-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal);background:rgba(0,194,163,0.1);border:1px solid rgba(0,194,163,0.2);
+  padding:5px 12px;border-radius:4px;
+}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 6vw 60px;max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;
+}
+.hero-left{}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+}
+.hero-title{
+  font-family:'Instrument Serif',serif;font-size:clamp(2.4rem,5vw,4rem);
+  color:var(--white);line-height:1.1;margin-bottom:16px;
+}
+.hero-title em{font-style:italic;color:var(--teal)}
+.hero-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:540px;margin-bottom:32px}
+.hero-metrics{display:flex;gap:32px;flex-wrap:wrap}
+.h-metric{}
+.h-metric-n{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--teal)}
+.h-metric-l{font-size:0.75rem;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;margin-top:2px}
+
+.countdown-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:28px;min-width:200px;text-align:center;
+  flex-shrink:0;
+}
+.cd-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.cd-days{font-family:'Instrument Serif',serif;font-size:4rem;color:var(--teal);line-height:1}
+.cd-sub{font-size:0.75rem;color:var(--muted);margin-top:8px}
+.cd-progress{height:4px;background:var(--border);border-radius:2px;margin-top:20px;overflow:hidden}
+.cd-fill{height:100%;background:var(--teal);border-radius:2px;width:14.28%}
+
+/* ── DAILY PLAN ── */
+.days-section{max-width:960px;margin:0 auto;padding:0 6vw 80px}
+.days-title{
+  font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--white);
+  margin-bottom:8px;
+}
+.days-sub{font-size:0.9rem;color:var(--muted);margin-bottom:40px}
+
+.day-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  overflow:hidden;margin-bottom:16px;
+  transition:border-color .2s;
+}
+.day-card:hover{border-color:rgba(0,194,163,0.3)}
+.day-card.today{border-color:var(--teal);box-shadow:0 0 0 1px rgba(0,194,163,0.2)}
+
+.day-header{
+  padding:20px 28px;
+  display:flex;align-items:center;gap:20px;cursor:pointer;
+  user-select:none;
+}
+.day-number{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);flex-shrink:0;min-width:52px;
+}
+.day-name{font-weight:800;font-size:1.05rem;color:var(--white);flex:1}
+.day-theme{font-size:0.82rem;color:var(--muted);flex:1;text-align:right}
+.day-status{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;flex-shrink:0;
+}
+.status-today{background:rgba(0,194,163,0.15);color:var(--teal);border:1px solid rgba(0,194,163,0.3)}
+.status-future{background:var(--border);color:var(--muted)}
+.day-chevron{color:var(--muted);transition:transform .2s;flex-shrink:0}
+.day-card.open .day-chevron{transform:rotate(90deg)}
+
+.day-today-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal);background:rgba(0,194,163,0.1);
+  padding:3px 8px;border-radius:3px;flex-shrink:0;
+}
+
+.day-body{
+  display:none;padding:0 28px 28px;
+}
+.day-card.open .day-body{display:block}
+
+.task-list{display:flex;flex-direction:column;gap:0}
+.task{
+  display:flex;gap:16px;padding:16px 0;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.task:last-child{border:none}
+.task-time{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);
+  min-width:60px;padding-top:2px;flex-shrink:0;
+}
+.task-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;
+}
+.task-content{flex:1}
+.task-label{font-weight:700;font-size:0.93rem;color:var(--white);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.task-detail{font-size:0.83rem;color:var(--muted);line-height:1.6}
+.task-tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:3px;font-weight:600;
+}
+.tag-build{background:rgba(91,141,239,0.15);color:var(--blue)}
+.tag-launch{background:rgba(0,194,163,0.12);color:var(--teal)}
+.tag-outreach{background:rgba(240,192,64,0.12);color:var(--gold)}
+.tag-admin{background:rgba(136,136,136,0.1);color:var(--muted)}
+.tag-critical{background:rgba(255,90,90,0.12);color:var(--rose)}
+
+.task-checkbox{
+  width:18px;height:18px;border-radius:5px;
+  border:1.5px solid var(--border);flex-shrink:0;margin-top:2px;
+  cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;
+}
+.task-checkbox.checked{background:var(--teal);border-color:var(--teal)}
+.task-checkbox.checked::after{content:'✓';font-size:0.65rem;color:#fff;font-weight:800}
+.task.done .task-label{text-decoration:line-through;color:var(--muted)}
+
+.day-goal{
+  margin-top:20px;padding:16px 20px;
+  background:rgba(0,194,163,0.06);border:1px solid rgba(0,194,163,0.15);
+  border-radius:12px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.day-goal-icon{font-size:1rem;flex-shrink:0}
+.day-goal-text{font-size:0.85rem;color:var(--teal);line-height:1.55}
+.day-goal-text strong{display:block;margin-bottom:2px;font-weight:800}
+
+/* ── METRICS TRACKER ── */
+.metrics-section{max-width:960px;margin:0 auto;padding:0 6vw 60px}
+.metrics-title{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--white);margin-bottom:8px}
+.metrics-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.metric-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+}
+.metric-icon{font-size:1.4rem;margin-bottom:12px}
+.metric-current{
+  font-family:'Instrument Serif',serif;font-size:2.4rem;color:var(--teal);line-height:1;
+  margin-bottom:4px;
+}
+.metric-name{font-size:0.82rem;color:var(--muted);margin-bottom:8px}
+.metric-target{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);
+  padding-top:10px;border-top:1px solid var(--border);
+}
+
+/* ── RESOURCES ── */
+.resources-section{max-width:960px;margin:0 auto;padding:0 6vw 80px}
+.resources-title{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--white);margin-bottom:8px}
+.resources-sub{font-size:0.9rem;color:var(--muted);margin-bottom:32px}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.resource-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+  transition:border-color .2s;
+}
+.resource-card:hover{border-color:rgba(0,194,163,0.3)}
+.res-icon{font-size:1.6rem;margin-bottom:12px}
+.res-title{font-weight:800;font-size:0.95rem;color:var(--white);margin-bottom:6px}
+.res-body{font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.res-link{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:.05em;
+  color:var(--teal);text-decoration:none;
+}
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid var(--border);
+  padding:40px 6vw;max-width:960px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
+}
+.footer-left{font-size:0.82rem;color:var(--muted)}
+.footer-right{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--teal);
+}
+
+@media(max-width:680px){
+  .hero{grid-template-columns:1fr}
+  .countdown-box{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="h-logo"><div class="h-logo-dot"></div> PrediCare AI</div>
+  <div class="h-badge">Week 1 Launch Plan</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Day 1 → Day 7 · Execution Blueprint</div>
+    <h1 class="hero-title">Everything you do<br>this week <em>matters</em><br>most.</h1>
+    <p class="hero-sub">The first 7 days of a startup are uniquely powerful. You have no reputation to protect, no users to disappoint, and no process to follow. Use that freedom. This plan tells you exactly what to do, when, and why.</p>
+    <div class="hero-metrics">
+      <div class="h-metric"><div class="h-metric-n">7</div><div class="h-metric-l">Days</div></div>
+      <div class="h-metric"><div class="h-metric-n">47</div><div class="h-metric-l">Specific tasks</div></div>
+      <div class="h-metric"><div class="h-metric-n">1,000</div><div class="h-metric-l">Waitlist goal</div></div>
+      <div class="h-metric"><div class="h-metric-n">3</div><div class="h-metric-l">Investor meetings</div></div>
+    </div>
+  </div>
+  <div class="countdown-box">
+    <div class="cd-label">Day</div>
+    <div class="cd-days" id="cd-days">1</div>
+    <div class="cd-sub">of your launch week</div>
+    <div class="cd-progress"><div class="cd-fill" id="cd-fill"></div></div>
+  </div>
+</div>
+
+<!-- DAY-BY-DAY PLAN -->
+<div class="days-section">
+  <h2 class="days-title">Your 7-Day Execution Plan</h2>
+  <p class="days-sub">Click each day to expand. Check off tasks as you complete them. Focus on today — don't skip ahead.</p>
+
+  <!-- DAY 1 -->
+  <div class="day-card today open" id="day1">
+    <div class="day-header" onclick="toggleDay('day1')">
+      <div class="day-number">Day 01</div>
+      <div class="day-name">Monday — Foundation Day</div>
+      <div class="day-today-badge">START HERE</div>
+      <div class="day-theme">Set up everything</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t1-1">
+          <div class="task-time">9 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-1')"></div>Register predicare.ai domain <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">Go to GoDaddy or Namecheap right now. Also register @PrediCareAI on Twitter/X, LinkedIn, and Instagram. These handles will be taken if you wait. Cost: ~₹800/year for the domain.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-2">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-2')"></div>Deploy landing page on Vercel <span class="task-tag tag-launch">LAUNCH</span> <span class="task-tag tag-critical">CRITICAL</span></div>
+            <div class="task-detail">Create a free Vercel account. Connect your GitHub. Upload the landing page HTML you already have. Point your domain to it. You'll have a live website before lunch. This is your single most important task today.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-3">
+          <div class="task-time">11 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-3')"></div>Connect Mailchimp waitlist to landing page <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">Free Mailchimp account → create an audience → embed the form on your landing page. Every email you collect is a potential user, investor contact, and beta tester. Set up an auto-reply: "You're on the list — we launch in Bihar & the Hindi belt Q3 2026 — Bihar & Hindi belt first, pan-India by Q1 2027."</div>
+          </div>
+        </div>
+        <div class="task" id="t1-4">
+          <div class="task-time">1 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-4')"></div>Create LinkedIn company page for PrediCare AI <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Use the exact copy from your Brand Kit. Upload the logo, set the tagline, fill out all fields. Then post your FIRST company update: "We're building the AI that predicts disease before it happens. Watch this space." Simple. No overthinking.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-5">
+          <div class="task-time">2 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-5')"></div>Set up Twitter/X @PrediCareAI <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Copy your bio from the Brand Kit. Upload the logo as profile pic, navy gradient as header. Follow 50 relevant accounts: @KalaariCapital, @BlueVentures, @iSPIRT, @NASSOCOMHealth, and 40+ healthtech founders. Twitter/X is your fastest path to investor attention.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-6">
+          <div class="task-time">3 PM</div>
+          <div class="task-dot" style="background:#FF5A5A"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-6')"></div>Update your personal LinkedIn headline <span class="task-tag tag-critical">CRITICAL</span></div>
+            <div class="task-detail">Change your headline to: "Founder @ PrediCare AI | Building AI that predicts disease before it happens | Preventive Health for India's 1.4B". This alone will start attracting inbound messages. Every person who visits your profile now knows what you're building.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-7">
+          <div class="task-time">4 PM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-7')"></div>Create <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="314554505c714143545558525043541f5058">[email&#160;protected]</a> email <span class="task-tag tag-admin">ADMIN</span></div>
+            <div class="task-detail">Set up Google Workspace (₹125/month) with <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9eeafbfff3deeeecfbfaf7fdffecfbb0fff7">[email&#160;protected]</a>. This makes every communication look professional instantly. Use it for all investor and partner outreach — not your personal Gmail.</div>
+          </div>
+        </div>
+        <div class="task" id="t1-8">
+          <div class="task-time">5 PM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t1-8')"></div>Tell 20 people personally — message them tonight <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Message 20 friends, family, and colleagues: "I just launched PrediCare AI — an AI that predicts health risks before symptoms appear. Would mean the world if you signed up and shared: predicare.ai". These first 20 signups are your social proof foundation.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 1 Goal: Live website + 20 signups</strong>By midnight: predicare.ai is live, all social handles are created, and you have your first 20 email signups. Everything else this week builds on this foundation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-header" onclick="toggleDay('day2')">
+      <div class="day-number">Day 02</div>
+      <div class="day-name">Tuesday — The Founder Post</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Go public</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t2-1">
+          <div class="task-time">8 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t2-1')"></div>Post your founder story on LinkedIn (personal) <span class="task-tag tag-launch">LAUNCH</span> <span class="task-tag tag-critical">CRITICAL</span></div>
+            <div class="task-detail">Use the founder story post from your Outreach Kit — but personalize it with YOUR real story. The closer it is to your real experience, the more powerful it will be. Post at exactly 8:30 AM IST for maximum weekday reach. Then stay at your desk for 2 hours and reply to every single comment.</div>
+          </div>
+        </div>
+        <div class="task" id="t2-2">
+          <div class="task-time">9 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t2-2')"></div>Post the same story on Twitter/X as a 7-tweet thread <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Use the thread template from your Outreach Kit. Schedule Tweets 2–7 to auto-post every 10 minutes using Buffer (free). This keeps the thread active in feeds for 70 minutes — dramatically increasing total reach.</div>
+          </div>
+        </div>
+        <div class="task" id="t2-3">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t2-3')"></div>DM everyone who liked/commented on your post <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">"Thanks for the support [Name] — you're exactly who we're building this for. Here's your personal early access link: predicare.ai/early. Would love your honest feedback when you try it." Personalize each message. Target 50+ DMs today.</div>
+          </div>
+        </div>
+        <div class="task" id="t2-4">
+          <div class="task-time">2 PM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t2-4')"></div>Share in 5 WhatsApp groups <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Identify and join: 2 doctor/health professional groups, 1 startup/entrepreneurship group, 1 tech group, 1 college alumni group. Write a personal note — not a generic post. "I've been building something for the past few months and just launched publicly today. Would love your eyes on it." Then share the link.</div>
+          </div>
+        </div>
+        <div class="task" id="t2-5">
+          <div class="task-time">4 PM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t2-5')"></div>Submit to Product Hunt "Coming Soon" page <span class="task-tag tag-admin">ADMIN</span></div>
+            <div class="task-detail">Product Hunt lets you create a "coming soon" page before launch. Start collecting upvotes and followers. Even 50 followers before your PH launch day will dramatically boost your visibility on launch day itself.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 2 Goal: 100–200 waitlist signups</strong>Your founder post should generate significant traffic. 100 signups by end of day is achievable. Reply to every LinkedIn comment — the algorithm will keep showing your post to new people for 48 hours.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-header" onclick="toggleDay('day3')">
+      <div class="day-number">Day 03</div>
+      <div class="day-name">Wednesday — Doctor Outreach</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Build credibility</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t3-1">
+          <div class="task-time">9 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t3-1')"></div>Identify 20 doctors on LinkedIn in Patna + Hindi belt <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Search LinkedIn: "General Physician Patna", "Cardiologist Patna", "Physician Bihar". Find 20 doctors with active LinkedIn profiles and 500+ connections. They are opinion leaders — 1 doctor endorsement = 200 patients.</div>
+          </div>
+        </div>
+        <div class="task" id="t3-2">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t3-2')"></div>Comment thoughtfully on 10 doctors' recent posts <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Before DMing, engage first. Leave a 2–3 sentence intelligent comment on their most recent posts. "This is exactly the kind of preventive thinking we need more of in India. The gap between detection and intervention is costing millions of lives." This warms them before your DM arrives.</div>
+          </div>
+        </div>
+        <div class="task" id="t3-3">
+          <div class="task-time">11 AM</div>
+          <div class="task-dot" style="background:#00C2A3"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t3-3')"></div>Post the data-driven LinkedIn post (10 statistics) <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Use the "10 numbers" post from your Outreach Kit. This is your second major content piece — it builds authority and is highly shareable among healthcare professionals. Post at 11 AM on Wednesday for midweek peak reach.</div>
+          </div>
+        </div>
+        <div class="task" id="t3-4">
+          <div class="task-time">2 PM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t3-4')"></div>Start building your CTO co-founder target list <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">Spend 2 hours on LinkedIn identifying 15 senior ML engineers at Qure.ai, Niramai, Practo, 1mg, mFine, and Apollo247. Note their names, profiles, and one personal detail about their work. Quality of research here = quality of DMs later.</div>
+          </div>
+        </div>
+        <div class="task" id="t3-5">
+          <div class="task-time">4 PM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t3-5')"></div>Register for iSPIRT or NASSCOM HealthTech next event <span class="task-tag tag-admin">ADMIN</span></div>
+            <div class="task-detail">Find their next event or webinar at ispirt.in or nasscom.in. Register and add it to your calendar. If there's a Slack/Discord community, join it today. These communities contain future co-founders, advisors, and customers.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 3 Goal: 300 signups + 1 doctor conversation booked</strong>If even one doctor agrees to a 20-minute feedback call, that's a potential advisor, advocate, and clinical validator rolled into one. Prioritize this above almost everything else today.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day4">
+    <div class="day-header" onclick="toggleDay('day4')">
+      <div class="day-number">Day 04</div>
+      <div class="day-name">Thursday — First Investor Emails</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Start the round</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t4-1">
+          <div class="task-time">9 AM</div>
+          <div class="task-dot" style="background:#FF5A5A"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t4-1')"></div>Map your LinkedIn 2nd-degree connections to 12 target investors <span class="task-tag tag-critical">CRITICAL</span></div>
+            <div class="task-detail">Go through each of the 12 target investors from your Outreach Kit. Lead with the Bihar-first angle — it is genuinely differentiated. Every other health AI founder says "Bengaluru". You are the only one who can credibly say "I am building for the 130M people in Bihar who every other startup ignores." Search their LinkedIn profiles and look at your shared connections. For each shared connection, note the relationship strength (close friend vs. acquaintance). A warm intro is 10x more valuable than cold email.</div>
+          </div>
+        </div>
+        <div class="task" id="t4-2">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t4-2')"></div>Request 3–5 warm intro emails from your connectors <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Use the warm intro request template from your Outreach Kit. Write the 2-paragraph blurb FOR them so all they need to do is forward it. Start with investors connected to people you trust most. Never ask one person to intro you to more than 2 investors at once — it dilutes their credibility.</div>
+          </div>
+        </div>
+        <div class="task" id="t4-3">
+          <div class="task-time">11 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t4-3')"></div>Send 3 cold emails to bottom-tier investors on your list <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Start with your 3 lowest-priority investors first. This is practice — you'll refine your pitch based on how they respond (or don't). Use the cold email template but personalize the fund reference paragraph for each one. Track open rates with a free tool like Mailtrack.</div>
+          </div>
+        </div>
+        <div class="task" id="t4-4">
+          <div class="task-time">2 PM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t4-4')"></div>Apply to YC Co-Founder Matching platform <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">Create your profile at ycombinator.com/cofounder-matching. Fill it out completely — company description, what you're looking for, your background. This is where the most serious technical talent actively looking for co-founder opportunities is concentrated.</div>
+          </div>
+        </div>
+        <div class="task" id="t4-5">
+          <div class="task-time">4 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t4-5')"></div>Send 5 personalized co-founder DMs to ML engineers <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Use your 15-person target list from yesterday. Pick the 5 most promising profiles. Personalize each DM with a specific reference to their work. Quality over quantity — these DMs should take 15 minutes each, not 2 minutes each.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 4 Goal: 3 investor emails sent + 5 co-founder DMs sent</strong>Don't expect replies yet. You're planting seeds. Your waitlist growth (400+ by now) IS your pitch — reference it in every investor email.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day5">
+    <div class="day-header" onclick="toggleDay('day5')">
+      <div class="day-number">Day 05</div>
+      <div class="day-name">Friday — Prototype & Validate</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Show, don't tell</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t5-1">
+          <div class="task-time">9 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t5-1')"></div>Deploy the MVP prototype to predicare.ai/assess <span class="task-tag tag-build">BUILD</span> <span class="task-tag tag-critical">CRITICAL</span></div>
+            <div class="task-detail">You have the interactive health risk assessment prototype from this kit. Deploy it at predicare.ai/assess. Add a banner at the top: "Beta — give us feedback". This is now your most powerful sales tool — it shows investors and users a WORKING product, not just a landing page.</div>
+          </div>
+        </div>
+        <div class="task" id="t5-2">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t5-2')"></div>Post: "We just launched our beta assessment — try it now" <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Post on LinkedIn and Twitter/X with a screenshot of the assessment results screen. "We just launched our beta health risk assessment. Answer 12 questions. Get your personal 5-year disease risk score. It takes 5 minutes and it's free: predicare.ai/assess". Product demos beat all other content for engagement.</div>
+          </div>
+        </div>
+        <div class="task" id="t5-3">
+          <div class="task-time">1 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t5-3')"></div>Conduct 3 user interviews (friends, family, anyone willing) <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">Call 3 people. Ask them to share their screen and take the assessment while you watch and listen. Don't tell them what to do — just observe. Note: where they hesitate, what confuses them, what surprises them in the results. 30 minutes of watching someone use your product = 30 days of guessing.</div>
+          </div>
+        </div>
+        <div class="task" id="t5-4">
+          <div class="task-time">3 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t5-4')"></div>Send the assessment link to all 12 investors you've contacted <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">"Quick update: we just shipped our first working product — a 12-question health risk assessment. 600 people have taken it in 4 days. Would love your thoughts if you have 5 minutes: predicare.ai/assess". This transforms you from "founder with an idea" to "founder shipping product."</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 5 Goal: Working beta live + 600 total signups + 3 user interviews done</strong>Having a live, working product by end of Week 1 is exceptional. Most founders take months to get here. You're doing it in 5 days.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="day6">
+    <div class="day-header" onclick="toggleDay('day6')">
+      <div class="day-number">Day 06</div>
+      <div class="day-name">Saturday — Community & Content</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Build the audience</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t6-1">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t6-1')"></div>Post your co-founder search publicly on LinkedIn <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Use the co-founder search post template from your Outreach Kit. Post it Saturday morning — LinkedIn reach is lower on weekends, but the people who see it on weekends are often the most serious (developers working on side projects, startup people checking in).</div>
+          </div>
+        </div>
+        <div class="task" id="t6-2">
+          <div class="task-time">11 AM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t6-2')"></div>Write your Hacker News "Show HN" post <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">Post on HN: "Show HN: PrediCare AI – Health risk prediction before symptoms, built for India (predicare.ai/assess)". Keep it technical and honest: what you've built, what the problem is, what's working, what's not. HN readers are sophisticated and reward authenticity. Even 50 upvotes = massive reach.</div>
+          </div>
+        </div>
+        <div class="task" id="t6-3">
+          <div class="task-time">1 PM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t6-3')"></div>Schedule next 2 weeks of social content in Buffer <span class="task-tag tag-admin">ADMIN</span></div>
+            <div class="task-detail">Take your Twitter content calendar from the Brand Kit. Schedule Week 2 and Week 3 tweets in Buffer (free for 10 posts). You should never have an empty social calendar again — consistency signals health and seriousness to investors who are quietly watching your accounts.</div>
+          </div>
+        </div>
+        <div class="task" id="t6-4">
+          <div class="task-time">3 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t6-4')"></div>DM 10 more co-founder candidates + 5 more investors <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">Keep the pipeline moving. By now you may have 1–2 co-founder responses and 1–2 investor replies. Follow up with new candidates while the early conversations progress. Never have fewer than 10 active co-founder conversations happening simultaneously.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 6 Goal: 800 signups + Hacker News post live</strong>A good HN post can 10x your growth in a single day. Prepare honest, technical answers for the comments — HN users will ask hard questions about your ML model accuracy, data sources, and regulatory plan. Be ready.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="day7">
+    <div class="day-header" onclick="toggleDay('day7')">
+      <div class="day-number">Day 07</div>
+      <div class="day-name">Sunday — Review & Plan Week 2</div>
+      <div class="day-status status-future">→</div>
+      <div class="day-theme">Reflect & accelerate</div>
+      <div class="day-chevron">▶</div>
+    </div>
+    <div class="day-body">
+      <div class="task-list">
+        <div class="task" id="t7-1">
+          <div class="task-time">10 AM</div>
+          <div class="task-dot" style="background:#888"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t7-1')"></div>Review all 7-day metrics honestly <span class="task-tag tag-admin">ADMIN</span></div>
+            <div class="task-detail">Waitlist signups? Investor emails sent/replied? Co-founder DMs sent/replied? Doctor conversations? Beta users? Write these numbers down. The gap between what you planned and what happened IS your learning. Don't hide from it — it's your roadmap for Week 2.</div>
+          </div>
+        </div>
+        <div class="task" id="t7-2">
+          <div class="task-time">11 AM</div>
+          <div class="task-dot" style="background:#00C2A3"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t7-2')"></div>Write and send Week 1 update email to your waitlist <span class="task-tag tag-launch">LAUNCH</span></div>
+            <div class="task-detail">"Hi [Name], one week in — here's what we've built, what we've learned, and what's coming next." Share your signup numbers, a screenshot of the assessment, 1 user quote, and a preview of Week 2. This is your first "investor update" — write it as if investors are reading it (they might be).</div>
+          </div>
+        </div>
+        <div class="task" id="t7-3">
+          <div class="task-time">1 PM</div>
+          <div class="task-dot" style="background:#5B8DEF"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t7-3')"></div>Identify your 3 biggest Week 1 learnings <span class="task-tag tag-build">BUILD</span></div>
+            <div class="task-detail">What surprised you? What worked better than expected? What failed completely? Write 3 honest paragraphs. These learnings ARE your Week 2 strategy. The founders who improve fastest are the ones who reflect most honestly — not the ones who work the longest hours.</div>
+          </div>
+        </div>
+        <div class="task" id="t7-4">
+          <div class="task-time">3 PM</div>
+          <div class="task-dot" style="background:#F0C040"></div>
+          <div class="task-content">
+            <div class="task-label"><div class="task-checkbox" onclick="checkTask('t7-4')"></div>Book your first 3 investor intro meetings for Week 2 <span class="task-tag tag-outreach">OUTREACH</span></div>
+            <div class="task-detail">By now you should have 1–3 investor responses. Book Calendly slots for Week 2. If you have zero responses, that's data — your subject line or opening paragraph needs to change. A/B test 2 different cold email versions in Week 2. Don't assume. Test.</div>
+          </div>
+        </div>
+      </div>
+      <div class="day-goal">
+        <div class="day-goal-icon">🎯</div>
+        <div class="day-goal-text"><strong>Day 7 Goal: 1,000 waitlist signups + 1 investor meeting booked + 1 co-founder conversation active</strong>If you hit these three numbers, Week 1 was a success. If you didn't — the gap tells you exactly what to fix in Week 2. Either way, you're no longer Day 1. You're a founder who has shipped.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics-section">
+  <h2 class="metrics-title">Track These Numbers Daily</h2>
+  <p class="metrics-sub">These are the only metrics that matter in Week 1. Everything else is noise.</p>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon">📧</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Waitlist Signups</div>
+      <div class="metric-target">TARGET: 1,000 by Day 7</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">💼</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Investor Emails Sent</div>
+      <div class="metric-target">TARGET: 15 by Day 7</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">💬</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Investor Replies</div>
+      <div class="metric-target">TARGET: 3 replies, 1 meeting</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🤝</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Co-Founder DMs Sent</div>
+      <div class="metric-target">TARGET: 20 by Day 7</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🏥</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Doctor Conversations</div>
+      <div class="metric-target">TARGET: 3 calls booked</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🧪</div>
+      <div class="metric-current">0</div>
+      <div class="metric-name">Beta Users (Assessment)</div>
+      <div class="metric-target">TARGET: 200 assessments taken</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<div class="resources-section">
+  <h2 class="resources-title">Tools You Need This Week</h2>
+  <p class="resources-sub">Free or near-free tools that every serious founder in Week 1 should have running.</p>
+  <div class="resources-grid">
+    <div class="resource-card">
+      <div class="res-icon">🌐</div>
+      <div class="res-title">Vercel — Deploy in 2 minutes</div>
+      <div class="res-body">Free tier. Connect GitHub → deploy your landing page and prototype. Custom domain support. Automatic HTTPS. No devops needed.</div>
+      <a class="res-link" href="#">vercel.com → free</a>
+    </div>
+    <div class="resource-card">
+      <div class="res-icon">📧</div>
+      <div class="res-title">Mailchimp — Waitlist Management</div>
+      <div class="res-body">Free up to 500 contacts. Create your audience, embed the signup form, set up welcome email automation. Everything you need for your waitlist.</div>
+      <a class="res-link" href="#">mailchimp.com → free</a>
+    </div>
+    <div class="resource-card">
+      <div class="res-icon">📅</div>
+      <div class="res-title">Calendly — Investor Meetings</div>
+      <div class="res-body">Free tier. Share your link in every investor email so they can book directly. Removes all friction from scheduling. Connects to Google Calendar.</div>
+      <a class="res-link" href="#">calendly.com → free</a>
+    </div>
+    <div class="resource-card">
+      <div class="res-icon">📊</div>
+      <div class="res-title">Buffer — Social Scheduling</div>
+      <div class="res-body">Free for up to 10 posts. Schedule your content calendar across LinkedIn and Twitter/X at once. Consistency without manual effort.</div>
+      <a class="res-link" href="#">buffer.com → free</a>
+    </div>
+    <div class="resource-card">
+      <div class="res-icon">📬</div>
+      <div class="res-title">Mailtrack — Email Opens</div>
+      <div class="res-body">Free Chrome extension. Shows you when investors open your cold emails and how many times. Tells you whether to follow up or move on.</div>
+      <a class="res-link" href="#">mailtrack.io → free</a>
+    </div>
+    <div class="resource-card">
+      <div class="res-icon">🎥</div>
+      <div class="res-title">Loom — Product Demo Videos</div>
+      <div class="res-body">Free screen recorder. Record a 90-second walkthrough of your assessment prototype. Include it in investor emails — videos 3x reply rates vs. text-only emails.</div>
+      <a class="res-link" href="#">loom.com → free</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-left">PrediCare AI · Week 1 Launch Plan · Day 1 of your journey</div>
+  <div class="footer-right">predicare.ai</div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleDay(id){
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+function checkTask(id){
+  const task = document.getElementById(id);
+  const cb = task.querySelector('.t
