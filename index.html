@@ -69,7 +69,7 @@
        NOTE: AdSense approval takes 1–2 weeks.
        Add this now so it's ready when approved.
   ═══════════════════════════════════════════ -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <!-- ADSENSE: Add your publisher ID here after approval at adsense.google.com -->
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
@@ -418,9 +418,9 @@
     <a href="#how">How It Works</a>
     <a href="#market">Market</a>
     <a href="#pricing">Pricing</a>
-    <a href="#investors">Investors</a>
+    <a href="#waitlist">Join Waitlist</a>
   </div>
-  <button class="nav-cta">Get Early Access</button>
+  <button class="nav-cta" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Early Access</button>
 </nav>
 
 <!-- HERO -->
@@ -432,25 +432,25 @@
   <h1>AI That <span class="accent">Predicts</span> Disease<br/>Before It Happens</h1>
   <p>PrediCare AI analyzes your health data to predict risks of diabetes, heart disease, and cancer — years before symptoms appear. Prevention is the cure.</p>
   <div class="hero-btns">
-    <button class="btn-primary">Join the Waitlist →</button>
-    <button class="btn-secondary">Watch Demo</button>
+    <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the Waitlist →</button>
+    <button class="btn-secondary" onclick="window.location.href='assess.html'">Try the Demo →</button>
   </div>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">$3.7T</div>
-      <div class="stat-label">Global healthcare market</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">2–3B</div>
-      <div class="stat-label">Lives we aim to protect</div>
+      <div class="stat-num">77M+</div>
+      <div class="stat-label">Indians with undetected diabetes</div>
     </div>
     <div class="stat">
       <div class="stat-num">80%</div>
-      <div class="stat-label">Diseases are preventable</div>
+      <div class="stat-label">Of deadly diseases are preventable</div>
     </div>
     <div class="stat">
-      <div class="stat-num">2036</div>
-      <div class="stat-label">Target: 3B users reached</div>
+      <div class="stat-num">67%</div>
+      <div class="stat-label">Rural India has no specialist access</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">₹0</div>
+      <div class="stat-label">To get started — free forever</div>
     </div>
   </div>
 </section>
@@ -497,7 +497,7 @@
     <div class="solution-card" data-num="01">
       <div class="s-icon">🔮</div>
       <h3>Predict</h3>
-      <p>Our multimodal AI analyzes 200+ biomarkers, lifestyle signals, and family history to generate a personalized 5-year disease risk score with ≥80% accuracy.</p>
+      <p>Our AI analyzes your key health signals, lifestyle habits, and family history to generate a personalized 5-year disease risk score. Beta covers 5 conditions — full 14-disease dashboard at launch.</p>
     </div>
     <div class="solution-card" data-num="02">
       <div class="s-icon">🩺</div>
@@ -593,33 +593,33 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- WHY WE BUILD -->
 <section class="testimonials" id="testimonials">
-  <div class="section-label">Early Feedback</div>
-  <div class="section-title">What Our Early Users Are Saying</div>
+  <div class="section-label">Why We're Building This</div>
+  <div class="section-title">The Problem Is Personal</div>
   <div class="testi-grid">
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"PrediCare flagged my pre-diabetic risk 8 months before my doctor's test confirmed it. I changed my diet immediately. I'm now back in the normal range."</div>
+      <div class="testi-stars">🩺 Founder Story</div>
+      <div class="testi-text">"Three years ago, my father was diagnosed with Type 2 diabetes and severe heart disease simultaneously. The cardiologist said: 'If we'd caught this 3 years earlier, we could have prevented most of this.' That sentence changed everything for me."</div>
       <div class="testi-author">
-        <div class="testi-avatar">PR</div>
-        <div><div class="testi-name">Priya Rajan</div><div class="testi-role">Software Engineer, Bengaluru</div></div>
+        <div class="testi-avatar">NK</div>
+        <div><div class="testi-name">Nagendra Kumar</div><div class="testi-role">Founder & CEO, PrediCare AI</div></div>
       </div>
     </div>
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"As a cardiologist, I'm impressed. The risk reports my patients share are actually useful — better structured than most lab summaries I receive."</div>
+      <div class="testi-stars">📊 The Gap We're Closing</div>
+      <div class="testi-text">"77 million Indians have diabetes they haven't detected yet. 60 million have heart disease they don't know about. AI can catch these signals years before crisis — but no one has built it for India, in Hindi, at a price anyone can afford. Until now."</div>
       <div class="testi-author">
-        <div class="testi-avatar">DM</div>
-        <div><div class="testi-name">Dr. Mihir Desai</div><div class="testi-role">Cardiologist, Apollo Hospitals</div></div>
+        <div class="testi-avatar">NK</div>
+        <div><div class="testi-name">PrediCare AI</div><div class="testi-role">Launching Bengaluru & Jaipur · Q3 2026</div></div>
       </div>
     </div>
     <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Finally a health app in Hindi that actually works offline. My mother in Jaipur uses it every day. It's changed how she thinks about her health."</div>
+      <div class="testi-stars">🚀 Join Us Early</div>
+      <div class="testi-text">"We're accepting our first 1,000 founding members before public launch. As a founding member you get 3 months of Pro free, priority access, and a direct line to shape the product. We're building this with you — not for you."</div>
       <div class="testi-author">
-        <div class="testi-avatar">AS</div>
-        <div><div class="testi-name">Arjun Sharma</div><div class="testi-role">Business Owner, Jaipur</div></div>
+        <div class="testi-avatar">🩺</div>
+        <div><div class="testi-name">Founding Member Waitlist</div><div class="testi-role">Open now · Free to join</div></div>
       </div>
     </div>
   </div>
@@ -641,7 +641,7 @@
         <li>Weekly health tips</li>
         <li>Hindi language support</li>
       </ul>
-      <button class="price-btn outlined">Get Started Free</button>
+      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Get Started Free</button>
     </div>
     <div class="price-card featured">
       <div class="price-badge">Most Popular</div>
@@ -656,7 +656,7 @@
         <li>Offline mode</li>
         <li>Priority support</li>
       </ul>
-      <button class="price-btn filled">Start Pro Trial</button>
+      <button class="price-btn filled" onclick="window.location.href='waitlist.html'">Start Pro Trial</button>
     </div>
     <div class="price-card">
       <div class="price-name">Family</div>
@@ -669,18 +669,21 @@
         <li>Shared health timeline</li>
         <li>Dedicated health advisor</li>
       </ul>
-      <button class="price-btn outlined">Protect Your Family</button>
+      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Protect Your Family</button>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="investors">
+<section class="cta-section" id="waitlist">
   <h2>Join the Healthcare Revolution</h2>
   <p>Be among the first 1,000 users to shape the future of preventive AI health.</p>
-  <div class="cta-form">
-    <input class="cta-input" type="email" placeholder="Enter your email address" />
-    <button class="btn-primary">Get Early Access →</button>
+  <div class="cta-form" id="cta-form-wrap">
+    <input class="cta-input" type="email" id="cta-email" placeholder="Enter your email address" />
+    <button class="btn-primary" onclick="submitCTA()">Get Early Access →</button>
+  </div>
+  <div id="cta-success" style="display:none;color:#fff;font-size:1rem;padding:16px 24px;background:rgba(10,191,163,0.2);border-radius:10px;border:1px solid rgba(10,191,163,0.4);max-width:500px;margin:0 auto;">
+    ✅ You're on the list! We'll email you before our Bengaluru & Jaipur launch.
   </div>
   <p style="color:rgba(255,255,255,0.4);font-size:0.82rem;margin-top:16px;">No credit card required · Launching in Bengaluru & Jaipur Q3 2026</p>
 </section>
@@ -727,5 +730,22 @@
   </div>
 </footer>
 
+
+<script>
+function submitCTA(){
+  var email=document.getElementById('cta-email').value.trim();
+  if(!email||!email.includes('@')){
+    document.getElementById('cta-email').style.outline='2px solid #E74C3C';
+    return;
+  }
+  document.getElementById('cta-form-wrap').style.display='none';
+  document.getElementById('cta-success').style.display='block';
+  fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'index-cta'})}).catch(function(){});
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('cta-email');
+  if(el) el.addEventListener('keydown',function(e){if(e.key==='Enter')submitCTA();});
+});
+</script>
 </body>
 </html>

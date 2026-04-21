@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join the Waitlist — PrediCare AI</title>
-  <meta name="description" content="Join 2,400+ people on the PrediCare AI waitlist. Get 3 months Pro free + priority access when we launch in Q3 2026." />
+  <meta name="description" content="Join the PrediCare AI waitlist. Get 3 months Pro free + priority access when we launch in Q3 2026." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://predicare.ai/waitlist" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <!-- ADSENSE: Add your publisher ID here after approval at adsense.google.com -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -64,7 +64,7 @@
 <body>
 
 <nav>
-  <a class="logo" href="/">
+  <a class="logo" href="index.html">
     <div class="logo-icon">🩺</div>
     <div class="logo-text">Predi<span>Care</span> AI</div>
   </a>
@@ -110,7 +110,7 @@
         </select>
         <!-- Mailchimp anti-bot field — do not remove -->
         <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="b_PLACEHOLDER_ANTISPAM" tabindex="-1" value="">
+          <input type="text" name="b_XXXXXXXX_XXXXXXXX" tabindex="-1" value="">
         </div>
         <button class="submit-btn" type="submit" id="submit-btn">
           Claim My Founding Member Spot →
@@ -118,27 +118,45 @@
       </div>
     </form>
 
-    <p class="counter">Already joined: <strong>2,412 people</strong> from 34 cities</p>
+    <p class="counter">Already joined: <strong>Growing daily</strong> — join before we launch</p>
     <p class="privacy-note">🔒 No spam. Unsubscribe anytime. We respect your privacy.</p>
   </div>
 </main>
 
 <footer>
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/privacy">Privacy Policy</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="privacy.html">Privacy Policy</a>
   <a href="mailto:hello@predicare.ai">hello@predicare.ai</a>
   <br/><br/>© 2026 PrediCare AI. Built with ❤️ in India.
 </footer>
 
 <script>
-  document.getElementById('waitlist-form').addEventListener('submit', function() {
+  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+    var email = this.querySelector('[name="EMAIL"]').value.trim();
+    var fname = this.querySelector('[name="FNAME"]').value.trim();
+    if(!email || !email.includes('@')) {
+      e.preventDefault();
+      this.querySelector('[name="EMAIL"]').style.borderColor = '#E74C3C';
+      return;
+    }
+    if(!fname) {
+      e.preventDefault();
+      this.querySelector('[name="FNAME"]').style.borderColor = '#E74C3C';
+      return;
+    }
     var btn = document.getElementById('submit-btn');
     btn.textContent = 'Joining...';
     btn.disabled = true;
-    // Redirect to success page after short delay (Mailchimp opens in new tab)
+    // NOTE: If Mailchimp form action is not yet set, prevent default and use local success page
+    if(this.action.indexOf('YOUR_MAILCHIMP') !== -1) {
+      e.preventDefault();
+      window.location.href = 'waitlist-success.html';
+      return;
+    }
+    // Mailchimp opens in new tab (target="_blank") — redirect locally after delay
     setTimeout(function() {
-      window.location.href = '/waitlist-success';
+      window.location.href = 'waitlist-success.html';
     }, 800);
   });
 </script>

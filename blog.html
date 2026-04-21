@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://predicare.ai/blog" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <!-- ADSENSE: Add your publisher ID here after approval at adsense.google.com -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -92,16 +92,16 @@
 <body>
 
 <nav>
-  <a class="logo" href="/">
+  <a class="logo" href="index.html">
     <div class="logo-icon">🩺</div>
     <div class="logo-text">Predi<span>Care</span> AI</div>
   </a>
   <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/blog" class="active">Blog</a>
-    <a href="/assess">Free Assessment</a>
-    <a href="/waitlist" class="nav-cta">Join Waitlist</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="assess.html">Free Assessment</a>
+    <a href="waitlist.html" class="nav-cta">Join Waitlist</a>
   </div>
 </nav>
 
@@ -126,7 +126,7 @@
       <div class="featured-tag">🔬 Featured Research</div>
       <h2>Why Indians Get Diabetes at Lower BMI — and What AI Can Do About It</h2>
       <div class="featured-meta">
-        <div class="author-pill"><div class="author-av">PS</div> Dr. Priya Sharma · April 10, 2026</div>
+        <div class="author-pill"><div class="author-av">NK</div> Nagendra Kumar, Founder · April 10, 2026</div>
         <span style="font-size:0.78rem;color:rgba(255,255,255,0.35)">8 min read</span>
       </div>
       <p>Indian bodies store fat differently. At a BMI of 23, an Indian person has the same metabolic risk as a Western person at BMI 27. Here's what the science says — and how PrediCare's model accounts for it.</p>
@@ -213,19 +213,35 @@
   <p>One evidence-based article every week. No spam. Unsubscribe anytime.</p>
   <div class="nl-form">
     <input type="email" placeholder="your@email.com" />
-    <button type="button">Subscribe →</button>
+    <button type="button" onclick="subscribeNL(this)">Subscribe →</button>
   </div>
 </div>
 
 <footer>
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/blog">Blog</a>
-  <a href="/privacy">Privacy</a>
-  <a href="/waitlist">Join Waitlist</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="blog.html">Blog</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="waitlist.html">Join Waitlist</a>
   <a href="mailto:hello@predicare.ai">Contact</a>
   <br/><br/>© 2026 PrediCare AI. Built with ❤️ in India.
 </footer>
 
+
+<script>
+function subscribeNL(btn){
+  var input = btn.previousElementSibling;
+  var email = input ? input.value.trim() : '';
+  if(!email||!email.includes('@')){
+    if(input) input.style.borderColor='#E74C3C';
+    return;
+  }
+  btn.textContent='✓ Subscribed!';
+  btn.style.background='#27AE60';
+  btn.disabled=true;
+  input.disabled=true;
+  fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'blog-newsletter'})}).catch(function(){});
+}
+</script>
 </body>
 </html>
