@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features — PrediCare AI</title>
+  <meta name="description" content="PrediCare AI features — AI risk prediction, Hindi-first, offline mode, ABDM integration, doctor-ready reports." />
+  <meta name="robots" content="index, follow" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-XXXXXXXXXX");</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --teal:#0ABFA3;--teal-d:#07997F;--teal-l:rgba(10,191,163,0.08);
+      --navy:#0B1F3A;--navy-m:#122952;--slate:#4A5568;
+      --white:#fff;--light:#F7FBFA;--border:#E8EDF5;
+    }
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    nav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:18px 6vw;background:rgba(11,31,58,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(10,191,163,0.15)}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-icon{width:36px;height:36px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:18px}
+    .logo-text{font-family:'Sora',sans-serif;font-weight:700;font-size:1.2rem;color:var(--white)}
+    .logo-text span{color:var(--teal)}
+    .nav-links{display:flex;gap:24px;align-items:center}
+    .nav-links a{font-size:0.88rem;color:rgba(255,255,255,0.75);font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--teal)}
+    .nav-cta{background:var(--teal)!important;color:#fff!important;padding:9px 20px;border-radius:8px;font-weight:600!important}
+    .hero-band{background:linear-gradient(135deg,#0B1F3A 0%,#0F3460 55%,#0ABFA3 100%);padding:120px 6vw 64px;text-align:center}
+    .eyebrow{font-size:0.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;font-weight:600}
+    .hero-band h1{font-family:'Sora',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:16px}
+    .hero-band h1 em{font-style:normal;color:var(--teal)}
+    .hero-band p{font-size:1.05rem;color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto;line-height:1.75}
+    .wrap{max-width:960px;margin:0 auto;padding:72px 6vw}
+    .section-label{font-size:0.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:10px}
+    .section-title{font-family:'Sora',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--navy);margin-bottom:16px;line-height:1.25}
+    .section-sub{color:var(--slate);line-height:1.8;max-width:600px;font-size:0.97rem}
+    .card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:28px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .btn-teal{display:inline-block;background:var(--teal);color:#fff;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem;transition:background .2s;border:none;cursor:pointer}
+    .btn-teal:hover{background:var(--teal-d)}
+    .btn-outline{display:inline-block;background:transparent;color:var(--teal);padding:12px 26px;border-radius:10px;font-weight:600;font-size:0.92rem;border:1.5px solid var(--teal);transition:all .2s;cursor:pointer}
+    .btn-outline:hover{background:var(--teal);color:#fff}
+    footer{background:var(--navy);padding:56px 6vw 28px}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+    .footer-brand p{color:rgba(255,255,255,0.45);font-size:0.85rem;margin-top:14px;line-height:1.7}
+    .footer-col h4{color:rgba(255,255,255,0.4);font-size:0.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+    .footer-col a{display:block;color:rgba(255,255,255,0.6);font-size:0.85rem;margin-bottom:10px;transition:color .2s}
+    .footer-col a:hover{color:var(--teal)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .footer-bottom p{color:rgba(255,255,255,0.3);font-size:0.8rem}
+    .footer-links a{color:rgba(255,255,255,0.3);font-size:0.8rem;margin-left:20px}
+    .footer-links a:hover{color:var(--teal)}
+    @media(max-width:720px){.nav-links{display:none}.footer-top,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+
+    .feat-card{transition:box-shadow .2s,transform .2s}
+    .feat-card:hover{box-shadow:0 8px 32px rgba(10,191,163,0.1);transform:translateY(-3px)}
+    .feat-icon{font-size:2rem;margin-bottom:14px}
+    .feat-card h3{font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px}
+    .feat-card p{font-size:0.84rem;color:var(--slate);line-height:1.7;margin-bottom:14px}
+    .feat-tag{display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:var(--teal-l);color:var(--teal)}
+
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-icon">🩺</div>
+    <div class="logo-text">Predi<span>Care</span> AI</div>
+  </a>
+  <div class="nav-links">
+    <a href="/features">Features</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/roadmap">Roadmap</a>
+    <a href="/about">About</a>
+    <a href="/blog">Blog</a>
+    <a href="/waitlist" class="nav-cta">Join Waitlist</a>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="eyebrow">Product</div>
+  <h1>Everything you need to<br/><em>stay ahead of disease</em></h1>
+  <p>PrediCare is not just a health app. It is a full prevention engine — built from the ground up for India.</p>
+</div>
+
+<div class="wrap">
+  <div class="section-label">Core Features</div>
+  <div class="section-title">The complete prevention stack</div>
+  <br/>
+  <div class="grid-3" style="margin-bottom:48px">
+    <div class="card feat-card">
+      <div class="feat-icon">🔮</div>
+      <h3>AI Risk Prediction</h3>
+      <p>12-question assessment generates your personalized 5-year risk score across 5 conditions in beta — 14 at launch. Risk models benchmarked against 50M+ records from public health consortia.</p>
+      <div class="feat-tag">Available now</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">🛡️</div>
+      <h3>Prevention Plans</h3>
+      <p>Hyper-personalized action plans — nutrition, exercise, sleep, stress, monitoring schedules — updated weekly as your data evolves. Not generic tips. Your plan, for your risk.</p>
+      <div class="feat-tag">Launching Q3 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">🗣️</div>
+      <h3>Hindi-First AI</h3>
+      <p>Full support in Hindi, Bhojpuri, Maithili, and 8 other Indian languages. Designed for a 55-year-old farmer in Bihar with a Class 8 education — not just urban professionals.</p>
+      <div class="feat-tag">Launching Q3 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">📡</div>
+      <h3>Offline Mode</h3>
+      <p>Full functionality without internet — critical for Bihar's districts where connectivity is unreliable. Your health data syncs when you reconnect. No data lost.</p>
+      <div class="feat-tag">Launching Q3 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">🩺</div>
+      <h3>Doctor-Ready Reports</h3>
+      <p>Share AI-generated health summaries directly with your physician before appointments. Turn a 14-minute consultation into a productive, data-driven conversation.</p>
+      <div class="feat-tag">Launching Q3 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">🔒</div>
+      <h3>DPDP Act Compliant</h3>
+      <p>Built to India's Digital Personal Data Protection Act 2023 from day one. Your health data is never sold, never shared with insurers or employers. You own it. You can delete it anytime.</p>
+      <div class="feat-tag">Always</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">📱</div>
+      <h3>Wearable Integration</h3>
+      <p>Connect Apple Health, Google Fit, Fitbit, and 20+ other platforms for continuous monitoring. Your risk scores update automatically as your health data flows in.</p>
+      <div class="feat-tag">Q4 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">🌐</div>
+      <h3>ABDM Integration</h3>
+      <p>Connects with India's Ayushman Bharat Digital Mission health ID system for seamless, secure health records access — one of the first consumer apps to do so.</p>
+      <div class="feat-tag">Q4 2026</div>
+    </div>
+    <div class="card feat-card">
+      <div class="feat-icon">💊</div>
+      <h3>Medication Tracking</h3>
+      <p>Smart reminders and adherence monitoring integrated with your prevention plan. Never miss a dose. Track your adherence over time.</p>
+      <div class="feat-tag">Q1 2027</div>
+    </div>
+  </div>
+
+  <div style="background:var(--light);border-radius:20px;padding:40px;text-align:center;margin-top:40px">
+    <div class="section-label">B2B Features</div>
+    <div class="section-title" style="max-width:500px;margin:0 auto 16px">For hospitals, insurers & corporates</div>
+    <p style="color:var(--slate);max-width:520px;margin:0 auto 32px;line-height:1.7">PrediCare also powers enterprise health intelligence — risk stratification dashboards for hospitals, underwriting APIs for insurers, and population health tools for corporate HR teams.</p>
+    <div class="grid-3">
+      <div style="background:var(--white);border-radius:14px;padding:24px;border:1px solid var(--border)">
+        <div style="font-size:1.8rem;margin-bottom:12px">🏥</div>
+        <h4 style="font-family:'Sora',sans-serif;font-weight:700;margin-bottom:8px;font-size:0.97rem">Hospital Risk Stratification</h4>
+        <p style="font-size:0.83rem;color:var(--slate);line-height:1.65">Identify high-risk patients before crisis. Reduce emergency admissions. Improve outcomes.</p>
+      </div>
+      <div style="background:var(--white);border-radius:14px;padding:24px;border:1px solid var(--border)">
+        <div style="font-size:1.8rem;margin-bottom:12px">🛡️</div>
+        <h4 style="font-family:'Sora',sans-serif;font-weight:700;margin-bottom:8px;font-size:0.97rem">Insurance Underwriting API</h4>
+        <p style="font-size:0.83rem;color:var(--slate);line-height:1.65">AI risk scores for policy pricing and wellness programs. ₹2–10 per API query.</p>
+      </div>
+      <div style="background:var(--white);border-radius:14px;padding:24px;border:1px solid var(--border)">
+        <div style="font-size:1.8rem;margin-bottom:12px">🏢</div>
+        <h4 style="font-family:'Sora',sans-serif;font-weight:700;margin-bottom:8px;font-size:0.97rem">Corporate Wellness Dashboard</h4>
+        <p style="font-size:0.83rem;color:var(--slate);line-height:1.65">Population-level health insights for HR teams. Reduce absenteeism. Demonstrate duty of care.</p>
+      </div>
+    </div>
+    <br/><a href="/contact" class="btn-teal" style="margin-top:16px">Request B2B Demo →</a>
+  </div>
+</div>
+<div style="background:linear-gradient(135deg,var(--navy),var(--navy-m));padding:60px 6vw;text-align:center">
+  <div class="section-title" style="color:#fff;margin-bottom:12px">Try the free assessment today</div>
+  <p style="color:rgba(255,255,255,0.65);margin-bottom:28px">5 minutes. No login required. Your risk score for diabetes, heart disease, and more.</p>
+  <a href="/assess" class="btn-teal" style="margin-right:12px">Start Free Assessment →</a>
+  <a href="/waitlist" class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3)">Join the Waitlist</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="logo" href="/" style="text-decoration:none">
+        <div class="logo-icon">🩺</div>
+        <div class="logo-text">Predi<span>Care</span> AI</div>
+      </a>
+      <p>Predicting disease before it happens. Bihar-first. Pan-India by 2027.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="/features">Features</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="/assess">Free Assessment</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About Us</a>
+      <a href="/blog">Blog</a>
+      <a href="/careers">Careers</a>
+      <a href="/press">Press</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investors</h4>
+      <a href="/pitch-deck">Pitch Deck</a>
+      <a href="/financial-model">Financial Model</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/media-kit">Media Kit</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 PrediCare AI. All rights reserved. Built with ❤️ in Bihar, India.</p>
+    <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="mailto:hello@predicare.ai">hello@predicare.ai</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -64,7 +64,7 @@
 <body>
 
 <nav>
-  <a class="logo" href="index.html">
+  <a class="logo" href="/">
     <div class="logo-icon">🩺</div>
     <div class="logo-text">Predi<span>Care</span> AI</div>
   </a>
@@ -81,21 +81,18 @@
       <div class="benefit"><div class="benefit-icon">⚡</div>Priority access before public launch</div>
       <div class="benefit"><div class="benefit-icon">🏆</div>Your name on our founding member wall</div>
       <div class="benefit"><div class="benefit-icon">🩺</div>Free AI health risk assessment right now</div>
+      <div class="benefit"><div class="benefit-icon">💬</div>WhatsApp updates & early launch alerts</div>
     </div>
 
-    <!-- 
-      IMPORTANT: Replace the form action URL below with your Mailchimp embed form URL.
-      Get it from: Mailchimp → Audience → Signup Forms → Embedded Forms → copy the action URL
-      It looks like: https://predicare.us21.list-manage.com/subscribe/post?u=XXXX&id=XXXX
-    -->
-    <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="POST" target="_blank" id="waitlist-form">
+    <form id="waitlist-form" onsubmit="submitWaitlist(event)">
       <div class="form-group">
         <div class="form-row">
-          <input type="text" name="FNAME" placeholder="First name" required />
-          <input type="text" name="LNAME" placeholder="Last name" />
+          <input type="text" id="w-fname" placeholder="First name *" required />
+          <input type="text" id="w-lname" placeholder="Last name" />
         </div>
-        <input type="email" name="EMAIL" placeholder="Your email address" required />
-        <select name="CITY">
+        <input type="email" id="w-email" placeholder="Your email address *" required />
+        <input type="tel" id="w-phone" placeholder="WhatsApp / mobile number (e.g. 9876543210)" pattern="[0-9]{10}" />
+        <select id="w-city">
           <option value="" disabled selected>Your city</option>
           <option>Patna</option>
           <option>Bihar (other)</option>
@@ -110,15 +107,12 @@
           <option>Kolkata</option>
           <option>Other</option>
         </select>
-        <!-- Mailchimp anti-bot field — do not remove -->
-        <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="b_XXXXXXXX_XXXXXXXX" tabindex="-1" value="">
-        </div>
         <button class="submit-btn" type="submit" id="submit-btn">
           Claim My Founding Member Spot →
         </button>
       </div>
     </form>
+    <div id="waitlist-error" style="display:none;color:#C0392B;font-size:0.85rem;text-align:center;margin-top:8px"></div>
 
     <p class="counter">Already joined: <strong>Growing daily</strong> — join before we launch</p>
     <p class="privacy-note">🔒 No spam. Unsubscribe anytime. We respect your privacy.</p>
@@ -126,41 +120,90 @@
 </main>
 
 <footer>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="privacy.html">Privacy Policy</a>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/privacy">Privacy Policy</a>
   <a href="mailto:hello@predicare.ai">hello@predicare.ai</a>
   <br/><br/>© 2026 PrediCare AI. Built with ❤️ in India.
 </footer>
 
 <script>
-  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-    var email = this.querySelector('[name="EMAIL"]').value.trim();
-    var fname = this.querySelector('[name="FNAME"]').value.trim();
-    if(!email || !email.includes('@')) {
-      e.preventDefault();
-      this.querySelector('[name="EMAIL"]').style.borderColor = '#E74C3C';
-      return;
-    }
-    if(!fname) {
-      e.preventDefault();
-      this.querySelector('[name="FNAME"]').style.borderColor = '#E74C3C';
-      return;
-    }
-    var btn = document.getElementById('submit-btn');
-    btn.textContent = 'Joining...';
-    btn.disabled = true;
-    // NOTE: If Mailchimp form action is not yet set, prevent default and use local success page
-    if(this.action.indexOf('YOUR_MAILCHIMP') !== -1) {
-      e.preventDefault();
+async function submitWaitlist(e) {
+  e.preventDefault();
+  var fname = document.getElementById('w-fname').value.trim();
+  var lname = document.getElementById('w-lname').value.trim();
+  var email = document.getElementById('w-email').value.trim();
+  var phone = document.getElementById('w-phone').value.trim();
+  var city  = document.getElementById('w-city').value;
+  var err   = document.getElementById('waitlist-error');
+  var btn   = document.getElementById('submit-btn');
+
+  // Validate
+  if (!fname) {
+    document.getElementById('w-fname').style.borderColor = '#E74C3C';
+    err.textContent = 'Please enter your first name.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    document.getElementById('w-email').style.borderColor = '#E74C3C';
+    err.textContent = 'Please enter a valid email address.';
+    err.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Joining…';
+  btn.disabled = true;
+  err.style.display = 'none';
+
+  // ─── HOW TO SET UP FORMSPREE (free, 2 minutes, no coding) ───
+  // 1. Go to https://formspree.io → click "Get Started Free"
+  // 2. Sign up with your hello@predicare.ai email
+  // 3. Click "New Form" → name it "PrediCare Waitlist" → click "Create Form"
+  // 4. Copy your form endpoint — it looks like: https://formspree.io/f/abcd1234
+  // 5. Replace mojyprgk below with just the ID part (e.g. abcd1234)
+  // 6. Re-upload waitlist.html to GitHub → Vercel auto-redeploys in 30 seconds
+  // Every signup then appears in your Formspree dashboard AND gets emailed to you.
+  // ────────────────────────────────────────────────────────────
+
+  var FORMSPREE_ID = 'mojyprgk'; // ← replace this
+
+  try {
+    var res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        first_name: fname,
+        last_name:  lname,
+        email:      email,
+        phone:      phone,
+        city:       city || 'Not specified',
+        source:     'predicare-waitlist',
+        _subject:   'New PrediCare Waitlist Signup — ' + fname + ' ' + lname
+      })
+    });
+
+    if (res.ok) {
+      // Success — go to thank you page
       window.location.href = 'waitlist-success.html';
-      return;
+    } else {
+      // Formspree returned an error — show message
+      var data = await res.json();
+      err.textContent = data.error || 'Something went wrong. Please email hello@predicare.ai directly.';
+      err.style.display = 'block';
+      btn.textContent = 'Claim My Founding Member Spot →';
+      btn.disabled = false;
     }
-    // Mailchimp opens in new tab (target="_blank") — redirect locally after delay
-    setTimeout(function() {
-      window.location.href = 'waitlist-success.html';
-    }, 800);
-  });
+  } catch(networkErr) {
+    // Network failure — save locally and redirect anyway
+    try {
+      var saved = JSON.parse(localStorage.getItem('predicare_waitlist') || '[]');
+      saved.push({ fname, lname, email, phone, city, ts: new Date().toISOString() });
+      localStorage.setItem('predicare_waitlist', JSON.stringify(saved));
+    } catch(e) {}
+    window.location.href = 'waitlist-success.html';
+  }
+}
 </script>
 
 </body>

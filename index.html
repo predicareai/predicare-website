@@ -414,11 +414,11 @@
     <div class="logo-text">Predi<span>Care</span> AI</div>
   </a>
   <div class="nav-links">
-    <a href="#solution">Solution</a>
-    <a href="#how">How It Works</a>
-    <a href="#market">Market</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#waitlist">Join Waitlist</a>
+    <a href="/features">Features</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/pitch-deck">Investors</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/waitlist">Join Waitlist</a>
   </div>
   <button class="nav-cta" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Early Access</button>
 </nav>
@@ -433,7 +433,7 @@
   <p>PrediCare AI analyzes your health data to predict risks of diabetes, heart disease, and cancer — years before symptoms appear. Prevention is the cure.</p>
   <div class="hero-btns">
     <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join the Waitlist →</button>
-    <button class="btn-secondary" onclick="window.location.href='assess.html'">Try the Demo →</button>
+    <button class="btn-secondary" onclick="window.location.href='/assess'">Try the Demo →</button>
   </div>
   <div class="hero-stats">
     <div class="stat">
@@ -600,7 +600,7 @@
   <div class="testi-grid">
     <div class="testi-card">
       <div class="testi-stars">🩺 Founder Story</div>
-      <div class="testi-text">"Three years ago, my father was diagnosed with Type 2 diabetes and severe heart disease simultaneously. The cardiologist said: 'If we'd caught this 3 years earlier, we could have prevented most of this.' That sentence changed everything for me."</div>
+      <div class="testi-text">"I worked at Shrinivas G Medical College and Hospital in Bihar. Every day I saw patients suffering from diabetes and heart disease — and I saw their families standing outside the wards in fear, tension, and financial ruin. That feeling never left me. I left to build the tool that catches these diseases before they reach that point."</div>
       <div class="testi-author">
         <div class="testi-avatar">NK</div>
         <div><div class="testi-name">Nagendra Kumar</div><div class="testi-role">Founder & CEO, PrediCare AI</div></div>
@@ -641,7 +641,7 @@
         <li>Weekly health tips</li>
         <li>Hindi language support</li>
       </ul>
-      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Get Started Free</button>
+      <button class="price-btn outlined" onclick="window.location.href='/waitlist'">Get Started Free</button>
     </div>
     <div class="price-card featured">
       <div class="price-badge">Most Popular</div>
@@ -656,7 +656,7 @@
         <li>Offline mode</li>
         <li>Priority support</li>
       </ul>
-      <button class="price-btn filled" onclick="window.location.href='waitlist.html'">Start Pro Trial</button>
+      <button class="price-btn filled" onclick="window.location.href='/waitlist'">Start Pro Trial</button>
     </div>
     <div class="price-card">
       <div class="price-name">Family</div>
@@ -669,7 +669,7 @@
         <li>Shared health timeline</li>
         <li>Dedicated health advisor</li>
       </ul>
-      <button class="price-btn outlined" onclick="window.location.href='waitlist.html'">Protect Your Family</button>
+      <button class="price-btn outlined" onclick="window.location.href='/waitlist'">Protect Your Family</button>
     </div>
   </div>
 </section>
@@ -700,24 +700,24 @@
     </div>
     <div class="footer-col">
       <h4>Product</h4>
-      <a href="#">Features</a>
-      <a href="#">How It Works</a>
-      <a href="#">Pricing</a>
-      <a href="#">Roadmap</a>
+      <a href="/features">Features</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/roadmap">Roadmap</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="#">About Us</a>
-      <a href="#">Blog</a>
-      <a href="#">Careers</a>
-      <a href="#">Press</a>
+      <a href="/about">About Us</a>
+      <a href="/blog">Blog</a>
+      <a href="/careers">Careers</a>
+      <a href="/press">Press</a>
     </div>
     <div class="footer-col">
       <h4>Investors</h4>
-      <a href="#">Pitch Deck</a>
-      <a href="#">Financial Model</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Media Kit</a>
+      <a href="/pitch-deck">Pitch Deck</a>
+      <a href="/financial-model">Financial Model</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/media-kit">Media Kit</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -740,7 +740,7 @@ function submitCTA(){
   }
   document.getElementById('cta-form-wrap').style.display='none';
   document.getElementById('cta-success').style.display='block';
-  fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'index-cta'})}).catch(function(){});
+  fetch('https://formspree.io/f/mojyprgk',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,source:'index-cta'})}).catch(function(){});
 }
 document.addEventListener('DOMContentLoaded',function(){
   var el=document.getElementById('cta-email');
