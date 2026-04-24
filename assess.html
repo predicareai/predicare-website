@@ -369,6 +369,22 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
 .rec-text p{font-size:0.82rem;color:var(--slate);line-height:1.55}
 
 /* CTA */
+/* HOW AI WORKS */
+.how-ai-works{background:#F7FBFA;border-radius:20px;padding:32px;margin-bottom:24px;border:1px solid #E6FAF7}
+.how-ai-title{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:800;color:#0A2540;margin-bottom:6px}
+.how-ai-sub{font-size:0.85rem;color:#718096;margin-bottom:24px}
+.how-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.how-ai-card{background:#fff;border-radius:14px;padding:20px;border:1px solid #E8EDF5}
+.how-ai-icon{font-size:1.6rem;margin-bottom:10px}
+.how-ai-card h4{font-family:'Outfit',sans-serif;font-size:0.92rem;font-weight:700;color:#0A2540;margin-bottom:8px}
+.how-ai-card p{font-size:0.82rem;color:#4A5568;line-height:1.7;margin-bottom:8px}
+.how-ai-card p:last-child{margin-bottom:0}
+.how-ai-list{list-style:none;display:flex;flex-direction:column;gap:5px;padding:0}
+.how-ai-list li{font-size:0.81rem;color:#4A5568;line-height:1.55;padding-left:0}
+.how-ai-disclaimer{background:#FEF3CD;border-left:3px solid #F59E0B;border-radius:0 10px 10px 0;padding:14px 16px;font-size:0.8rem;color:#744210;line-height:1.7;margin-bottom:14px}
+.how-ai-icmr{background:rgba(10,191,163,0.06);border:1px solid rgba(10,191,163,0.2);border-radius:10px;padding:14px 16px;font-size:0.8rem;color:#0A2540;line-height:1.65;display:flex;gap:10px;align-items:flex-start}
+@media(max-width:560px){.how-ai-grid{grid-template-columns:1fr}}
+
 .results-cta{
   background:linear-gradient(135deg,var(--navy),#0D3B6E);
   border-radius:20px;padding:32px;text-align:center;
@@ -523,6 +539,59 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
     <div class="rec-section">
       <div class="rec-title">🎯 Your Top 4 Actions This Month</div>
       <div id="rec-list"></div>
+    </div>
+
+    <!-- HOW OUR AI WORKS -->
+    <div class="how-ai-works">
+      <div class="how-ai-title">🔬 How does PrediCare estimate your risk?</div>
+      <div class="how-ai-sub">A common and important question. Here is an honest answer.</div>
+
+      <div class="how-ai-grid">
+        <div class="how-ai-card">
+          <div class="how-ai-icon">📊</div>
+          <h4>Risk Probability — Not Diagnosis</h4>
+          <p>PrediCare does <strong>not</strong> diagnose disease. We estimate the <strong>probability</strong> that you may develop a condition in the next 5 years — based on factors science has proven are strongly predictive.</p>
+          <p>Think of it like a weather forecast: "70% chance of rain" doesn't mean it will definitely rain — it means the conditions strongly suggest it. Your risk score works the same way.</p>
+        </div>
+        <div class="how-ai-card">
+          <div class="how-ai-icon">🧬</div>
+          <h4>Built on Validated Science</h4>
+          <p>Your 12 answers map directly to risk factors identified in decades of clinical research:</p>
+          <ul class="how-ai-list">
+            <li><strong>Diabetes risk</strong> — based on ICMR's Indian Diabetes Risk Score (IDRS), developed specifically for Indian bodies</li>
+            <li><strong>Heart disease risk</strong> — based on Framingham Risk Score, validated across millions of patients</li>
+            <li><strong>Hypertension & metabolic risk</strong> — based on WHO and UK Biobank population studies</li>
+          </ul>
+        </div>
+        <div class="how-ai-card">
+          <div class="how-ai-icon">🇮🇳</div>
+          <h4>Why Indian Bodies Need Different Models</h4>
+          <p>Indians develop diabetes and heart disease at <strong>lower BMI</strong> than Western populations — often at BMI 23 versus the global threshold of 27. This is because Indians store fat differently, particularly visceral (belly) fat.</p>
+          <p>Most Western health apps use Western thresholds. PrediCare applies Indian-specific risk thresholds validated by ICMR and Indian epidemiological research.</p>
+        </div>
+        <div class="how-ai-card">
+          <div class="how-ai-icon">⚠️</div>
+          <h4>What This Score Is — And Is Not</h4>
+          <ul class="how-ai-list">
+            <li>✅ An early warning that you may be at risk</li>
+            <li>✅ A reason to get a blood test or see a doctor</li>
+            <li>✅ A motivation to change diet, exercise, or sleep</li>
+            <li>✅ A tool to have a more informed conversation with your physician</li>
+            <li>❌ Not a medical diagnosis</li>
+            <li>❌ Not a replacement for a blood test or doctor visit</li>
+            <li>❌ Not 100% accurate — no screening tool is</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="how-ai-disclaimer">
+        <strong>Medical Disclaimer:</strong> PrediCare is an early-warning risk assessment tool, not a medical diagnostic device. Our risk scores indicate probability based on validated epidemiological research — not clinical diagnosis. A high risk score does not mean you have a disease. A low risk score does not mean you are disease-free. Always consult a qualified physician before making any health decisions. If you have symptoms, see a doctor immediately.
+      </div>
+
+      <div class="how-ai-icmr">
+        <span>📋</span>
+        <span>The Indian Diabetes Risk Score (IDRS) used by the Indian Council of Medical Research (ICMR) uses just <strong>4 questions</strong> to screen for diabetes risk. PrediCare uses 12 — covering more risk factors across more conditions. More questions = more accurate picture.</span>
+      </div>
     </div>
 
     <div class="results-cta">
