@@ -528,8 +528,8 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
       <h3>This is just the beginning</h3>
       <p>Join 1,000 founding members to get your full 14-disease risk dashboard (launching Q3 2026), weekly prevention coaching, wearable sync, and doctor-ready PDF reports — free for 3 months.</p>
       <div class="cta-btns">
-        <button class="btn-cta-primary">Join Early Access →</button>
-        <button class="btn-cta-secondary">Share My Results</button>
+        <button class="btn-cta-primary" onclick="window.location.href='/waitlist'">Join Early Access →</button>
+        <button class="btn-cta-secondary" onclick="shareResults()">Share My Results</button>
       </div>
       <button class="btn-restart" onclick="restart()">↩ Take assessment again</button>
     </div>
@@ -863,6 +863,22 @@ function showResults(){
   });
 
   showScreen('screen-results');
+}
+
+function shareResults(){
+  var text = 'I just checked my health risk on PrediCare AI — India\'s first AI that predicts diabetes, heart disease & more before symptoms appear. Free 5-min assessment: https://predicare.ai/assess';
+  if(navigator.share){
+    navigator.share({ title: 'My PrediCare Health Risk Results', text: text, url: 'https://predicare.ai/assess' })
+      .catch(function(){});
+  } else {
+    // Fallback — copy to clipboard
+    navigator.clipboard.writeText(text).then(function(){
+      alert('Link copied! Share it on WhatsApp or LinkedIn.');
+    }).catch(function(){
+      // Last fallback — open WhatsApp share
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    });
+  }
 }
 
 function restart(){
