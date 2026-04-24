@@ -414,11 +414,12 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
 <body>
 
 <header>
-  <div class="logo">
+  <a class="logo" href="/" style="text-decoration:none">
     <div class="logo-pulse">🩺</div>
     <div class="logo-text">Predi<span>Care</span></div>
-  </div>
+  </a>
   <div class="header-right">
+    <a href="/" style="font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none;margin-right:16px;font-weight:500;transition:color .2s" onmouseover="this.style.color='#0ABFA3'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← Home</a>
     <div class="progress-label" id="progress-label">Step 0 of 12</div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
@@ -532,6 +533,7 @@ input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2)}
         <button class="btn-cta-secondary" onclick="shareResults()">Share My Results</button>
       </div>
       <button class="btn-restart" onclick="restart()">↩ Take assessment again</button>
+      <a href="/" style="display:block;text-align:center;margin-top:12px;font-size:0.82rem;color:#A0AEC0;text-decoration:none">← Back to predicare.ai</a>
     </div>
   </div>
 
@@ -866,19 +868,42 @@ function showResults(){
 }
 
 function shareResults(){
-  var text = 'I just checked my health risk on PrediCare AI — India\'s first AI that predicts diabetes, heart disease & more before symptoms appear. Free 5-min assessment: https://predicare.ai/assess';
-  if(navigator.share){
-    navigator.share({ title: 'My PrediCare Health Risk Results', text: text, url: 'https://predicare.ai/assess' })
-      .catch(function(){});
-  } else {
-    // Fallback — copy to clipboard
-    navigator.clipboard.writeText(text).then(function(){
-      alert('Link copied! Share it on WhatsApp or LinkedIn.');
-    }).catch(function(){
-      // Last fallback — open WhatsApp share
-      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
-    });
+  document.getElementById('share-modal').style.display='flex';
+}
+function closeShare(){
+  document.getElementById('share-modal').style.display='none';
+}
+function doShare(platform){
+  var url   = 'https://predicare.ai/assess';
+  var text  = 'I just checked my health risk on PrediCare AI — India\'s first AI that predicts diabetes & heart disease before symptoms appear. Free 5-min assessment:';
+  var title = 'My PrediCare AI Health Risk Results';
+  var links = {
+    whatsapp:  'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url),
+    facebook:  'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '&quote=' + encodeURIComponent(text),
+    twitter:   'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url) + '&via=PrediCareAI',
+    linkedin:  'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url) + '&summary=' + encodeURIComponent(text),
+    instagram: 'https://www.instagram.com/',   // IG has no web share API — opens app
+    reddit:    'https://www.reddit.com/submit?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title),
+    telegram:  'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text),
+    email:     'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(text + '\n\n' + url),
+  };
+  if(platform === 'copy'){
+    navigator.clipboard.writeText(url).then(function(){
+      var btn = document.getElementById('copy-btn');
+      btn.textContent = '✅ Copied!';
+      btn.style.background = '#27AE60';
+      setTimeout(function(){ btn.textContent = '🔗 Copy Link'; btn.style.background = ''; }, 2000);
+    }).catch(function(){ alert('Link: ' + url); });
+    return;
   }
+  if(platform === 'instagram'){
+    // Copy text for Instagram since there's no web share — user pastes in bio/story
+    navigator.clipboard.writeText(text + ' ' + url).then(function(){
+      alert('Caption copied! Open Instagram and paste it in your story or post.');
+    }).catch(function(){});
+    return;
+  }
+  window.open(links[platform], '_blank', 'width=600,height=500');
 }
 
 function restart(){
@@ -892,5 +917,44 @@ function restart(){
 // Init
 updateProgress();
 </script>
+<!-- SHARE MODAL -->
+<div id="share-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px" onclick="if(event.target===this)closeShare()">
+  <div style="background:#fff;border-radius:24px;padding:32px;max-width:420px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,0.3)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <h3 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:800;color:#0A2540">Share Your Results</h3>
+      <button onclick="closeShare()" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:#A0AEC0;line-height:1">×</button>
+    </div>
+    <p style="font-size:0.83rem;color:#718096;margin-bottom:20px;line-height:1.6">Help someone you care about know their health risk — it could change their life.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+      <button onclick="doShare('whatsapp')" style="background:#25D366;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">💬</span><span style="font-size:0.68rem;font-weight:700;color:#fff">WhatsApp</span>
+      </button>
+      <button onclick="doShare('facebook')" style="background:#1877F2;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">📘</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Facebook</span>
+      </button>
+      <button onclick="doShare('twitter')" style="background:#000;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">𝕏</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Twitter</span>
+      </button>
+      <button onclick="doShare('linkedin')" style="background:#0A66C2;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">💼</span><span style="font-size:0.68rem;font-weight:700;color:#fff">LinkedIn</span>
+      </button>
+      <button onclick="doShare('instagram')" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">📸</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Instagram</span>
+      </button>
+      <button onclick="doShare('telegram')" style="background:#26A5E4;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">✈️</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Telegram</span>
+      </button>
+      <button onclick="doShare('reddit')" style="background:#FF4500;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">🤖</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Reddit</span>
+      </button>
+      <button onclick="doShare('email')" style="background:#EA4335;border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.6rem">📧</span><span style="font-size:0.68rem;font-weight:700;color:#fff">Email</span>
+      </button>
+    </div>
+    <button id="copy-btn" onclick="doShare('copy')" style="width:100%;background:#F7FBFA;border:1.5px solid #E2E8F0;border-radius:12px;padding:13px;font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:700;color:#0A2540;cursor:pointer;transition:all .2s" onmouseover="this.style.background='#E6FAF7'" onmouseout="this.style.background='#F7FBFA'">🔗 Copy Link</button>
+    <p style="text-align:center;font-size:0.75rem;color:#A0AEC0;margin-top:12px">Instagram: copies caption to clipboard — paste in your story</p>
+  </div>
+</div>
+
 </body>
 </html>
