@@ -704,9 +704,10 @@ function showScreen(id){
 }
 
 function updateProgress(){
-  const pct = Math.round((current/questions.length)*100);
-  document.getElementById('progress-fill').style.width = pct+'%';
-  document.getElementById('progress-label').textContent = `Step ${current} of ${questions.length}`;
+  const pct = Math.round((current / questions.length) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent =
+    `Step ${Math.min(current + 1, questions.length)} of ${questions.length}`;
 }
 
 function renderQuestion(idx){
